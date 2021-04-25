@@ -16,12 +16,13 @@ import (
 )
 
 func main() {
-	//先以正常模式运行，下面去掉为调试模式
+	//先以正常模式运行，下面去掉为调试模式。。
 	gin.SetMode(gin.ReleaseMode)
 
 	router := gin.Default()
 	router.LoadHTMLGlob("view/*")      //这里是引入模板文件
 	router.Static("/static", "static") //引入静态目录
 	router.GET("/", con.Index)         //首页进入控制器
-	router.Run(":8000")                //开启端口访问
+	router.GET("/aa", con.Index)
+	router.Run(":8000") //开启端口访问
 }
