@@ -3,9 +3,6 @@ package controller
 /*
  * @Description:
  * @Author: longfei
- * @Date: 2021-04-22 13:56:46
- * @LastEditTime: 2021-05-06 15:00:44
- * @LastEditors: longfei
  * @FilePath: \go\controller\index.go
  */
 

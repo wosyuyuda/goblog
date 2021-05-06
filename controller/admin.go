@@ -3,9 +3,6 @@ package controller
 /*
  * @Description:
  * @Author: longfei
- * @Date: 2021-05-05 13:16:04
- * @LastEditTime: 2021-05-06 14:11:40
- * @LastEditors: longfei
  * @FilePath: \go\controller\admin.go
  */
 import (
