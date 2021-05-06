@@ -4,7 +4,7 @@ package main
  * @Description:
  * @Author: longfei
  * @Date: 2021-04-10 09:26:45
- * @LastEditTime: 2021-05-06 14:09:29
+ * @LastEditTime: 2021-05-06 14:59:40
  * @LastEditors: longfei
  * @FilePath: \go\main.go
  */
@@ -36,13 +36,12 @@ func main() {
 
 	v1 := r.Group("/admin")
 	{
-		//这里是设置session的地方
 
 		v1.GET("/login", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "login1.html", gin.H{})
 		}) //登陆页
-		v1.POST("/sub", con.Login)  //用户提交
-		v1.GET("/", con.AdminIndex) //管理页
+		v1.POST("/sub", con.Login)  //用户登陆提交的接口
+		v1.GET("/", con.AdminIndex) //管理页，现在是啥也还没有
 	}
 
 	r.Run(":8000") //开启端口访问

@@ -4,7 +4,7 @@ package controller
  * @Description:
  * @Author: longfei
  * @Date: 2021-04-22 13:56:46
- * @LastEditTime: 2021-05-06 14:06:21
+ * @LastEditTime: 2021-05-06 15:00:44
  * @LastEditors: longfei
  * @FilePath: \go\controller\index.go
  */
@@ -25,6 +25,7 @@ type view struct {
 	Body  string
 }
 
+//这里加一个接收前端数据的再返回数据就好啦
 func AddView(c *gin.Context) {
 	view1 := new(view)
 	view1.Type = 1
