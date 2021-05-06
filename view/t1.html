@@ -1,0 +1,14 @@
+<!--
+ * @Description: 
+ * @Author: longfei
+ * @FilePath: \go\view\t1.html
+-->
+<html>
+    <title>{{.title}}</title>
+    <script type="text/javascript" src="/static/a.js"></script>
+<body>
+    {{range $i, $v := .list}}
+    <p>hello1, {{$v.Id}}- {{$v.Title}}-{{$v.Type}}-{{$v.Body}}</p>
+    {{end}}
+</body>
+</html>

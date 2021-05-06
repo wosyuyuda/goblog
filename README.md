@@ -1,39 +1,44 @@
 # gomybolg
 
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
+# 介绍
 
-#### 软件架构
-软件架构说明
+1. 主要还是mvc结构，部分会使用前后端分离，看哪个便利哪个来
+2. golang的gin框架+gorm.v2+hui后端管理，前端界面考虑用mip的模板，更利于优化
+3. 博客的基本功能，后台登陆功能已经好了，再加上增删改查的功能，再加一个分类功能就好啦
+
+# 软件架构
+1. golang的gin框架+gorm.v2+hui后端管理，前端界面考虑用mip的模板
+
+# 目录结构
+1. controller 控制器
+    1.1 --admin.go 管理后台文件
+    1.2 --index.go 前端页面的文件
+    1.3 --user.go 啥用没有，后期留着用来管理用户或者管理员
+    1.4 --list.go 列表功能，本来应该放在admin.go里面的，不过划分出来结构会更清晰一些
+2. main.go启动文件，包含路由
+3. model 数据库目录，添加数据库处理类的功能
+4. server目录，后期添加一下处理服务的功能，现在没啥东西就先空着
+5. static 静态资源目录，放一些css,js图片等资源
+6. view目录用来放模板的目录
 
 
-#### 安装教程
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
+# 安装教程
+1. 更改数据库/model/model.go里面的，俩个地方都改一下
+2. 这个拉到本地，运行main.go即可
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+static里面的静态资源是h ui的模板，想研究的自己去研究一下吧
 
 #### 参与贡献
+1. h ui  http://h-ui.net/
+2. gin+gorm
+3. 部分使用layui，及ajax
+4. 后端考虑部分使用vue,功能部分
+5. 前端模板考虑使用百度mip，更利于百度优化
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
 
 
-#### 特技
+## 特技
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+

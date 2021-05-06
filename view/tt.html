@@ -1,17 +1,15 @@
+
 <!--
  * @Description: 
  * @Author: longfei
- * @Date: 2021-04-22 11:30:01
- * @LastEditTime: 2021-04-22 11:57:45
- * @LastEditors: longfei
  * @FilePath: \go\view\tt.html
 -->
 <html>
+    <title>{{.title}}</title>
     <script type="text/javascript" src="/static/a.js"></script>
 <body>
-    <p>hello, {{.title}}</p>
-    {{range $index, $ele := .stuArr }}
-    <p>{{ $index }}: {{ $ele.Name }}今年{{ $ele.Age }} 岁了</p>
-    {{ end }}
+    <p>hello, {{.id}}-{{.title}}-{{.body}}</p>
+   
 </body>
+
 </html>
