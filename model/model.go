@@ -3,9 +3,6 @@ package model
 /*
  * @Description:
  * @Author: longfei
- * @Date: 2021-04-25 09:18:47
- * @LastEditTime: 2021-05-06 14:34:09
- * @LastEditors: longfei
  * @FilePath: \go\model\model.go
  */
 
