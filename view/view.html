@@ -7,8 +7,8 @@
     <title>{{.title}}</title>
     <script type="text/javascript" src="/static/a.js"></script>
 <body>
-    {{range $i, $v := .list}}
-    <p>hello1, {{$v.Id}}- {{$v.Title}}-{{$v.Type}}-{{$v.Body}}</p>
-    {{end}}
+   
+    <p>hello1, {{.Id}}- {{.Title}}-{{.Type}}-{{.Body}}</p>
+   
 </body>
 </html>

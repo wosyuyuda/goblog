@@ -52,6 +52,27 @@ func AdminAddView(c *gin.Context) {
 	c.HTML(http.StatusOK, "admin_AddView.html", gin.H{}) //进入管理首页
 }
 
+//这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
+func AddView(c *gin.Context) {
+	view1 := new(view)
+	type1 := c.PostForm("type") //这里分类还要转成int类型，真麻烦,好像直接用string还方便些
+	viewType, _ := strconv.Atoi(type1)
+	view1.Type = viewType
+
+	view1.Title = c.PostForm("title")
+	view1.Body = c.PostForm("body")
+	fmt.Printf("传过来的标题是：%s 密码是：%s", c.PostForm("body"), c.PostForm("title"))
+	//fmt.Println(view1)
+	conn := d.GetDb()
+	conn.AutoMigrate(&view{})
+	err := conn.Create(view1).Error
+	if err != nil {
+		fmt.Println("创建失败")
+	}
+	fmt.Println("创建成功")
+	c.JSON(200, gin.H{"msg": "创建成功", "code": 200})
+}
+
 //用户登陆提交的页面
 func Login(c *gin.Context) {
 
