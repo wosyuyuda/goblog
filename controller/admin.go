@@ -10,12 +10,14 @@ import (
 	"encoding/hex"
 	"fmt"
 	"net/http"
+	"strconv"
 	d "test/model"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
+//这个后面加到一个中间件里面去。现在就先用着吧
 func Islogin(c *gin.Context) {
 	session := sessions.Default(c)
 	uid := session.Get("uid")
@@ -27,15 +29,26 @@ func Islogin(c *gin.Context) {
 	}
 }
 
-//后台的列表页
+//后台的首页，再在其它页面添加一个文章列表的功能
 func AdminIndex(c *gin.Context) {
-	Islogin(c)
 	c.HTML(http.StatusOK, "admin_index.html", gin.H{}) //进入管理首页
+}
+
+//后台的文章的管理页面
+func AdminList(c *gin.Context) {
+	page := c.DefaultQuery("page", "1")
+	pagenum, _ := strconv.Atoi(page)
+	db := d.LinkDb() //连接数据库模型
+	v := new(view)
+	db.Limit(10).Offset(pagenum).Find(&v)
+	//这里模板整一下
+	c.HTML(http.StatusOK, "tt.html", gin.H{
+		"list": v,
+	})
 }
 
 //后台的添加文章详情页
 func AdminAddView(c *gin.Context) {
-	Islogin(c)
 	c.HTML(http.StatusOK, "admin_AddView.html", gin.H{}) //进入管理首页
 }
 
