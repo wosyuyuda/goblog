@@ -33,7 +33,7 @@ func main() {
 
 	v1 := r.Group("/admin")
 	{
-		//这里加一个判断是否登陆的中间件
+		//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
 		v1.GET("/login", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "login1.html", gin.H{})
 		}) //登陆页
