@@ -8,7 +8,7 @@
     <script type="text/javascript" src="/static/a.js"></script>
 <body>
     {{range $i, $v := .list}}
-    <p>hello1, {{$v.Id}}- {{$v.Title}}-{{$v.Type}}-{{$v.Body}}</p>
+    <p>hello1, {{$v.ID}}- {{$v.Title}}-{{$v.Type}}-{{$v.Body}}-{{$v.CreatedAt}}</p>
     {{end}}
 </body>
 </html>

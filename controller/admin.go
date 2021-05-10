@@ -10,12 +10,14 @@ import (
 	"encoding/hex"
 	"fmt"
 	"net/http"
+	"strconv"
 	d "test/model"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
+//这个后面加到一个中间件里面去。现在就先用着吧
 func Islogin(c *gin.Context) {
 	session := sessions.Default(c)
 	uid := session.Get("uid")
@@ -27,16 +29,48 @@ func Islogin(c *gin.Context) {
 	}
 }
 
-//后台的列表页
+//后台的首页，再在其它页面添加一个文章列表的功能
 func AdminIndex(c *gin.Context) {
-	Islogin(c)
 	c.HTML(http.StatusOK, "admin_index.html", gin.H{}) //进入管理首页
+}
+
+//后台的文章的管理页面
+func AdminList(c *gin.Context) {
+	page := c.DefaultQuery("page", "1")
+	pagenum, _ := strconv.Atoi(page)
+	db := d.LinkDb() //连接数据库模型
+	v := new(view)
+	db.Limit(10).Offset(pagenum).Find(&v)
+	//这里模板整一下
+	c.HTML(http.StatusOK, "tt.html", gin.H{
+		"list": v,
+	})
 }
 
 //后台的添加文章详情页
 func AdminAddView(c *gin.Context) {
-	Islogin(c)
 	c.HTML(http.StatusOK, "admin_AddView.html", gin.H{}) //进入管理首页
+}
+
+//这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
+func AddView(c *gin.Context) {
+	view1 := new(view)
+	type1 := c.PostForm("type") //这里分类还要转成int类型，真麻烦,好像直接用string还方便些
+	viewType, _ := strconv.Atoi(type1)
+	view1.Type = viewType
+
+	view1.Title = c.PostForm("title")
+	view1.Body = c.PostForm("body")
+	fmt.Printf("传过来的标题是：%s 密码是：%s", c.PostForm("body"), c.PostForm("title"))
+	//fmt.Println(view1)
+	conn := d.GetDb()
+	conn.AutoMigrate(&view{})
+	err := conn.Create(view1).Error
+	if err != nil {
+		fmt.Println("创建失败")
+	}
+	fmt.Println("创建成功")
+	c.JSON(200, gin.H{"msg": "创建成功", "code": 200})
 }
 
 //用户登陆提交的页面
