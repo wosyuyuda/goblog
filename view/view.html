@@ -4,11 +4,11 @@
  * @FilePath: \go\view\t1.html
 -->
 <html>
-    <title>{{.title}}</title>
-    <script type="text/javascript" src="/static/a.js"></script>
+    <title>{{.view.Title}}</title>
+   
 <body>
    
-    <p>hello1, {{.Id}}- {{.Title}}-{{.Type}}-{{.Body}}</p>
-   
+    <p>hello1, {{.view.ID}}- {{.view.Title}}-{{.view.Typeid}}-{{.view.Body}}--{{.view.CreatedAt}}</p>
+    {{.view.Tps.ID}} {{.view.Tps.Name}}
 </body>
 </html>

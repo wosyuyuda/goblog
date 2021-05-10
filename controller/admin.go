@@ -55,9 +55,9 @@ func AdminAddView(c *gin.Context) {
 //这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
 func AddView(c *gin.Context) {
 	view1 := new(view)
-	type1 := c.PostForm("type") //这里分类还要转成int类型，真麻烦,好像直接用string还方便些
+	type1 := c.PostForm("typeid") //这里分类还要转成int类型，真麻烦,好像直接用string还方便些
 	viewType, _ := strconv.Atoi(type1)
-	view1.Type = viewType
+	view1.Typeid = viewType
 
 	view1.Title = c.PostForm("title")
 	view1.Body = c.PostForm("body")

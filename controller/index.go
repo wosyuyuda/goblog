@@ -9,7 +9,6 @@ package controller
 import (
 	"net/http"
 
-	"fmt"
 	d "test/model"
 
 	"github.com/gin-gonic/gin"
@@ -18,9 +17,12 @@ import (
 
 type view struct {
 	gorm.Model
-	Type  int
-	Title string `gorm:"size:255"`
-	Body  string
+	Typeid int    //分类的ID，关联
+	Title  string `gorm:"size:255"` //标题
+	Body   string //详细的内容
+	Click  int    //点击量
+	Pic    string `gorm:"size:255"` //文章的缩略图
+	Tps    Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`
 }
 
 //这里是详情页
@@ -29,13 +31,9 @@ func GetView(c *gin.Context) {
 	db := d.LinkDb() //连接数据库模型
 	u := new(view)
 	db.Where("id = ?", id).Find(&u)
-	fmt.Println(u)
+	db.Model(&u).Preload("Tps").Find(&u)
 	c.HTML(http.StatusOK, "view.html", gin.H{
-		"view":  u,
-		"ID":    u.ID,
-		"Title": u.Title,
-		"Body":  u.Body,
-		"Type":  u.Type,
+		"view": u,
 	})
 }
 
@@ -54,10 +52,14 @@ func Views(c *gin.Context) {
 //这里查询列表
 func (view) Findlist(id string) (vi []view) {
 	db := d.LinkDb() //连接数据库模型
+
 	if id == "0" {
-		db.Limit(10).Order("created_at desc").Find(&vi)
+		db.Limit(10).Order("created_at desc").Preload("Tps").Find(&vi)
+		//下面是原来的
+		//db.Limit(10).Order("created_at desc").Find(&vi)
+		//db.Model(&vi).Preload("Tps").Find(&vi)
 	} else {
-		db.Where("type = ?", id).Limit(10).Order("created_at desc").Find(&vi)
+		db.Where("typeid = ?", id).Limit(10).Order("created_at desc").Preload("Tps").Find(&vi)
 	}
 	return
 }
