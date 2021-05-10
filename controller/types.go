@@ -8,15 +8,20 @@ import (
 )
 
 type Tp struct {
-	ID   uint   `gorm:"primarykey"`
-	Name string `gorm:"size:255"`
+	ID    uint   `gorm:"primarykey"`
+	Name  string `gorm:"size:255"`
+	views []view `gorm:"foreignKey:Typeid;references:ID"`
 }
 
+//-1是获取首页带文章的
 func (Tp) GetType(id string) (Tp []Tp) {
 	db := d.LinkDb() //连接数据库模型
-	if id == "0" {
+	switch id {
+	case "0":
 		db.Find(&Tp)
-	} else {
+	case "-1":
+		db.Debug().Preload("view").Find(&Tp)
+	default:
 		db.Where("id = ?", id).Find(&Tp)
 	}
 	return

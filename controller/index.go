@@ -7,6 +7,7 @@ package controller
  */
 
 import (
+	"fmt"
 	"net/http"
 
 	d "test/model"
@@ -71,6 +72,8 @@ func Lists1(c *gin.Context) {
 	tuijian := view2.Findlist("-1")
 	types1 := new(Tp)
 	tp := types1.GetType("0")
+	tp1 := types1.GetType("-1")
+	fmt.Printf("%+v", tp1)
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    views,
 		"types":   tp,
