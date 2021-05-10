@@ -20,7 +20,7 @@ type view struct {
 	Typeid int    //分类的ID，关联
 	Title  string `gorm:"size:255"` //标题
 	Body   string //详细的内容
-	Click  int    //点击量
+	Click  int    `gorm:"size:10"`  //点击量
 	Pic    string `gorm:"size:255"` //文章的缩略图
 	Tps    Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`
 }
