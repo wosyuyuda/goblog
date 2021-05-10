@@ -39,17 +39,19 @@ func GetView(c *gin.Context) {
 	})
 }
 
-//这里是首页
+//这里是列表页
 func Views(c *gin.Context) {
 	id1 := c.Param("id")
 	v1 := new(view)
 	list := v1.Findlist(id1)
 	c.HTML(http.StatusOK, "t1.html", gin.H{
-		"list": list,
+		"title": "这个是后台设置的标题呀",
+		"list":  list,
 	})
 
 }
 
+//这里查询列表
 func (view) Findlist(id string) (vi []view) {
 	db := d.LinkDb() //连接数据库模型
 	if id == "0" {
