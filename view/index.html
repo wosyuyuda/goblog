@@ -334,10 +334,10 @@
                     aria-hidden="true">
                     <ul>
                         <li><button on="tap:right-sidebar.close"> X </button></li>
-                        <li><a target="_blank" href="/" class="dropdown-toggle">网站首页</a></li>
-
-
-                        <li><a target="_blank" href="/list/1" data-type="mip" data-title="分类" title="分类">分类</a></li>
+                       
+                        {{range $i, $v := .types}}
+                        <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a></li>
+                        {{end}}	 
 
                     </ul>
                 </mip-sidebar>
@@ -349,10 +349,10 @@
                 <nav class="navbar-left primary-menu">
                     <ul id="menu-justnews-menu" class="nav navbar-nav">
                         <li class="menu-item dropdown active"><a href="/">首页</a></li>
-
-                        <li class="menu-item "><a href="/list/1" data-type="mip" data-title="分类" title="分类"
-                                class="dropdown-toggle">分类</a></li>
-
+ {{range $i, $v := .types}}
+                        <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}"
+                                class="dropdown-toggle">{{$v.Name}}</a></li>
+                                {{end}}	 
                     </ul>
                 </nav>
                 <div class="navbar-action pull-right">
@@ -419,11 +419,8 @@
                         <mip-vd-tabs allow-scroll="">
                             <ul class="list tabs" id="j-newslist">
                                 <li class="tab">最新</li>
-
                                 <!--  下面是分类的列表 -->
-                                <!-- {dede:channel type='top' row='10' }
-         <li class="tab">[field:typename/]</li>
-		 {/dede:channel}	--> 
+                                {{range $i, $v := .types}} <li class="tab">{{$v.Name}}</li> {{end}}
         </ul> 
 
 
@@ -477,7 +474,7 @@
           <div class="item-img">
            <a target="_blank" href="[field:arcurl /]" data-type="mip" data-title="{{.Title}}" title="{{.Title}}">
             <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy " src="/static/no-images.jpg" alt="{{.Title}}"></mip-img></a>
-           <a target="_blank" class="item-category" href="[field:typeurl/]">[field:typename/]</a>
+           <a target="_blank" class="item-category" href="[field:typeurl/]">{{.Name}}</a>
           </div>
           <div class="item-content">
            <h2 class="item-title"><a target="_blank" href="[field:arcurl /]" data-type="mip" data-title="{{.Title}}" title="{{.Title}}">{{.Title}}</a></h2>
@@ -486,7 +483,7 @@
            </div>
            <div class="item-meta">
             <div class="item-meta-li author">
-             <a class="nickname" href="[field:typeurl/]" target="_blank">[field:typename/]</a>
+             <a class="nickname" href="[field:typeurl/]" target="_blank">{{.Name}}</a>
             </div>
             <span class="item-meta-li date">[field:pubdate function="MyDate('yy-m-d',@me)"/]</span>
             <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i> [field:click/]</span>
@@ -554,15 +551,15 @@
                 <div class="footer-col footer-col-copy ">
                     <ul class="footer-nav hidden-xs ">
 
-                        <!--  {dede:channel type='top' row='10' }
-	     <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="[field:typeurl/]" data-type="mip" data-title="[field:typename/]" title="[field:typename/]">[field:typename/]</a>. </li>
-	    	{/dede:channel}	  -->
+                        {{range $i, $v := .types}}
+	     <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
+         {{end}}	 
                     </ul>
                     <div class="copyright ">
                         Copyright &copy; 2020 版权所有
                         <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer "></a>
                         Powered by
-                        <a href="#" target="_blank " rel="noopener noreferrer ">mipcms</a>
+                        <a href="#" target="_blank " rel="noopener noreferrer "></a>
                         <mip-stats-baidu token="5d17a3900bf319d084c445742d214ac6"></mip-stats-baidu>
                     </div>
                 </div>

@@ -12,6 +12,16 @@ type Tp struct {
 	Name string `gorm:"size:255"`
 }
 
+func (Tp) GetType(id string) (Tp []Tp) {
+	db := d.LinkDb() //连接数据库模型
+	if id == "0" {
+		db.Find(&Tp)
+	} else {
+		db.Where("id = ?", id).Find(&Tp)
+	}
+	return
+}
+
 func AddTypes(c *gin.Context) {
 	tp1 := new(Tp)
 	tp1.Name = c.PostForm("name")
