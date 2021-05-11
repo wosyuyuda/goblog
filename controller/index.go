@@ -12,6 +12,7 @@ import (
 	"strconv"
 
 	d "test/model"
+	"test/util"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -55,16 +56,25 @@ func Views(c *gin.Context) {
 	id1 := c.Param("id")
 	v1 := new(view)
 	list := v1.Findlist(id1, 1)
-	newList := v1.Findlist("0", 1)
-	tuijian := v1.Findlist("-1", 1)
+	newList := v1.Findlist("0", 1)  //最新
+	tuijian := v1.Findlist("-1", 1) //推荐
 	types1 := new(Tp)
-	tp := types1.GetType("0")
+	tp := types1.GetType("0") //栏目分类
+
+	page := c.DefaultQuery("page", "1")
+	pagenum, _ := strconv.Atoi(page)
+	var i int64
+	db := d.LinkDb()
+	db.Model(&view{}).Where("typeid = ?", id1).Count(&i)
+	p := util.GetPage(i, pagenum)
+
 	c.HTML(http.StatusOK, "list.html", gin.H{
 		"list":     list,
 		"typeinfo": list[0].Tps,
 		"types":    tp,
 		"newlist":  newList,
 		"tuijian":  tuijian,
+		"pageinfo": p,
 	})
 }
 
