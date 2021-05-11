@@ -37,10 +37,11 @@ func GetView(c *gin.Context) {
 	id := c.Param("id")
 	db := d.LinkDb() //连接数据库模型
 	u := new(view)
-	newList := u.Findlist("0", 1)
-	tuijian := u.Findlist("-1", 1)
+	newList := u.Findlist("0", 1)  //最新的列表
+	tuijian := u.Findlist("-1", 1) //推荐的列表
 	db.Where("id = ?", id).Find(&u)
 	db.Model(&u).Preload("Tps").Find(&u)
+	db.Model(&u).Update("click", u.Click+1) //点击量加1
 	types1 := new(Tp)
 	tp := types1.GetType("0")
 	c.HTML(http.StatusOK, "view.html", gin.H{
