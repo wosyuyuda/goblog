@@ -8,10 +8,9 @@ package controller
  */
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"fmt"
 	d "test/model"
+	"test/util"
 
 	"github.com/gin-gonic/gin"
 )
@@ -30,11 +29,8 @@ func AddU(c *gin.Context) {
 	user.Age = 18
 	user.Gender = 1
 	pwd := "123456"
-
-	h := md5.New()
-	h.Write([]byte(pwd))
-	user.Pwd = hex.EncodeToString(h.Sum(nil)) //md5加密一道
-	user.AddUser()                            //user.id = 1，添加之后user中的id会变成数据库中生成的值
+	user.Pwd = util.Md5(pwd)
+	user.AddUser() //user.id = 1，添加之后user中的id会变成数据库中生成的值
 }
 
 func (user *User) AddUser() {

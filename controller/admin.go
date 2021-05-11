@@ -6,12 +6,11 @@ package controller
  * @FilePath: \go\controller\admin.go
  */
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"fmt"
 	"net/http"
 	"strconv"
 	d "test/model"
+	"test/util"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
@@ -20,6 +19,7 @@ import (
 //这个后面加到一个中间件里面去。现在就先用着吧
 func Islogin(c *gin.Context) {
 	session := sessions.Default(c)
+
 	uid := session.Get("uid")
 	fmt.Printf("aa%+v\n", uid)
 	//手动删除了cookie后获取到的缓存是nil,没有找到用户信息的时候存的是0
@@ -79,7 +79,7 @@ func Login(c *gin.Context) {
 	code := c.PostForm("code")
 	if code != "1111" { //此处为验证码验证，后期再扩展
 		c.JSON(200, gin.H{"msg": "验证码错误", "code": 400})
-		return
+		c.Abort()
 	}
 	name := c.PostForm("name")
 	pwd := c.PostForm("pwd")
@@ -90,13 +90,13 @@ func Login(c *gin.Context) {
 	fmt.Printf("传过来的账号是：%s 密码是：%s", name, pwd)
 	fmt.Printf("后台的账号是：%s 密码是：%s，uid是 %d", u.Name, u.Pwd, u.Id) */
 
-	h := md5.New()
-	h.Write([]byte(pwd)) // 需要加密的字符串为 123456，如果密码放到前端加密，后端就可以不用
-	if hex.EncodeToString(h.Sum(nil)) != u.Pwd || u.Id == 0 {
+	if util.Md5(pwd) != u.Pwd || u.Id == 0 {
 		c.JSON(200, gin.H{"msg": "账号不存在或者密码错误", "code": 400})
-		return
+		c.Abort()
 	}
 	session := sessions.Default(c)
+	option := sessions.Options{MaxAge: 3600 * 8} //8小时后过期
+	session.Options(option)
 	session.Set("uid", u.Id) //把用户ID存进session,后面拿出来确认
 	session.Save()
 	c.Redirect(http.StatusMovedPermanently, "/admin/")
