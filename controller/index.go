@@ -9,6 +9,7 @@ package controller
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	d "test/model"
 
@@ -72,12 +73,17 @@ func Lists1(c *gin.Context) {
 	tuijian := view2.Findlist("-1")
 	types1 := new(Tp)
 	tp := types1.GetType("0")
-	tp1 := types1.GetType("-1")
-	fmt.Printf("%+v", tp1)
+	tt := [3]Tp{}
+	for i, v := range tp {
+		v.Views = view2.Findlist1(strconv.Itoa(int(v.ID)))
+		tt[i] = v
+	}
+	fmt.Printf("列表的数据是%+v", tt)
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    views,
 		"types":   tp,
 		"tuijian": tuijian,
+		"tt":      tt,
 	})
 }
 
@@ -92,5 +98,10 @@ func (view) Findlist(id string) (vi []view) {
 	default:
 		db.Where("typeid = ?", id).Limit(10).Order("created_at desc").Preload("Tps").Find(&vi)
 	}
+	return
+}
+func (view) Findlist1(id string) (vi []view) {
+	db := d.LinkDb() //连接数据库模型
+	db.Where("typeid = ?", id).Limit(10).Order("created_at desc").Find(&vi)
 	return
 }

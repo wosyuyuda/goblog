@@ -10,7 +10,7 @@ import (
 type Tp struct {
 	ID    uint   `gorm:"primarykey"`
 	Name  string `gorm:"size:255"`
-	views []view `gorm:"foreignKey:Typeid;references:ID"`
+	Views []view `gorm:"-"`
 }
 
 //-1是获取首页带文章的
@@ -20,7 +20,7 @@ func (Tp) GetType(id string) (Tp []Tp) {
 	case "0":
 		db.Find(&Tp)
 	case "-1":
-		db.Debug().Preload("view").Find(&Tp)
+		db.Find(&Tp)
 	default:
 		db.Where("id = ?", id).Find(&Tp)
 	}

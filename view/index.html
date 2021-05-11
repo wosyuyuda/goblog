@@ -420,7 +420,7 @@
                             <ul class="list tabs" id="j-newslist">
                                 <li class="tab">最新</li>
                                 <!--  下面是分类的列表 -->
-                                {{range $i, $v := .types}} <li class="tab">{{$v.Name}}</li> {{end}}
+                                {{range $i, $v := .tt}} <li class="tab">{{$v.Name}}</li> {{end}}
         </ul> 
 
 
@@ -467,33 +467,46 @@
 
 
                                 <!-- 下面是分类的详细调用 -->
-                                <!-- {dede:channelartlist}
+                                {{range  $v1 := .tt}}
         <ul class="article-list tab-list active">
-			{dede:arclist titlelen='90' row='6'}
-         <li class="item">
-          <div class="item-img">
-           <a target="_blank" href="[field:arcurl /]" data-type="mip" data-title="{{.Title}}" title="{{.Title}}">
-            <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy " src="/static/no-images.jpg" alt="{{.Title}}"></mip-img></a>
-           <a target="_blank" class="item-category" href="[field:typeurl/]">{{.Name}}</a>
-          </div>
-          <div class="item-content">
-           <h2 class="item-title"><a target="_blank" href="[field:arcurl /]" data-type="mip" data-title="{{.Title}}" title="{{.Title}}">{{.Title}}</a></h2>
-           <div class="item-excerpt">
-            <p>[field:description function='cn_substr(@me,240)'/]...</p>
-           </div>
-           <div class="item-meta">
-            <div class="item-meta-li author">
-             <a class="nickname" href="[field:typeurl/]" target="_blank">{{.Name}}</a>
-            </div>
-            <span class="item-meta-li date">[field:pubdate function="MyDate('yy-m-d',@me)"/]</span>
-            <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i> [field:click/]</span>
-           </div>
-          </div></li>
-  {/dede:arclist}  
-         <li class="load-more-wrap"><a target="_blank" data-type="mip" class="load-more j-load-more" data-title="{dede:field name='typename'/}" href="{dede:field name='typeurl'/}">点击查看更多</a></li>
+            {{range $v := $v1.Views}}
+            <li class="item">
+                <div class="item-img">
+                    <a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
+                        data-title="{{$v.Title}}" title="{{$v.Title}}">
+                        <mip-img layout="container"
+                            class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy "
+                            src="/static/no-images.jpg"
+                            alt="{{$v.Title}}"></mip-img>
+                    </a>
+                    <!-- 这里放分类的链接 -->
+                    <a target="_blank" class="item-category"
+                        href="/list/{{$v.Tps.ID}}">{{$v.Tps.Name}}
+                    </a>
+                </div>
+                <div class="item-content">
+                    <h2 class="item-title"><a target="_blank" href="/view/{{$v.ID}}"
+                            data-type="mip" data-title="{{$v.Title}}"
+                            title="{{$v.Title}}">{{$v.Title}}</a></h2>
+                    <div class="item-excerpt">
+                        <p>{{$v.Body}}...</p>
+                    </div>
+                    <div class="item-meta">
+                        <div class="item-meta-li author">
+                            <a class="nickname" href="/list/{{$v.Tps.ID}}"
+                                target="_blank">{{$v.Tps.Name}}</a>
+                        </div>
+                        <span class="item-meta-li date">{{$v.CreatedAt}}</span>
+                        <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i>
+                            {{$v.Click}}</span>
+                    </div>
+                </div>
+            </li>
+          {{end}}
+         <li class="load-more-wrap"><a target="_blank" data-type="mip" class="load-more j-load-more" data-title="{{$v1.Name}}" href="/list/{{$v1.ID}}">点击查看更多</a></li>
         </ul>
-		   {/dede:channelartlist}  -->
-
+		 
+        {{end}}
 
 
 
