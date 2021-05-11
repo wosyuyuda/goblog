@@ -73,11 +73,19 @@ func Lists1(c *gin.Context) {
 	tuijian := view2.Findlist("-1")
 	types1 := new(Tp)
 	tp := types1.GetType("0")
-	tt := [3]Tp{}
+	//fmt.Printf("列表的数据是 %T %+v", len(tp), len(tp))
+	/* tt := [3]Tp{}
 	for i, v := range tp {
 		v.Views = view2.Findlist1(strconv.Itoa(int(v.ID)))
 		tt[i] = v
+	} */
+
+	tt := []Tp{}
+	for _, v := range tp {
+		v.Views = view2.Findlist1(strconv.Itoa(int(v.ID)))
+		tt = append(tt, v)
 	}
+
 	fmt.Printf("列表的数据是%+v", tt)
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    views,
