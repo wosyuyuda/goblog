@@ -3,15 +3,15 @@ package util
 import "unsafe"
 
 type Pages struct {
-	Upage    int
-	Page     int
-	Nextpage int
-	Num      int
+	Upage    int //上一页
+	Page     int //当前页
+	Nextpage int //下一页
+	Num      int //总共的条数
 }
 
 func GetPage(num int64, p int) Pages {
 	page := Pages{}
-
+	off := 10 //一页默认10条
 	idPointer := (*int)(unsafe.Pointer(&num))
 	znum := *idPointer
 
@@ -24,7 +24,7 @@ func GetPage(num int64, p int) Pages {
 		page.Upage = p - 1
 	}
 
-	if p*10 > znum {
+	if p*off > znum {
 		page.Nextpage = 0
 	} else {
 		page.Nextpage = p + 1
