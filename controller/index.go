@@ -7,6 +7,7 @@ package controller
  */
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -25,6 +26,8 @@ type view struct {
 	Tuijian uint   `gorm:"size:1"`                        //是否为推荐
 	Swiper  uint   `gorm:"size:1"`                        //是否为轮播图
 	Pic     string `gorm:"size:255"`                      //文章的缩略图
+	Content string `gorm:"size:255"`                      //文章的简介
+	Status  uint   `gorm:"size:1"`                        //文章状态，0删除，1正常
 	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"` //这里放分类信息types
 }
 
@@ -33,8 +36,8 @@ func GetView(c *gin.Context) {
 	id := c.Param("id")
 	db := d.LinkDb() //连接数据库模型
 	u := new(view)
-	newList := u.Findlist("0")
-	tuijian := u.Findlist("-1")
+	newList := u.Findlist("0", 1)
+	tuijian := u.Findlist("-1", 1)
 	db.Where("id = ?", id).Find(&u)
 	db.Model(&u).Preload("Tps").Find(&u)
 	types1 := new(Tp)
@@ -51,9 +54,9 @@ func GetView(c *gin.Context) {
 func Views(c *gin.Context) {
 	id1 := c.Param("id")
 	v1 := new(view)
-	list := v1.Findlist(id1)
-	newList := v1.Findlist("0")
-	tuijian := v1.Findlist("-1")
+	list := v1.Findlist(id1, 1)
+	newList := v1.Findlist("0", 1)
+	tuijian := v1.Findlist("-1", 1)
 	types1 := new(Tp)
 	tp := types1.GetType("0")
 	c.HTML(http.StatusOK, "list.html", gin.H{
@@ -68,8 +71,8 @@ func Views(c *gin.Context) {
 //这里是首页
 func Lists1(c *gin.Context) {
 	view2 := new(view)
-	views := view2.Findlist("0")
-	tuijian := view2.Findlist("-1")
+	views := view2.Findlist("0", 1)
+	tuijian := view2.Findlist("-1", 1)
 	types1 := new(Tp)
 	tp := types1.GetType("0")
 	//获取首页每个栏目的列表
@@ -78,7 +81,7 @@ func Lists1(c *gin.Context) {
 		v.Views = view2.Findlist1(strconv.Itoa(int(v.ID)))
 		tt = append(tt, v)
 	}
-
+	fmt.Printf("数据是%+v", tt)
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    views,
 		"types":   tp,
@@ -88,15 +91,20 @@ func Lists1(c *gin.Context) {
 }
 
 //这里查询列表,0获取全部的，-1是推荐，-2是轮播
-func (view) Findlist(id string) (vi []view) {
+func (view) Findlist(id string, page int) (vi []view) {
 	db := d.LinkDb() //连接数据库模型
+	num := 10
+	if page < 1 {
+		page = 1
+	}
+	page -= 1
 	switch id {
 	case "0":
-		db.Limit(10).Order("created_at desc").Preload("Tps").Find(&vi)
+		db.Limit(num).Offset(page * num).Order("created_at desc").Preload("Tps").Find(&vi)
 	case "-1":
-		db.Where("tuijian = ?", 1).Limit(10).Order("created_at desc").Preload("Tps").Find(&vi)
+		db.Where("tuijian = ?", 1).Limit(num).Offset(page * num).Order("created_at desc").Preload("Tps").Find(&vi)
 	default:
-		db.Where("typeid = ?", id).Limit(10).Order("created_at desc").Preload("Tps").Find(&vi)
+		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order("created_at desc").Preload("Tps").Find(&vi)
 	}
 	return
 }

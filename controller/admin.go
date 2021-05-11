@@ -12,19 +12,19 @@ import (
 	d "test/model"
 	"test/util"
 
-	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
 
 //这个后面加到一个中间件里面去。现在就先用着吧
 func Islogin(c *gin.Context) {
-	session := sessions.Default(c)
-
-	uid := session.Get("uid")
-	fmt.Printf("aa%+v\n", uid)
+	uid := util.GetSession(c, "uid")
+	fmt.Printf("用户的UID是%v", uid)
 	//手动删除了cookie后获取到的缓存是nil,没有找到用户信息的时候存的是0
 	if uid == 0 || uid == "" || uid == nil { //跳转到登陆界面，这里后面应该放到中间件里面去
-		c.Redirect(http.StatusMovedPermanently, "/admin/login")
+		//	c.Redirect(http.StatusMovedPermanently, "/admin/login")
+		c.Redirect(http.StatusTemporaryRedirect, "/admin/login") //时间跳转到登陆页面
+
+		c.Abort()
 		return
 	}
 }
@@ -38,12 +38,22 @@ func AdminIndex(c *gin.Context) {
 func AdminList(c *gin.Context) {
 	page := c.DefaultQuery("page", "1")
 	pagenum, _ := strconv.Atoi(page)
-	db := d.LinkDb() //连接数据库模型
 	v := new(view)
-	db.Limit(10).Offset(pagenum).Find(&v)
+	list := v.Findlist("0", pagenum)
+	fmt.Println(pagenum)
+
+	//获取全部列表的信息
+	var i int64
+	db := d.LinkDb()
+	db.Model(&view{}).Count(&i)
+	p := util.GetPage(i, pagenum)
+
+	fmt.Printf("分页的内容是%+v", p)
 	//这里模板整一下
-	c.HTML(http.StatusOK, "tt.html", gin.H{
-		"list": v,
+	c.HTML(http.StatusOK, "admin_list.html", gin.H{
+		"list":     list,
+		"page":     pagenum,
+		"pageinfo": p,
 	})
 }
 
@@ -61,6 +71,7 @@ func AddView(c *gin.Context) {
 
 	view1.Title = c.PostForm("title")
 	view1.Body = c.PostForm("body")
+	view1.Content = string([]rune(view1.Body)[:31]) //截取255的长度放到简介里面去
 	fmt.Printf("传过来的标题是：%s 密码是：%s", c.PostForm("body"), c.PostForm("title"))
 	//fmt.Println(view1)
 	conn := d.GetDb()
@@ -75,31 +86,25 @@ func AddView(c *gin.Context) {
 
 //用户登陆提交的页面
 func Login(c *gin.Context) {
-
 	code := c.PostForm("code")
 	if code != "1111" { //此处为验证码验证，后期再扩展
 		c.JSON(200, gin.H{"msg": "验证码错误", "code": 400})
 		c.Abort()
+		return
 	}
 	name := c.PostForm("name")
 	pwd := c.PostForm("pwd")
 	conn := d.GetDb()
 	u := new(User)
 	conn.Where("name = ?", name).Find(&u)
-	/* fmt.Printf("用户信息是%+v\n", u)
-	fmt.Printf("传过来的账号是：%s 密码是：%s", name, pwd)
-	fmt.Printf("后台的账号是：%s 密码是：%s，uid是 %d", u.Name, u.Pwd, u.Id) */
-
 	if util.Md5(pwd) != u.Pwd || u.Id == 0 {
 		c.JSON(200, gin.H{"msg": "账号不存在或者密码错误", "code": 400})
 		c.Abort()
+		return
 	}
-	session := sessions.Default(c)
-	option := sessions.Options{MaxAge: 3600 * 8} //8小时后过期
-	session.Options(option)
-	session.Set("uid", u.Id) //把用户ID存进session,后面拿出来确认
-	session.Save()
-	c.Redirect(http.StatusMovedPermanently, "/admin/")
+
+	util.SetSession(c, "uid", u.Id) //把用户的ID存进session
+	//c.Redirect(http.StatusMovedPermanently, "/admin/")
 	c.JSON(200, gin.H{"msg": "登陆成功", "code": 200})
 
 }

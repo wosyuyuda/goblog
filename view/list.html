@@ -112,9 +112,9 @@
         <h3 class="widget-title"><span>推荐文章</span></h3>
         <ul>
 		
-		      {dede:arclist flag='c' titlelen=42 row=6}
-         <li><a target="_blank" href="/view/{{.ID}}" rel="bookmark" title="{{.Title}}">{{.Title}}</a></li>
-		    {/dede:arclist}
+		      {{range $i, $v := .tuijian}}
+         <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark" title="{{$v.Title}}">{{$v.Title}}</a></li>
+         {{end}}
 
         </ul>
        </div>

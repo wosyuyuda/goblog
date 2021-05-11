@@ -142,10 +142,10 @@
       <div id="profile-5" class="widget widget_profile">
       <!-- <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
        <div class="profile-posts">
-        <h3 class="widget-title"><span>最近文章</span></h3>
+        <h3 class="widget-title"><span>推荐</span></h3>
         <ul>
 		
-          {{range $i, $v := .newlist}}
+          {{range $i, $v := .tuijian}}
          <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark" title="{{$v.Title}}">{{$v.Title}}</a></li>
          {{end}}
         </ul>

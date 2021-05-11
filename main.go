@@ -37,12 +37,14 @@ func main() {
 		v1.GET("/login", func(c *gin.Context) {
 			c.HTML(http.StatusOK, "login1.html", gin.H{})
 		}) //登陆页
+
+		v1.GET("/", con.AdminIndex)    //管理页，现在是啥也还没有
+		v1.GET("/list", con.AdminList) //后台的文章列表，这里要加一个管理选项
+
 		v1.POST("/sub", con.Login)        //用户登陆提交的接口
-		v1.GET("/", con.AdminIndex)       //管理页，现在是啥也还没有
 		v1.POST("/addView", con.AddView)  //添加文章
 		v1.POST("/addUser", con.AddU)     //添加用户
 		v1.POST("/addType", con.AddTypes) //添加分类
-		v1.GET("/list", con.AdminIndex)   //后台的文章列表，这里要加一个管理选项
 	}
 
 	r.Run(":8000") //开启端口访问,本地再试一下提交

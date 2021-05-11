@@ -80,10 +80,11 @@
             $ = layui.$;
         form.on('submit(demo1)', function (data) {
             let b=data.field
-            console.log(b)
-            $.post("/admin/sub", { "name":b.name,"pwd":b.pwd,"code":b.code }, function (result) {
-                layer.msg(result.msg)
-                if(result.code==200){
+           // console.log(b)
+            $.post("/admin/sub", { "name":b.name,"pwd":b.pwd,"code":b.code }, function (res) {
+                layer.msg(res.msg)
+                console.log(res)
+                if(res.code==200){
                    // return false;
                     setTimeout("window.location.href = '/admin/'", 1500 )
                 }
