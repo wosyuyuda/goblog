@@ -50,14 +50,21 @@ func AdminAddView(c *gin.Context) {
 
 //这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
 func AddView(c *gin.Context) {
-	view1 := new(view)
-	type1 := c.PostForm("typeid") //这里分类还要转成int类型，真麻烦,好像直接用string还方便些
-	viewType, _ := strconv.Atoi(type1)
-	view1.Typeid = viewType
+	var data view
+	c.ShouldBind(&data)
 
-	view1.Title = c.PostForm("title")
-	view1.Body = c.PostForm("body")
-	view1.Content = string([]rune(view1.Body)[:31]) //截取255的长度放到简介里面去
+	//typeid没办法直接拿过来，只好再单独获取了
+	typeid := c.PostForm("typeid")
+	t, _ := strconv.Atoi(typeid)
+	fmt.Printf("%+v", data)
+	view1 := new(view)
+	view1.Typeid = t
+	view1.Title = data.Title
+	view1.Body = data.Body
+	view1.Swiper = data.Swiper
+	view1.Tuijian = data.Tuijian
+
+	view1.Content = string([]rune(util.HanderHmtl(view1.Body))[:31]) //去掉html标签后截取255的长度放到简介里面去
 	fmt.Printf("传过来的标题是：%s 密码是：%s", c.PostForm("body"), c.PostForm("title"))
 	//fmt.Println(view1)
 	conn := d.GetDb()

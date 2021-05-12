@@ -20,16 +20,16 @@ import (
 
 type view struct {
 	gorm.Model
-	Typeid  int    `gorm:"size:10"  json:"typeid"`        //分类的ID，关联
-	Title   string `gorm:"size:255" json:"title"`         //标题
-	Body    string `json:"body"`                          //详细的内容
-	Click   int    `gorm:"size:10" json:"click"`          //点击量
-	Tuijian uint   `gorm:"size:1" json:"tuijian"`         //是否为推荐
-	Swiper  uint   `gorm:"size:1" json:"swiper"`          //是否为轮播图
-	Pic     string `gorm:"size:255" json:"pic"`           //文章的缩略图
-	Content string `gorm:"size:255" json:"content"`       //文章的简介
-	Status  uint   `gorm:"size:1" json:"status"`          //文章状态，0删除，1正常
-	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"` //这里放分类信息types
+	Typeid  int    `gorm:"size:10"  json:"typeid"`                 //分类的ID，关联
+	Title   string `gorm:"size:255" json:"title" form:"title"`     //标题
+	Body    string `json:"body" form:"body"`                       //详细的内容
+	Click   int    `gorm:"size:10" json:"click"`                   //点击量
+	Tuijian uint   `gorm:"size:1" json:"tuijian" form:"tuijian"`   //是否为推荐
+	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
+	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
+	Content string `gorm:"size:255" json:"content" form:"content"` //文章的简介
+	Status  uint   `gorm:"size:1" json:"status"`                   //文章状态，0删除，1正常
+	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
 
 //这里是详情页
