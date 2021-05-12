@@ -311,7 +311,7 @@
                     this.arcdata.body = UE.getEditor('editor').getContent()
                     let url = "/admin/addView";
                     if (getQueryVariable('type') == 'edit') {
-                        url = "/college/saveid";
+                        url = "/admin/saveView";
                     }
                     this.arcdata.tuijian=this.arcdata.tuijian?1:0;
                     this.arcdata.swiper=this.arcdata.swiper?1:0;
@@ -334,16 +334,19 @@
                 if (getQueryVariable('type') == 'edit') {//如果是编辑
                     let id = getQueryVariable('id')
                     if (id != '') {
-                        $.get("/college/getid/" + id, function (res, status) {
+                        $.get("/admin/view/" + id, function (res, status) {
                             if (status == 'success' && res.code == 200) {
                                 console.log(res.data);
-                                var ue = UE.getEditor('editor');
+                                ue = UE.getEditor('editor');
                                 ue.ready(function () {
                                     //设置编辑器的内容
                                     ue.setContent(res.data.body);
                                 });
-                                that.types = res.data.types
+                                that.types = res.type
+                                res.data.tuijian=res.data.tuijian==1?true:false
+                                res.data.swiper=res.data.swiper==1?true:false
                                 that.arcdata = res.data;
+                                console.log(that.arcdata)
                             } else {
                                 layer.msg('异常')
                             }

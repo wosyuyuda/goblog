@@ -20,6 +20,26 @@ func AdminIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "admin_index.html", gin.H{}) //进入管理首页
 }
 
+type editview struct {
+	tp1  []Tp
+	view view
+}
+
+func AdminGetId(c *gin.Context) {
+	id := c.Param("id")
+	fmt.Println("进入获取文章")
+	db := d.LinkDb()
+	l := editview{}
+	err := db.Where("id = ?", id).Find(&l.view).Error
+	db.Find(&l.tp1)
+	fmt.Printf("获取到的内容是%+v", l)
+	if err != nil {
+		c.JSON(200, gin.H{"msg": "获取失败", "code": 204})
+	}
+
+	c.JSON(200, gin.H{"msg": "获取成功", "code": 200, "data": l.view, "type": l.tp1})
+}
+
 //后台的文章的管理页面
 func AdminList(c *gin.Context) {
 	page := c.DefaultQuery("page", "1")

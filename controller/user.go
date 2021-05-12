@@ -25,7 +25,7 @@ type User struct {
 
 func AddU(c *gin.Context) {
 	user := new(User)
-	user.Name = "tome"
+	user.Name = "longfei"
 	user.Age = 18
 	user.Gender = 1
 	pwd := "123456"
