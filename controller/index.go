@@ -8,6 +8,7 @@ package controller
 
 import (
 	"fmt"
+	"html/template"
 	"net/http"
 	"strconv"
 
@@ -27,7 +28,7 @@ type view struct {
 	Tuijian uint   `gorm:"size:1" json:"tuijian" form:"tuijian"`   //是否为推荐
 	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
-	Content string `gorm:"size:255" json:"content" form:"content"` //文章的简介
+	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
 	Status  uint   `gorm:"size:1" json:"status"`                   //文章状态，0删除，1正常
 	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
@@ -46,6 +47,7 @@ func GetView(c *gin.Context) {
 	tp := types1.GetType("0")
 	c.HTML(http.StatusOK, "view.html", gin.H{
 		"view":    u,
+		"body":    template.HTML(u.Body),
 		"types":   tp,
 		"newlist": newList,
 		"tuijian": tuijian,

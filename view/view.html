@@ -71,7 +71,7 @@
          <h1 class="entry-title">{{.view.Title}}</h1>
          <div class="entry-info">
           
-          <span>{{.view.Body}}</span>
+          <span>{{.view.Content}}</span>
           <span class="dot">•</span>
          </div>
         </div>
@@ -79,14 +79,14 @@
        <!--       <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
 	
 
-       {{.view.Body}}
+       {{.body}}
 
    <!--       <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
          <div class=" bbm">
           <mip-share></mip-share>
          </div>
          <div class="entry-copyright">
-          <p>本文来自投稿，不代表本人立场，如若转载，请注明出处；如有问题您可以发邮件到：itlun@qq.com/p>
+          <p>本文来自投稿，不代表本人立场，如若转载，请注明出处；如有问题您可以发邮件到：itlun@qq.com</p>
          </div>
         </div>
         <div class="entry-footer">
@@ -123,17 +123,6 @@
           </div>
          </div>
 		 
-         <h3 class="entry-related-title">最新文章</h3>
-         <ul class="entry-related-img clearfix p-list">
-          　　 {{range $i, $v := .newlist}}
-          <li class="col-xs-6 col-md-4 col-sm-6 p-item">
-           <div class="p-item-wrap">
-            <a href="/view/{{$v.ID}}" class="thumb" data-type="mip" data-title="{{$v.Title}}" title="{{$v.Title}}">
-             <mip-img layout="responsive" width="480" height="300" class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy" src="/static/no-images.jpg" alt="{{$v.Title}}"></mip-img></a>
-            <h2 class="title"><a href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}" title="{{$v.Title}}">{{$v.Title}}</a></h2>
-           </div></li>
-           {{end}}
-         </ul>
         </div>
        </div>
       </article>

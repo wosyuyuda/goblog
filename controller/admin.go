@@ -64,7 +64,8 @@ func AddView(c *gin.Context) {
 	view1.Swiper = data.Swiper
 	view1.Tuijian = data.Tuijian
 
-	view1.Content = string([]rune(util.HanderHmtl(view1.Body))[:31]) //去掉html标签后截取255的长度放到简介里面去
+	//这个截取太麻烦了，直接不用了，由前端去处理数据感觉方便多
+	view1.Content = string([]rune(util.HanderHmtl(view1.Body))[:64]) //去掉html标签后截取255的长度放到简介里面去
 	fmt.Printf("传过来的标题是：%s 密码是：%s", c.PostForm("body"), c.PostForm("title"))
 	//fmt.Println(view1)
 	conn := d.GetDb()
