@@ -90,7 +90,6 @@ func Login(c *gin.Context) {
 	}
 
 	util.SetSession(c, "uid", u.Id) //把用户的ID存进session
-	//c.Redirect(http.StatusMovedPermanently, "/admin/")
 	c.JSON(200, gin.H{"msg": "登陆成功", "code": 200})
 
 }
