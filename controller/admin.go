@@ -25,6 +25,7 @@ type editview struct {
 	view view
 }
 
+//获取当前文章，并且获取分类信息接口
 func AdminGetId(c *gin.Context) {
 	id := c.Param("id")
 	fmt.Println("进入获取文章")
