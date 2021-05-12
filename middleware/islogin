@@ -1,5 +1,0 @@
-package middleware
-
-func Islogin(c *gin.Context) {
-	fmt.Println("我是order路由组中间件2")
-}

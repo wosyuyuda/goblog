@@ -15,20 +15,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//这个后面加到一个中间件里面去。现在就先用着吧
-func Islogin(c *gin.Context) {
-	uid := util.GetSession(c, "uid")
-	fmt.Printf("用户的UID是%v", uid)
-	//手动删除了cookie后获取到的缓存是nil,没有找到用户信息的时候存的是0
-	if uid == 0 || uid == "" || uid == nil { //跳转到登陆界面，这里后面应该放到中间件里面去
-		//	c.Redirect(http.StatusMovedPermanently, "/admin/login")
-		c.Redirect(http.StatusTemporaryRedirect, "/admin/login") //时间跳转到登陆页面
-
-		c.Abort()
-		return
-	}
-}
-
 //后台的首页，再在其它页面添加一个文章列表的功能
 func AdminIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "admin_index.html", gin.H{}) //进入管理首页
