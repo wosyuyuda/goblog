@@ -12,6 +12,7 @@ import (
 	"strconv"
 
 	d "test/model"
+	"test/util"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -36,10 +37,11 @@ func GetView(c *gin.Context) {
 	id := c.Param("id")
 	db := d.LinkDb() //连接数据库模型
 	u := new(view)
-	newList := u.Findlist("0", 1)
-	tuijian := u.Findlist("-1", 1)
+	newList := u.Findlist("0", 1)  //最新的列表
+	tuijian := u.Findlist("-1", 1) //推荐的列表
 	db.Where("id = ?", id).Find(&u)
 	db.Model(&u).Preload("Tps").Find(&u)
+	db.Model(&u).Update("click", u.Click+1) //点击量加1
 	types1 := new(Tp)
 	tp := types1.GetType("0")
 	c.HTML(http.StatusOK, "view.html", gin.H{
@@ -55,16 +57,25 @@ func Views(c *gin.Context) {
 	id1 := c.Param("id")
 	v1 := new(view)
 	list := v1.Findlist(id1, 1)
-	newList := v1.Findlist("0", 1)
-	tuijian := v1.Findlist("-1", 1)
+	newList := v1.Findlist("0", 1)  //最新
+	tuijian := v1.Findlist("-1", 1) //推荐
 	types1 := new(Tp)
-	tp := types1.GetType("0")
+	tp := types1.GetType("0") //栏目分类
+
+	page := c.DefaultQuery("page", "1")
+	pagenum, _ := strconv.Atoi(page)
+	var i int64
+	db := d.LinkDb()
+	db.Model(&view{}).Where("typeid = ?", id1).Count(&i)
+	p := util.GetPage(i, pagenum)
+
 	c.HTML(http.StatusOK, "list.html", gin.H{
 		"list":     list,
 		"typeinfo": list[0].Tps,
 		"types":    tp,
 		"newlist":  newList,
 		"tuijian":  tuijian,
+		"pageinfo": p,
 	})
 }
 

@@ -1,212 +1,549 @@
 <!DOCTYPE html>
 <html mip="">
- <head>
+
+<head>
   <meta charset="utf-8" />
   <meta name="applicable-device" content="pc,mobile" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
   <link rel="shortcut icon" href="http://img.qpw9.cn/wx/1.ico" type="image/x-icon" />
-    <title>{{.typeinfo.Name}}</title>
-    <meta name="keywords" content="{dede:field.keywords/}">
-    <meta name="description" content="{dede:field.description function='html2text(@me)'/}">
+  <title>{{.typeinfo.Name}}</title>
+  <meta name="keywords" content="{dede:field.keywords/}">
+  <meta name="description" content="{dede:field.description function='html2text(@me)'/}">
 
   <link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css" />
   <link rel="stylesheet" type="text/css" href="/static/just.css" />
-   <style mip-custom=""> .q-content .topic-tab,.q-content .q-answer .as-user,.q-content .q-answer .as-comment-name,.profile-QAPress-tab .QAPress-tab-item { color: #3ca5f6 } .q-content .q-topic-wrap a:hover,.q-content .q-answer .as-action a:hover,.q-content .topic-tab:hover,.q-content .topic-title:hover { color: #4285f4 } .q-content .put-top,.q-content .topic-tab.current-tab,.q-content .q-answer .as-submit .btn-submit,.q-content .q-answer .as-comments-submit,.q-content .q-add-header .btn-post,.q-content .q-pagination .current,.q-btn-new,.profile-QAPress-tab .QAPress-tab-item.active,.q-mobile-ask a { background-color: #3ca5f6 } .q-content .q-answer .as-submit .btn-submit:hover,.q-content .q-answer .as-comments-submit:hover,.q-content .q-add-header .btn-post:hover,.q-content .topic-tab.current-tab:hover,.q-content .q-pagination a:hover,.q-btn-new:hover,.profile-QAPress-tab .QAPress-tab-item:hover,.q-mobile-ask a:hover { background-color: #4285f4 } .q-content .q-answer .as-comments-input:focus,.profile-QAPress-tab .QAPress-tab-item { border-color: #3ca5f6 } .profile-QAPress-tab .QAPress-tab-item:hover { border-color: #4285f4 }.page-template-page-fullnotitle.member-login #wrap,.page-template-page-fullnotitle.member-register #wrap{background-image:url('https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/login.jpg')}.j-share{position:fixed!important;top:50%!important}.header .logo img{max-height:40px}@media (max-width: 767px){.header .logo img{max-height:36px}}.footer-col-logo img{height:60px}.navbar-action #j-user-wrap,.navbar-action .login { display: inline-block; } .list.tabs .tab { display:inline-block; font-size: 16px; font-size: .16rem; color: #666; line-height: 48px; font-weight: 400; text-decoration: none; margin-right: 10px; cursor: pointer; } .list.tabs .tab:active{ color: #3ca5f6; font-weight: 500; border-bottom: 2px solid #3ca5f6; } mip-vd-tabs .mip-vd-tabs-nav-view .mip-vd-tabs-nav .mip-vd-tabs-nav-selected { border-bottom: 2px solid #38f; color: #38f; } mip-vd-tabs .mip-vd-tabs-scroll-touch{margin-top:-31px;} .apple1{background:url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/wx.png);} .footer-col-logo img{margin-right: 1px;} .footer-col {margin-left:10px;} .banner1{background: url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/banner.jpg); height: 300px; display: table; } ul.pagination li { display: inline-block; } ul.pagination li:active{color:blue;}#right-sidebar { background: #2b2b2b !important; } mip-sidebar { z-index: 99999 !important; } mip-sidebar { position: fixed !important; top: 0; max-height: 100% !important; height: 100%; max-width: 80% !important; background-color: #efefef; min-width: 45px !important; overflow-x: hidden !important; overflow-y: auto !important; z-index: 9999 !important; -webkit-overflow-scrolling: touch; will-change: transform; display: none; } #right-sidebar ul li { height: 42px; line-height: 42px; padding: 0px 35px; font-size: 16px; border-bottom: 1px solid #111; border-top: 1px solid #444; } #right-sidebar ul li button { width: 30px; font-size: 22px; background: #2b2b2b; color: #fff; border: 1px solid #2b2b2b; } #right-sidebar ul li a { color: #fff; }.search-icon { color: #fff; background: none; border: none; } .search-icon1 { color: #000; background: none; border: none; } .search-index { position: relative; line-height: 85px; transition: all .3s ease-out 0s; } .popup { display: inline-block; position: fixed; z-index: 10002; text-align: center; top: 0; right: 0; left: 0; bottom: 0; height: 100%; width: 100%; background-color: rgba(0,0,0,0.2); } .search.popup .popup_main { width: 630px; } .popup .popup_main { padding: 40px 60px; border: 1px #eee solid; background-color: #fff; } .popup>section { position: absolute; top: 45%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); } .search_form form { padding: 0 90px 0 0; overflow: hidden; margin: 0 auto; } .mip-layout-container { display: block; position: relative; } mip-form form { position: relative; } .search_form form input { height: 42px; background-color: #fff; float: left; border-radius: 0; } mip-form input[type='text'], mip-form input[type='input'], mip-form input[type='datetime'], mip-form input[type='email'], mip-form input[type='number'], mip-form input[type='tel'], mip-form input[type='url'] { padding-right: 30px; } .search_form form .search_btn { margin-right: -80px; width: 80px; background-color: #2C74E6; color: #fff; border: none; } .search_form form input { height: 42px; background-color: #fff; float: left; border-radius: 0; } mip-form input[type='submit'] { border: 0!important; border-radius: 0!important; } input[type="email"], input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], select, textarea { background-color: #fbfbfb; border: 1px #f2f2f2 solid; padding: 10px; width: 100%; min-width: 60px; font-size: 12px; font-family: '微软雅黑'; } span.lightbox-close { position: absolute; top: 12px; right: 12px; font-size: 30px; color: #a0ce4e; cursor: pointer; text-align: right; width: 50px; height: 50px; } </style>
+  <style mip-custom="">
+    .q-content .topic-tab,
+    .q-content .q-answer .as-user,
+    .q-content .q-answer .as-comment-name,
+    .profile-QAPress-tab .QAPress-tab-item {
+      color: #3ca5f6
+    }
+
+    .q-content .q-topic-wrap a:hover,
+    .q-content .q-answer .as-action a:hover,
+    .q-content .topic-tab:hover,
+    .q-content .topic-title:hover {
+      color: #4285f4
+    }
+
+    .q-content .put-top,
+    .q-content .topic-tab.current-tab,
+    .q-content .q-answer .as-submit .btn-submit,
+    .q-content .q-answer .as-comments-submit,
+    .q-content .q-add-header .btn-post,
+    .q-content .q-pagination .current,
+    .q-btn-new,
+    .profile-QAPress-tab .QAPress-tab-item.active,
+    .q-mobile-ask a {
+      background-color: #3ca5f6
+    }
+
+    .q-content .q-answer .as-submit .btn-submit:hover,
+    .q-content .q-answer .as-comments-submit:hover,
+    .q-content .q-add-header .btn-post:hover,
+    .q-content .topic-tab.current-tab:hover,
+    .q-content .q-pagination a:hover,
+    .q-btn-new:hover,
+    .profile-QAPress-tab .QAPress-tab-item:hover,
+    .q-mobile-ask a:hover {
+      background-color: #4285f4
+    }
+
+    .q-content .q-answer .as-comments-input:focus,
+    .profile-QAPress-tab .QAPress-tab-item {
+      border-color: #3ca5f6
+    }
+
+    .profile-QAPress-tab .QAPress-tab-item:hover {
+      border-color: #4285f4
+    }
+
+    .page-template-page-fullnotitle.member-login #wrap,
+    .page-template-page-fullnotitle.member-register #wrap {
+      background-image: url('https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/login.jpg')
+    }
+
+    .j-share {
+      position: fixed !important;
+      top: 50% !important
+    }
+
+    .header .logo img {
+      max-height: 40px
+    }
+
+    @media (max-width: 767px) {
+      .header .logo img {
+        max-height: 36px
+      }
+    }
+
+    .footer-col-logo img {
+      height: 60px
+    }
+
+    .navbar-action #j-user-wrap,
+    .navbar-action .login {
+      display: inline-block;
+    }
+
+    .list.tabs .tab {
+      display: inline-block;
+      font-size: 16px;
+      font-size: .16rem;
+      color: #666;
+      line-height: 48px;
+      font-weight: 400;
+      text-decoration: none;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+
+    .list.tabs .tab:active {
+      color: #3ca5f6;
+      font-weight: 500;
+      border-bottom: 2px solid #3ca5f6;
+    }
+
+    mip-vd-tabs .mip-vd-tabs-nav-view .mip-vd-tabs-nav .mip-vd-tabs-nav-selected {
+      border-bottom: 2px solid #38f;
+      color: #38f;
+    }
+
+    mip-vd-tabs .mip-vd-tabs-scroll-touch {
+      margin-top: -31px;
+    }
+
+    .apple1 {
+      background: url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/wx.png);
+    }
+
+    .footer-col-logo img {
+      margin-right: 1px;
+    }
+
+    .footer-col {
+      margin-left: 10px;
+    }
+
+    .banner1 {
+      background: url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/banner.jpg);
+      height: 300px;
+      display: table;
+    }
+
+    ul.pagination li {
+      display: inline-block;
+    }
+
+    ul.pagination li:active {
+      color: blue;
+    }
+
+    #right-sidebar {
+      background: #2b2b2b !important;
+    }
+
+    mip-sidebar {
+      z-index: 99999 !important;
+    }
+
+    mip-sidebar {
+      position: fixed !important;
+      top: 0;
+      max-height: 100% !important;
+      height: 100%;
+      max-width: 80% !important;
+      background-color: #efefef;
+      min-width: 45px !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important;
+      z-index: 9999 !important;
+      -webkit-overflow-scrolling: touch;
+      will-change: transform;
+      display: none;
+    }
+
+    #right-sidebar ul li {
+      height: 42px;
+      line-height: 42px;
+      padding: 0px 35px;
+      font-size: 16px;
+      border-bottom: 1px solid #111;
+      border-top: 1px solid #444;
+    }
+
+    #right-sidebar ul li button {
+      width: 30px;
+      font-size: 22px;
+      background: #2b2b2b;
+      color: #fff;
+      border: 1px solid #2b2b2b;
+    }
+
+    #right-sidebar ul li a {
+      color: #fff;
+    }
+
+    .search-icon {
+      color: #fff;
+      background: none;
+      border: none;
+    }
+
+    .search-icon1 {
+      color: #000;
+      background: none;
+      border: none;
+    }
+
+    .search-index {
+      position: relative;
+      line-height: 85px;
+      transition: all .3s ease-out 0s;
+    }
+
+    .popup {
+      display: inline-block;
+      position: fixed;
+      z-index: 10002;
+      text-align: center;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .search.popup .popup_main {
+      width: 630px;
+    }
+
+    .popup .popup_main {
+      padding: 40px 60px;
+      border: 1px #eee solid;
+      background-color: #fff;
+    }
+
+    .popup>section {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      -webkit-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+
+    .search_form form {
+      padding: 0 90px 0 0;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .mip-layout-container {
+      display: block;
+      position: relative;
+    }
+
+    mip-form form {
+      position: relative;
+    }
+
+    .search_form form input {
+      height: 42px;
+      background-color: #fff;
+      float: left;
+      border-radius: 0;
+    }
+
+    mip-form input[type='text'],
+    mip-form input[type='input'],
+    mip-form input[type='datetime'],
+    mip-form input[type='email'],
+    mip-form input[type='number'],
+    mip-form input[type='tel'],
+    mip-form input[type='url'] {
+      padding-right: 30px;
+    }
+
+    .search_form form .search_btn {
+      margin-right: -80px;
+      width: 80px;
+      background-color: #2C74E6;
+      color: #fff;
+      border: none;
+    }
+
+    .search_form form input {
+      height: 42px;
+      background-color: #fff;
+      float: left;
+      border-radius: 0;
+    }
+
+    mip-form input[type='submit'] {
+      border: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    input[type="email"],
+    input[type="email"],
+    input[type="number"],
+    input[type="password"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="text"],
+    input[type="url"],
+    select,
+    textarea {
+      background-color: #fbfbfb;
+      border: 1px #f2f2f2 solid;
+      padding: 10px;
+      width: 100%;
+      min-width: 60px;
+      font-size: 12px;
+      font-family: '微软雅黑';
+    }
+
+    span.lightbox-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 30px;
+      color: #a0ce4e;
+      cursor: pointer;
+      text-align: right;
+      width: 50px;
+      height: 50px;
+    }
+  </style>
   <link rel="canonical" href="/list/{{.typeinfo.ID}}">
- </head>
- <body class="home blog">
+</head>
+
+<body class="home blog">
   <header class="header ">
-   <div class="container clearfix ">
-    <div class="navbar-header ">
-     <button type="button" on="tap:right-sidebar.open" class="navbar-toggle collapsed " data-toggle="collapse " data-target=".navbar-collapse "><span class="icon-bar icon-bar-1 "></span><span class="icon-bar icon-bar-2 "></span><span class="icon-bar icon-bar-3 "></span></button>
-     <mip-sidebar id="right-sidebar" layout="nodisplay" side="right" class="mip-layout-nodisplay mip-element" aria-hidden="true">
-      <ul>
-       <li><button on="tap:right-sidebar.close"> X </button></li>
-       <li><a target="_blank" href="/">网站首页</a></li>
-       {{range $i, $v := .types}}
-       <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a></li>
-       {{end}}	  
-      </ul>
-     </mip-sidebar>
-     <h1 class="logo "><a href="/" rel="home ">
-       <mip-img src="https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/logo.png" alt=" MIPCMS内容管理系统"></mip-img></a></h1>
-    </div>
-    <div class="collapse navbar-collapse">
-     <nav class="navbar-left primary-menu">
-      <ul id="menu-justnews-menu" class="nav navbar-nav">
-       <li class="menu-item "><a href="/">首页</a></li>
-	   
-       {{range $i, $v := .types}}
-       <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}"
-               class="dropdown-toggle">{{$v.Name}}</a></li>
-               {{end}}	 
-      </ul>
-     </nav>
-     <div class="navbar-action pull-right">
-           <p class="navbar-search" action="/plus/search/" method="get" role="search"><a class="navbar-search-icon j-navbar-search" on="tap:search.toggle" href="#"></a></p>
-      <div id="j-user-wrap">
-             <a class="login" href="/#">登录</a>
+    <div class="container clearfix ">
+      <div class="navbar-header ">
+        <button type="button" on="tap:right-sidebar.open" class="navbar-toggle collapsed " data-toggle="collapse "
+          data-target=".navbar-collapse "><span class="icon-bar icon-bar-1 "></span><span
+            class="icon-bar icon-bar-2 "></span><span class="icon-bar icon-bar-3 "></span></button>
+        <mip-sidebar id="right-sidebar" layout="nodisplay" side="right" class="mip-layout-nodisplay mip-element"
+          aria-hidden="true">
+          <ul>
+            <li><button on="tap:right-sidebar.close"> X </button></li>
+            <li><a target="_blank" href="/">网站首页</a></li>
+            {{range $i, $v := .types}}
+            <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
+                title="{{$v.Name}}">{{$v.Name}}</a></li>
+            {{end}}
+          </ul>
+        </mip-sidebar>
+        <h1 class="logo "><a href="/" rel="home ">
+            <mip-img src="https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/logo.png" alt=" MIPCMS内容管理系统"></mip-img>
+          </a></h1>
       </div>
-      <a class="publish" href="#"> 投稿</a>
-     </div>
+      <div class="collapse navbar-collapse">
+        <nav class="navbar-left primary-menu">
+          <ul id="menu-justnews-menu" class="nav navbar-nav">
+            <li class="menu-item "><a href="/">首页</a></li>
+
+            {{range $i, $v := .types}}
+            <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
+                title="{{$v.Name}}" class="dropdown-toggle">{{$v.Name}}</a></li>
+            {{end}}
+          </ul>
+        </nav>
+        <div class="navbar-action pull-right">
+          <p class="navbar-search" action="/plus/search/" method="get" role="search"><a
+              class="navbar-search-icon j-navbar-search" on="tap:search.toggle" href="#"></a></p>
+          <div id="j-user-wrap">
+            <a class="login" href="/#">登录</a>
+          </div>
+          <a class="publish" href="#"> 投稿</a>
+        </div>
+      </div>
     </div>
-   </div>
   </header>
   <main class="mipcms-main">
-   <div id="wrap">
-    <div class="banner banner-white j-lazy banner1">
-     <div class="banner-inner">
-      <h1>{{.typeinfo.Name}}
-</h1>
-      <div class="page-description">
-       <p>分类介绍</p>
-      </div>
-     </div>
-    </div>
-    <div class="main container">
-     <div class="content">
-      <div class="sec-panel archive-list">
-    <!--   <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense> -->
-       <ul class="article-list">
-        {{range $i, $v := .list}}
-        <li class="item">
-         <div class="item-img">
-          <a target="_blank" href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}" title="{{$v.Title}}">
-           <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy " src="/static/no-images.jpg" alt="{{$v.Title}}"></mip-img></a>
-          <a target="_blank" class="item-category" href="/list/{{$v.Tps.ID}}">{{$v.Tps.Name}}</a>
-         </div>
-         <div class="item-content">
-          <h2 class="item-title"><a target="_blank" href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}" title="{{$v.Title}}">{{$v.Title}}</a></h2>
-          <div class="item-excerpt">
-           <p> {{$v.Body}}...</p>
+    <div id="wrap">
+      <div class="banner banner-white j-lazy banner1">
+        <div class="banner-inner">
+          <h1>{{.typeinfo.Name}}
+          </h1>
+          <div class="page-description">
+            <p>分类介绍</p>
           </div>
-          <div class="item-meta">
-           <div class="item-meta-li author">
-            <a class="nickname" href="/list/{{$v.Tps.ID}}" target="_blank">{{$v.Tps.Name}}</a>
-           </div>
-           <span class="item-meta-li date">{{$v.CreatedAt}} </span>
-           <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i>  {{$v.Click}}</span>
-          </div>
-         </div></li>
-         {{end}}
-       </ul>
- 
-
-
-
-       <div class="pagination1 clearfix">
-        <div class="page-control">
-         <ul class="pagination">
-           {dede:pagelist listitem="info,index,end,pre,next" listsize="2"/}
-         </ul>
         </div>
-       </div>
-	   
       </div>
-     </div>
-      <aside class="sidebar">
-      <div id="profile-5" class="widget widget_profile">
-           <!-- <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
-       <div class="profile-posts">
-        <h3 class="widget-title"><span>推荐文章</span></h3>
-        <ul>
-		
-		      {{range $i, $v := .tuijian}}
-         <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark" title="{{$v.Title}}">{{$v.Title}}</a></li>
-         {{end}}
+      <div class="main container">
+        <div class="content">
+          <div class="sec-panel archive-list">
+            <!--   <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense> -->
+            <ul class="article-list">
+              {{range $i, $v := .list}}
+              <li class="item">
+                <div class="item-img">
+                  <a target="_blank" href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}"
+                    title="{{$v.Title}}">
+                    <mip-img layout="container"
+                      class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy "
+                      src="/static/no-images.jpg" alt="{{$v.Title}}"></mip-img>
+                  </a>
+                  <a target="_blank" class="item-category" href="/list/{{$v.Tps.ID}}">{{$v.Tps.Name}}</a>
+                </div>
+                <div class="item-content">
+                  <h2 class="item-title"><a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
+                      data-title="{{$v.Title}}" title="{{$v.Title}}">{{$v.Title}}</a></h2>
+                  <div class="item-excerpt">
+                    <p> {{$v.Body}}...</p>
+                  </div>
+                  <div class="item-meta">
+                    <div class="item-meta-li author">
+                      <a class="nickname" href="/list/{{$v.Tps.ID}}" target="_blank">{{$v.Tps.Name}}</a>
+                    </div>
+                    <span class="item-meta-li date">{{$v.CreatedAt}} </span>
+                    <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i> {{$v.Click}}</span>
+                  </div>
+                </div>
+              </li>
+              {{end}}
+            </ul>
 
-        </ul>
-       </div>
+            <div class="pagination1 clearfix">
+              <div class="page-control">
+                <ul class="pagination">
+                      {{if ne .pageinfo.Upage 0}} 
+                      <li class="page-item"><a class="page-link" data-type="mip"
+                        href="?page={{.pageinfo.Upage}}">{{.pageinfo.Upage}}</a></li>
+            {{else}}            {{end}}
+            <li class="page-item active"><span class="page-link">{{.pageinfo.Page}}</span></li>
+            {{if ne .pageinfo.Nextpage 0}} 
+                      <li class="page-item"><a class="page-link" data-type="mip"
+                        href="?page={{.pageinfo.Nextpage}}">{{.pageinfo.Nextpage}}</a></li>
+            {{end}}
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <aside class="sidebar">
+          <div id="profile-5" class="widget widget_profile">
+            <!-- <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
+            <div class="profile-posts">
+              <h3 class="widget-title"><span>推荐文章</span></h3>
+              <ul>
+
+                {{range $i, $v := .tuijian}}
+                <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark" title="{{$v.Title}}">{{$v.Title}}</a></li>
+                {{end}}
+
+              </ul>
+            </div>
+          </div>
+          <!-- <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
+          <div id="post-thumb-5" class="widget widget_post_thumb">
+            <h3 class="widget-title"><span>最新文章</span></h3>
+            <ul>
+
+              {{range $i, $v := .newlist}}
+              <li class="item">
+                <div class="item-img">
+                  <a href="/view/{{$v.ID}}">
+                    <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
+                      src="/static/no-images.jpg"></mip-img>
+                  </a>
+                </div>
+                <div class="item-content">
+                  <p class="item-title"><a href="/view/{{$v.ID}}">{{$v.Title}}</a></p>
+                  <p class="item-date">{{$v.CreatedAt}}</p>
+                </div>
+              </li>
+              {{end}}
+            </ul>
+          </div>
+        </aside>
+
+
+
+
       </div>
-     <!-- <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
-      <div id="post-thumb-5" class="widget widget_post_thumb">
-       <h3 class="widget-title"><span>最新文章</span></h3>
-       <ul>
-	   
-        {{range $i, $v := .newlist}}
-        <li class="item">
-         <div class="item-img">
-          <a href="/view/{{$v.ID}}">
-           <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" src="/static/no-images.jpg"></mip-img></a>
-         </div>
-         <div class="item-content">
-          <p class="item-title"><a href="/view/{{$v.ID}}">{{$v.Title}}</a></p>
-          <p class="item-date">{{$v.CreatedAt}}</p>
-         </div></li>
-         {{end}}
-             </ul>
-      </div>
-     </aside>
-	 
-	 
-	 
-	 
     </div>
-   </div>
   </main>
   <footer class="footer">
-   <div class="container">
-    <div class="clearfix">
-     <div class="footer-col footer-col-logo">
-       <mip-img src="https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/logo-footer.png" alt="" width="60" height="60"></mip-img>
-     </div>
-     <div class="footer-col footer-col-copy ">
-      <ul class="footer-nav hidden-xs ">
-        {{range $i, $v := .types}}
-	     <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
-         {{end}}	 
-      </ul>
-      <div class="copyright ">
-        Copyright &copy; 2020  版权所有 
-       <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer "></a> Powered by 
-       <a href="#" target="_blank " rel="noopener noreferrer "></a>
-       <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
+    <div class="container">
+      <div class="clearfix">
+        <div class="footer-col footer-col-logo">
+          <mip-img src="https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/logo-footer.png" alt="" width="60" height="60">
+          </mip-img>
+        </div>
+        <div class="footer-col footer-col-copy ">
+          <ul class="footer-nav hidden-xs ">
+            {{range $i, $v := .types}}
+            <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}" data-type="mip"
+                data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
+            {{end}}
+          </ul>
+          <div class="copyright ">
+            Copyright &copy; 2020 版权所有
+            <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer "></a> Powered by
+            <a href="#" target="_blank " rel="noopener noreferrer "></a>
+            <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
+          </div>
+        </div>
+        <div class="footer-col footer-col-sns ">
+          <div class="footer-sns ">
+            <a class="sns-wx " href=" "><i class="fa fa-apple "></i><span class="apple1"></span></a>
+            <a class="sns-wx " href=" "><i class="fa fa-android "></i><span class="apple1"></span></a>
+            <a class="sns-wx " href=" "><i class="fa fa-weixin "></i><span class="apple1"></span></a>
+            <a target="_blank " href="#" rel="nofollow "><i class="fa fa-weibo "></i></a>
+          </div>
+        </div>
       </div>
-     </div>
-     <div class="footer-col footer-col-sns ">
-      <div class="footer-sns ">
-       <a class="sns-wx " href=" "><i class="fa fa-apple "></i><span class="apple1"></span></a>
-       <a class="sns-wx " href=" "><i class="fa fa-android "></i><span class="apple1"></span></a>
-       <a class="sns-wx " href=" "><i class="fa fa-weixin "></i><span class="apple1"></span></a>
-       <a target="_blank " href="#" rel="nofollow "><i class="fa fa-weibo "></i></a>
-      </div>
-     </div>
     </div>
-   </div>
-   </footer>
+  </footer>
   <mip-lightbox id="search" layout="nodisplay" class="mip-hidden">
-   <div class="lightbox">
-    <article class="search popup">
-     <section class="popup_main">
-      <mip-form method="get" class="search_form" url="/plus/search.php" action="/plus/search.php">
-       <input name="q" type="text" class="text_input" placeholder="输入关键字…" />
-       <input type="submit" class="search_btn" value="搜索" />
-      </mip-form>
-      <span on="tap:search.toggle" class="close lightbox-close">&times;</span>
-     </section>
-    </article>
-   </div>
+    <div class="lightbox">
+      <article class="search popup">
+        <section class="popup_main">
+          <mip-form method="get" class="search_form" url="/plus/search.php" action="/plus/search.php">
+            <input name="q" type="text" class="text_input" placeholder="输入关键字…" />
+            <input type="submit" class="search_btn" value="搜索" />
+          </mip-form>
+          <span on="tap:search.toggle" class="close lightbox-close">&times;</span>
+        </section>
+      </article>
+    </div>
   </mip-lightbox>
   <mip-fixed type="gototop">
-   <mip-gototop></mip-gototop>
+    <mip-gototop></mip-gototop>
   </mip-fixed>
 
   <script src="https://c.mipcdn.com/static/v1/mip.js"></script>
   <script src="https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-adsense/mip-adsense.js" type="text/javascript" charset="utf-8"></script>
-<mip-stats-cnzz token="1261053552"></mip-stats-bidu>
-<script src="https://c.mipcdn.com/static/v1/mip-stats-cnzz/mip-stats-cnzz.js"></script>
-	<mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
-<mip-pix src="https://www.lf19.cn{dede:field name='phpurl'/}/count.php?aid={dede:field name='id'/}&mid={dede:field name='mid'/}"></mip-pix>
-  <script src="https://c.mipcdn.com/static/v1/mip-gototop/mip-gototop.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-history/mip-history.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-fixed/mip-fixed.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://c.mipcdn.com/extensions/platform/v1/mip-cambrian/mip-cambrian.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-share/mip-share.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-form/mip-form.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-sidebar/mip-sidebar.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-vd-tabs/mip-vd-tabs.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js"></script>
- </body>
+  <script src="https://c.mipcdn.com/static/v1/mip-adsense/mip-adsense.js" type="text/javascript"
+    charset="utf-8"></script>
+  <mip-stats-cnzz token="1261053552">
+    </mip-stats-bidu>
+    <script src="https://c.mipcdn.com/static/v1/mip-stats-cnzz/mip-stats-cnzz.js"></script>
+    <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
+    <mip-pix
+      src="https://www.lf19.cn{dede:field name='phpurl'/}/count.php?aid={dede:field name='id'/}&mid={dede:field name='mid'/}">
+    </mip-pix>
+    <script src="https://c.mipcdn.com/static/v1/mip-gototop/mip-gototop.js" type="text/javascript"
+      charset="utf-8"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-history/mip-history.js" type="text/javascript"
+      charset="utf-8"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-fixed/mip-fixed.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://c.mipcdn.com/extensions/platform/v1/mip-cambrian/mip-cambrian.js"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-share/mip-share.js"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-form/mip-form.js"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-sidebar/mip-sidebar.js"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-vd-tabs/mip-vd-tabs.js"></script>
+    <script src="https://c.mipcdn.com/static/v1/mip-lightbox/mip-lightbox.js"></script>
+</body>
+
 </html>

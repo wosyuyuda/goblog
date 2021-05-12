@@ -58,7 +58,7 @@
                     class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a
                     class="btn btn-primary radius" data-title="添加资讯" data-href="article-add.html"
                     onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
-                    添加资讯</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+                    添加资讯</a></span> <span class="r">共有数据：<strong>{{.pageinfo.Num}}</strong> 条</span> </div>
         <div class="mt-20">
             <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
                 <thead>
@@ -101,9 +101,17 @@
             </table>
         </div>
         <div id="pageNav" class="pageNav">
-            <a href="?page={{.page}}">上一页</a>
-            <a >当前{{.page}}页</a>
-            <a href="?page={{.page}}">下一页</a>
+            {{if ne .pageinfo.Upage 0}} 
+            <a href="?page={{.pageinfo.Upage}}">上一页</a>
+            {{else}}
+            <a >上一页(空)</a>
+            {{end}}
+            <a >当前{{.pageinfo.Page}}页</a>
+            {{if ne .pageinfo.Nextpage 0}} 
+            <a href="?page={{.pageinfo.Nextpage}}">下一页</a>
+            {{else}}
+            <a >下一页(空)</a>
+            {{end}}
            
        </div>
     </div>
