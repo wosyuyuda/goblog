@@ -57,9 +57,9 @@ func AdminList(c *gin.Context) {
 	})
 }
 
-//后台的添加文章详情页
+//后台的添加文章详情页,笑死，gin模板语法跟vue.js模板语法冲突，不能直接用，直接加载静态页面吧
 func AdminAddView(c *gin.Context) {
-	c.HTML(http.StatusOK, "admin_AddView.html", gin.H{}) //进入管理首页
+	c.HTML(http.StatusOK, "admin_addview.html", gin.H{}) //进入管理首页
 }
 
 //这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断

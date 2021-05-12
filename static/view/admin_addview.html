@@ -1,0 +1,393 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <!--[if lt IE 9]>
+<script type="text/javascript" src="/static/lib/html5shiv.js"></script>
+<script type="text/javascript" src="/static/lib/respond.min.js"></script>
+<![endif]-->
+    <link rel="stylesheet" type="text/css" href="/static/static/h-ui/css/H-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/static/static/h-ui.admin/css/H-ui.admin.css" />
+    <link rel="stylesheet" type="text/css" href="/static/lib/Hui-iconfont/1.0.8/iconfont.css" />
+    <link rel="stylesheet" type="text/css" href="/static/static/h-ui.admin/skin/default/skin.css" id="skin" />
+    <link rel="stylesheet" type="text/css" href="/static/static/h-ui.admin/css/style.css" />
+
+
+    <link rel="stylesheet" href="https://wodlayui.oss-cn-beijing.aliyuncs.com/css/layui.css" media="all">
+    <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js" charset="utf-8"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+    <!--[if IE 6]>
+<script type="text/javascript" src="lib/DD_belatedPNG_0.0.8a-min.js" ></script>
+<script>DD_belatedPNG.fix('*');</script>
+<![endif]-->
+    <!--/meta 作为公共模版分离出去-->
+
+    <title>文章</title>
+
+</head>
+
+<body>
+    <div id='app'>
+        <article class="page-container">
+
+            <div class="form form-horizontal">
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>标题：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <input type="text" class="input-text" placeholder="" v-model="arcdata.title">
+                    </div>
+                </div>
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <button type="button" v-for="(item,index) in types"
+                            :class="item.id == arcdata.type ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
+                            @click='sztype(item.id)'>{{ item.name }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>封面图片：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <button type="button" class="layui-btn layui-btn-warm" id="up">上传
+                        </button>
+                        <img :src="arcdata.pic" style="width:200px;height:150px" v-if="arcdata.pic!=''">
+                    </div>
+                </div>
+
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类型：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <button type="button"
+                            :class="arcdata.tuijian ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
+                            @click='sztype1(4)'>推荐
+                        </button>
+                        <button type="button"
+                            :class="arcdata.lunbo ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
+                            @click='sztype1(2)'>轮播
+                        </button>
+                    </div>
+                </div>
+
+
+                <div class="row cl" v-if="arcdata.vedio">
+                    <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>上传视频：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <button type="button" class="layui-btn layui-btn-warm" @click='up(2)'>上传
+                        </button>
+                        <input type="text" class="input-text" v-model="arcdata.vedio_url" placeholder="填写视频地址或者上传">
+                        <video :src="arcdata.vedio_url" controls="controls" height='200px' width='200px'
+                            v-if="arcdata.vedio_url!=''"> </video>
+                    </div>
+                </div>
+
+
+                <div class="row cl">
+                    <label class="form-label col-xs-4 col-sm-2">文章内容：</label>
+                    <div class="formControls col-xs-8 col-sm-9">
+                        <script id="editor" type="text/plain" style="width:100%;height:400px;"></script>
+                    </div>
+                </div>
+                <div class="row cl">
+                    <div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
+                        <button class="btn btn-primary " @click="tj()"><i class="Hui-iconfont">&#xe632;</i> 提交</button>
+
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <div id="ossfile">你的浏览器不支持flash,Silverlight或者HTML5！</div>
+
+        <div id="container" style="padding-top:20px">
+            <div style="display:none;">
+                <a id="selectfiles" href="javascript:void(0);" class='layui-btn'>选择文件</a>
+                <a id="postfiles" href="javascript:void(0);" class='layui-btn'>开始</a>
+            </div>
+
+        </div>
+        <pre id="console"></pre>
+
+    </div>
+    <!--_footer 作为公共模版分离出去-->
+    <script type="text/javascript" src="/static/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/lib/layer/2.4/layer.js"></script>
+    <script type="text/javascript" src="/static/static/h-ui/js/H-ui.min.js"></script>
+    <script type="text/javascript" src="/static/static/h-ui.admin/js/H-ui.admin.js"></script>
+    <!--/_footer /作为公共模版分离出去-->
+
+    <!--请在下方写此页面业务相关的脚本-->
+    <script type="text/javascript" src="/static/lib/My97DatePicker/4.8/WdatePicker.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/jquery.validate.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/validate-methods.js"></script>
+    <script type="text/javascript" src="/static/lib/jquery.validation/1.14.0/messages_zh.js"></script>
+    <script type="text/javascript" src="/static/lib/webuploader/0.1.5/webuploader.min.js"></script>
+    <script type="text/javascript" src="/static/ueditor/1.4.3/ueditor.config.js"></script>
+    <script type="text/javascript" src="/static/ueditor/1.4.3/ueditor.all.min.js"> </script>
+    <script type="text/javascript" src="/static/ueditor/1.4.3/lang/zh-cn/zh-cn.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            $('.skin-minimal input').iCheck({
+                checkboxClass: 'icheckbox-blue',
+                radioClass: 'iradio-blue',
+                increaseArea: '20%'
+            });
+
+            $list = $("#fileList"),
+                $btn = $("#btn-star"),
+                state = "pending",
+                uploader;
+
+            var uploader = WebUploader.create({
+                auto: true,
+                swf: 'lib/webuploader/0.1.5/Uploader.swf',
+
+                // 文件接收服务端。
+                server: 'fileupload.php',
+
+                // 选择文件的按钮。可选。
+                // 内部根据当前运行是创建，可能是input元素，也可能是flash.
+                pick: '#filePicker',
+
+                // 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
+                resize: false,
+                // 只允许选择图片文件。
+                accept: {
+                    title: 'Images',
+                    extensions: 'gif,jpg,jpeg,bmp,png',
+                    mimeTypes: 'image/*'
+                }
+            });
+            uploader.on('fileQueued', function (file) {
+                var $li = $(
+                    '<div id="' + file.id + '" class="item">' +
+                    '<div class="pic-box"><img></div>' +
+                    '<div class="info">' + file.name + '</div>' +
+                    '<p class="state">等待上传...</p>' +
+                    '</div>'
+                ),
+                    $img = $li.find('img');
+                $list.append($li);
+
+                // 创建缩略图
+                // 如果为非图片文件，可以不用调用此方法。
+                // thumbnailWidth x thumbnailHeight 为 100 x 100
+                uploader.makeThumb(file, function (error, src) {
+                    if (error) {
+                        $img.replaceWith('<span>不能预览</span>');
+                        return;
+                    }
+
+                    $img.attr('src', src);
+                }, thumbnailWidth, thumbnailHeight);
+            });
+            // 文件上传过程中创建进度条实时显示。
+            uploader.on('uploadProgress', function (file, percentage) {
+                var $li = $('#' + file.id),
+                    $percent = $li.find('.progress-box .sr-only');
+
+                // 避免重复创建
+                if (!$percent.length) {
+                    $percent = $('<div class="progress-box"><span class="progress-bar radius"><span class="sr-only" style="width:0%"></span></span></div>').appendTo($li).find('.sr-only');
+                }
+                $li.find(".state").text("上传中");
+                $percent.css('width', percentage * 100 + '%');
+            });
+
+            // 文件上传成功，给item添加成功class, 用样式标记上传成功。
+            uploader.on('uploadSuccess', function (file) {
+                $('#' + file.id).addClass('upload-state-success').find(".state").text("已上传");
+            });
+
+            // 文件上传失败，显示上传出错。
+            uploader.on('uploadError', function (file) {
+                $('#' + file.id).addClass('upload-state-error').find(".state").text("上传出错");
+            });
+
+            // 完成上传完了，成功或者失败，先删除进度条。
+            uploader.on('uploadComplete', function (file) {
+                $('#' + file.id).find('.progress-box').fadeOut();
+            });
+            uploader.on('all', function (type) {
+                if (type === 'startUpload') {
+                    state = 'uploading';
+                } else if (type === 'stopUpload') {
+                    state = 'paused';
+                } else if (type === 'uploadFinished') {
+                    state = 'done';
+                }
+
+                if (state === 'uploading') {
+                    $btn.text('暂停上传');
+                } else {
+                    $btn.text('开始上传');
+                }
+            });
+
+            $btn.on('click', function () {
+                if (state === 'uploading') {
+                    uploader.stop();
+                } else {
+                    uploader.upload();
+                }
+            });
+
+            var ue = UE.getEditor('editor');
+
+        });
+     
+        layui.use('upload', function(){
+  var upload = layui.upload;
+   
+  //执行实例
+  var uploadInst = upload.render({
+    elem: '#up' //绑定元素
+    ,url: '/admin/ueditor/controller?action=uploadimage' //上传接口
+    ,done: function(res){
+      //上传完毕回调
+      console.log(res)
+      addimg(res.url)
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+});
+
+        new Vue({
+            el: "#app",
+            data() {
+                return {
+                    isv: false,
+                    type: 1,
+                    arcdata: {
+                        //这里的字段后期要改一下，改成跟数据库一致就少处理几道了
+                        body: '',
+                        pic: '',//图片
+                        title: '',
+                        type: 1,
+                        tuijian: false,
+                        lunbo: false,
+                    },
+                    types: [],
+                    uploadtype: 1
+                }
+            },
+            methods: {
+
+                up(type) {
+                    this.uploadtype = type;
+                    document.getElementById("selectfiles").click();
+                },
+                //设置素材分类
+                sztype(id) {
+                    this.arcdata.type = id;
+                },
+                sztype1(id) {
+                   console.log(id)
+                   if(id==4){//推荐
+                    this.arcdata.tuijian=!this.arcdata.tuijian
+                   }
+                   if(id==2){//轮播
+                    this.arcdata.lunbo=!this.arcdata.lunbo
+                   }
+                },
+                //添加图片或者视频
+                addimg(url) {
+                    this.arcdata.pic = url;
+                },
+                tj() {
+                    let that = this;
+                    this.arcdata.body = UE.getEditor('editor').getContent()
+                    let url = "/admin/addView";
+                    if (getQueryVariable('type') == 'edit') {
+                        url = "/college/saveid";
+                    }
+                    this.arcdata.tuijian=this.arcdata.tuijian?1:0;
+                    this.arcdata.lunbo=this.arcdata.lunbo?1:0;
+                    console.log(this.arcdata);return;
+                    $.post(url, { data: that.arcdata }, function (res) {
+                        if (res.code == 200) {
+                            layer.msg(res.msg);
+                            that.arcdata = [];
+                            setTimeout(function () { window.location.reload() }, 1500);
+                        } else {
+                            layer.msg('更新失败')
+                        }
+                    });
+                },
+            }
+            ,
+            created() {
+                let that = this;
+                if (getQueryVariable('type') == 'edit') {//如果是编辑
+                    let id = getQueryVariable('id')
+                    if (id != '') {
+                        $.get("/college/getid/" + id, function (res, status) {
+                            if (status == 'success' && res.code == 200) {
+                                console.log(res.data);
+                                var ue = UE.getEditor('editor');
+                                ue.ready(function () {
+                                    //设置编辑器的内容
+                                    ue.setContent(res.data.body);
+                                });
+                                that.types = res.data.types
+                                that.arcdata = res.data;
+                            } else {
+                                layer.msg('异常')
+                            }
+                        });
+                    } else {
+                        layer.msg('异常ID')
+                    }
+
+                } else {//如果是添加
+                    $.get("/admin/gettype", function (res, status) {
+                        if (status == 'success' && res.code == 200) {
+                            that.types=res.data
+                            console.log(that.types)
+                        } else {
+                            layer.msg('未登陆')
+                        }
+                    });
+                }
+            },
+            mounted() {
+                window.addimg = this.addimg;
+            },
+
+        })
+
+        //动态获取参数
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+    </script>
+    <!--/请在上方写此页面业务相关的脚本-->
+   
+</body>
+ <!-- 这里是使用crypto1上传到阿里云的js代码，这个暂时是用不了啦，测试就先用golang传本地吧 -->
+<!-- <script type="text/javascript" src="/up/lib/crypto1/crypto/crypto.js"></script>
+<script type="text/javascript" src="/up/lib/crypto1/hmac/hmac.js"></script>
+<script type="text/javascript" src="/up/lib/crypto1/sha1/sha1.js"></script>
+<script type="text/javascript" src="/up/lib/base64.js"></script>
+<script type="text/javascript" src="/up/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="/up/upload.js"></script> -->
+
+</html>

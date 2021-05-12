@@ -9,6 +9,8 @@ package main
 import (
 	"net/http"
 	con "test/controller"
+	"test/middleware"
+	"test/util"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -30,7 +32,7 @@ func main() {
 	//设置session开始让下面调用
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
-
+	r.Use(middleware.Islogin)
 	v1 := r.Group("/admin")
 	{
 		//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
@@ -40,7 +42,9 @@ func main() {
 
 		v1.GET("/", con.AdminIndex)    //管理页，现在是啥也还没有
 		v1.GET("/list", con.AdminList) //后台的文章列表，这里要加一个管理选项
-
+		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
+		v1.GET("/gettype", con.Gt) //后台的文章列表，这里要加一个管理选项
+		v1.Any("/ueditor/controller", util.Action)
 		v1.POST("/sub", con.Login)        //用户登陆提交的接口
 		v1.POST("/addView", con.AddView)  //添加文章
 		v1.POST("/addUser", con.AddU)     //添加用户
