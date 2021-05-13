@@ -16,3 +16,9 @@ func GetSession(c *gin.Context, key string) interface{} {
 	session := sessions.Default(c)
 	return session.Get(key)
 }
+
+func NullSession(c *gin.Context, key string) {
+	session := sessions.Default(c)
+	session.Delete(key)
+
+}

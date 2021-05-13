@@ -7,7 +7,6 @@ package main
  */
 
 import (
-	"net/http"
 	con "test/controller"
 
 	"test/install"
@@ -38,11 +37,11 @@ func main() {
 	r.GET("/install/", install.Install) //文章详情页，这里的详情页可以开始获取数据了
 	v2 := r.Group("/admin")
 	{
-		v2.GET("/login", func(c *gin.Context) {
-			c.HTML(http.StatusOK, "login1.html", gin.H{})
-		}) //登陆页
-		v2.POST("/sub", con.Login)    //用户登陆提交的接口
-		v2.POST("/addUser", con.AddU) //添加用户
+		v2.GET("/login", con.Logins)      //登陆页
+		v2.GET("/getcode", con.GetCode)   //获取验证码
+		v2.GET("/loginout", con.Loginout) //退出登陆
+		v2.POST("/sub", con.Login)        //用户登陆提交的接口
+		v2.POST("/addUser", con.AddU)     //添加用户
 	}
 
 	r.Use(middleware.Islogin)

@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"strconv"
 	d "test/model"
+	"test/server"
 	"test/util"
 
 	"github.com/gin-gonic/gin"
@@ -59,7 +60,6 @@ func AddView(c *gin.Context) {
 	conn := d.GetDb()
 	msg := "创建成功"
 	if data.ID > 0 {
-
 		err = conn.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
 		msg = "更新成功"
 	} else {
@@ -77,8 +77,9 @@ func AddView(c *gin.Context) {
 
 //用户登陆提交的页面
 func Login(c *gin.Context) {
+	id := c.PostForm("id")
 	code := c.PostForm("code")
-	if code != "1111" { //此处为验证码验证，后期再扩展
+	if !server.CaptVerify(id, code) { //此处为验证码验证，后期再扩展
 		c.JSON(200, gin.H{"msg": "验证码错误", "code": 400})
 		c.Abort()
 		return
@@ -97,4 +98,21 @@ func Login(c *gin.Context) {
 	util.SetSession(c, "uid", u.Id) //把用户的ID存进session
 	c.JSON(200, gin.H{"msg": "登陆成功", "code": 200})
 
+}
+
+func Logins(c *gin.Context) {
+	c.HTML(http.StatusOK, "login1.html", gin.H{})
+}
+
+func Loginout(c *gin.Context) {
+	util.NullSession(c, "uid")
+	c.JSON(200, gin.H{"msg": "退出成功", "code": 200})
+}
+
+func GetCode(c *gin.Context) {
+	id, b64s, err := server.CaptMake()
+	if err != nil {
+		fmt.Printf("错误信息是%+v", err)
+	}
+	c.JSON(200, gin.H{"msg": "获取成功", "code": 400, "id": id, "img": b64s})
 }
