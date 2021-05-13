@@ -59,6 +59,7 @@ func AddView(c *gin.Context) {
 	conn := d.GetDb()
 	msg := "创建成功"
 	if data.ID > 0 {
+
 		err = conn.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
 		msg = "更新成功"
 	} else {
