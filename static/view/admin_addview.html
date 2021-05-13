@@ -308,13 +308,15 @@
                 },
                 tj() {
                     let that = this;
-                    this.arcdata.body = UE.getEditor('editor').getContent()
+                  let b=  this.arcdata.body = UE.getEditor('editor').getContent()
                     let url = "/admin/addView";
                     if (getQueryVariable('type') == 'edit') {
-                        url = "/admin/saveView";
+                        url = "/admin/addView?type=edit";
                     }
                     this.arcdata.tuijian=this.arcdata.tuijian?1:0;
                     this.arcdata.swiper=this.arcdata.swiper?1:0;
+                    this.arcdata.content=b.replace(/(<([^>]+)>)/ig, "").slice(0,60)
+                    this.arcdata.typeid=this.arcdata.typeid!=0?this.arcdata.typeid:this.types[0].id
                     console.log(this.arcdata);
                     //return;
                     $.post(url,  that.arcdata , function (res) {
@@ -345,7 +347,14 @@
                                 that.types = res.type
                                 res.data.tuijian=res.data.tuijian==1?true:false
                                 res.data.swiper=res.data.swiper==1?true:false
+                                delete res.data.tps 
+                                delete res.data.content 
+                                delete res.data.CreatedAt 
+                                delete res.data.UpdatedAt 
+                                delete res.data.DeletedAt 
+                                
                                 that.arcdata = res.data;
+                                
                                 console.log(that.arcdata)
                             } else {
                                 layer.msg('异常')

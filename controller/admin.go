@@ -20,43 +20,20 @@ func AdminIndex(c *gin.Context) {
 	c.HTML(http.StatusOK, "admin_index.html", gin.H{}) //进入管理首页
 }
 
-type editview struct {
-	tp1  []Tp
-	view view
-}
-
 //获取当前文章，并且获取分类信息接口
 func AdminGetId(c *gin.Context) {
 	id := c.Param("id")
-	fmt.Println("进入获取文章")
-	db := d.LinkDb()
-	l := editview{}
-	err := db.Where("id = ?", id).Find(&l.view).Error
-	db.Find(&l.tp1)
-	fmt.Printf("获取到的内容是%+v", l)
-	if err != nil {
-		c.JSON(200, gin.H{"msg": "获取失败", "code": 204})
-	}
-
-	c.JSON(200, gin.H{"msg": "获取成功", "code": 200, "data": l.view, "type": l.tp1})
+	view := util.GetView(id, 0)
+	tp := GetTypeNew("0")
+	c.JSON(200, gin.H{"msg": "获取成功", "code": 200, "data": view, "type": tp})
 }
 
 //后台的文章的管理页面
 func AdminList(c *gin.Context) {
-	page := c.DefaultQuery("page", "1")
-	pagenum, _ := strconv.Atoi(page)
-	v := new(view)
-	list := v.Findlist("0", pagenum)
-	fmt.Println(pagenum)
-
-	//获取全部列表的信息
-	var i int64
-	db := d.LinkDb()
-	db.Model(&view{}).Count(&i)
+	pagenum := util.PageNum(c)        //获取当前第几页
+	list := FindListNew("0", pagenum) //列表数据
+	i := util.GetTypeCount("0")       //获取总共的文章数量
 	p := util.GetPage(i, pagenum)
-
-	fmt.Printf("分页的内容是%+v", p)
-	//这里模板整一下
 	c.HTML(http.StatusOK, "admin_list.html", gin.H{
 		"list":     list,
 		"page":     pagenum,
@@ -71,32 +48,30 @@ func AdminAddView(c *gin.Context) {
 
 //这里加一个接收前端数据的再返回数据就好啦，应该再加一个是否登陆判断
 func AddView(c *gin.Context) {
-	var data view
+	var data d.View
+	var err error
 	c.ShouldBind(&data)
 
 	//typeid没办法直接拿过来，只好再单独获取了
 	typeid := c.PostForm("typeid")
 	t, _ := strconv.Atoi(typeid)
-	fmt.Printf("%+v", data)
-	view1 := new(view)
-	view1.Typeid = t
-	view1.Title = data.Title
-	view1.Body = data.Body
-	view1.Swiper = data.Swiper
-	view1.Tuijian = data.Tuijian
-
-	//这个截取太麻烦了，直接不用了，由前端去处理数据感觉方便多
-	view1.Content = string([]rune(util.HanderHmtl(view1.Body))[:64]) //去掉html标签后截取255的长度放到简介里面去
-	fmt.Printf("传过来的标题是：%s 密码是：%s", c.PostForm("body"), c.PostForm("title"))
-	//fmt.Println(view1)
+	data.Typeid = t
 	conn := d.GetDb()
-	conn.AutoMigrate(&view{})
-	err := conn.Create(view1).Error
-	if err != nil {
-		fmt.Println("创建失败")
+	msg := "创建成功"
+	if data.ID > 0 {
+		err = conn.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
+		msg = "更新成功"
+	} else {
+		conn.AutoMigrate(&d.View{})
+		err = conn.Create(&data).Error
 	}
-	fmt.Println("创建成功")
-	c.JSON(200, gin.H{"msg": "创建成功", "code": 200})
+	if err != nil {
+		c.JSON(200, gin.H{"msg": "更新失败", "code": 200})
+		fmt.Println("更新失败")
+		c.Abort()
+		return
+	}
+	c.JSON(200, gin.H{"msg": msg, "code": 200})
 }
 
 //用户登陆提交的页面

@@ -16,11 +16,7 @@ import (
 )
 
 type User struct {
-	Id     int    `gorm:"primary_key" json:"id"`
-	Name   string `gorm:"size:255" json:"name"`
-	Age    int    `gorm:"size:2" json:"age"`
-	Gender int    `gorm:"size:2" json:"gender"` //1:男、2:女
-	Pwd    string `gorm:"size:255" json:"pwd"`
+	d.User
 }
 
 func AddU(c *gin.Context) {

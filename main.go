@@ -10,6 +10,7 @@ import (
 	"net/http"
 	con "test/controller"
 
+	"test/install"
 	"test/middleware"
 	"test/util"
 
@@ -20,8 +21,8 @@ import (
 
 func main() {
 	//先以正常模式运行，下面去掉为调试模式
-	gin.SetMode(gin.ReleaseMode)
-
+	//gin.SetMode(gin.ReleaseMode)
+	gin.SetMode("debug")
 	r := gin.Default()
 
 	r.LoadHTMLGlob("view/*")        //这里是引入模板文件
@@ -34,7 +35,7 @@ func main() {
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
-
+	r.GET("/install/", install.Install) //文章详情页，这里的详情页可以开始获取数据了
 	v2 := r.Group("/admin")
 	{
 		v2.GET("/login", func(c *gin.Context) {
@@ -48,14 +49,14 @@ func main() {
 
 	v1 := r.Group("/admin")
 	{
-		v1.GET("/", con.AdminIndex)    //管理页，现在是啥也还没有
-		v1.GET("/list", con.AdminList) //后台的文章列表，这里要加一个管理选项
+		v1.GET("/", con.AdminIndex)                //管理页，现在是啥也还没有
+		v1.GET("/list", con.AdminList)             //后台的文章列表，这里要加一个管理选项
+		v1.GET("/gettype", con.Gt)                 //后台的文章列表，这里要加一个管理选项
+		v1.Any("/ueditor/controller", util.Action) //这里是百度编辑器图片上传必须要用的，正常图片上传也可以用这个接口
+		v1.GET("/view/:id", con.AdminGetId)        //获取文章信息的接口
+		v1.POST("/addView", con.AddView)           //添加与保存文章接口
+		v1.POST("/addType", con.AddTypes)          //添加分类
 		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
-		v1.GET("/gettype", con.Gt) //后台的文章列表，这里要加一个管理选项
-		v1.Any("/ueditor/controller", util.Action)
-		v1.GET("/view/:id", con.AdminGetId)
-		v1.POST("/addView", con.AddView)  //添加文章
-		v1.POST("/addType", con.AddTypes) //添加分类
 	}
 
 	r.Run(":8000") //开启端口访问,本地再试一下提交

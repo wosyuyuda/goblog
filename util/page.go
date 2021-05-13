@@ -2,7 +2,10 @@ package util
 
 import (
 	"math"
+	"strconv"
 	"unsafe"
+
+	"github.com/gin-gonic/gin"
 )
 
 type Pages struct {
@@ -11,6 +14,12 @@ type Pages struct {
 	Nextpage int //下一页
 	Num      int //总共的条数
 	Pages    int //总共多少页
+}
+
+func PageNum(c *gin.Context) int {
+	page := c.DefaultQuery("page", "1")
+	pagenum, _ := strconv.Atoi(page)
+	return pagenum
 }
 
 func GetPage(num int64, p int) Pages {

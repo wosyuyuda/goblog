@@ -7,7 +7,6 @@ package controller
  */
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -16,112 +15,102 @@ import (
 	"test/util"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
 )
 
-type view struct {
-	gorm.Model
-	Typeid  int    `gorm:"size:10"  json:"typeid"`                 //分类的ID，关联
-	Title   string `gorm:"size:255" json:"title" form:"title"`     //标题
-	Body    string `json:"body" form:"body"`                       //详细的内容
-	Click   int    `gorm:"size:10" json:"click"`                   //点击量
-	Tuijian uint   `gorm:"size:1" json:"tuijian" form:"tuijian"`   //是否为推荐
-	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
-	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
-	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	Status  uint   `gorm:"size:1" json:"status"`                   //文章状态，0删除，1正常
-	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
-}
+/* type view struct {
+	d.View
+} */
 
 //这里是详情页
 func GetView(c *gin.Context) {
 	id := c.Param("id")
-	db := d.LinkDb() //连接数据库模型
-	u := new(view)
-	newList := u.Findlist("0", 1)  //最新的列表
-	tuijian := u.Findlist("-1", 1) //推荐的列表
-	db.Where("id = ?", id).Find(&u)
-	db.Model(&u).Preload("Tps").Find(&u)
-	db.Model(&u).Update("click", u.Click+1) //点击量加1
-	types1 := new(Tp)
-	tp := types1.GetType("0")
+	newList := FindListNew("0", 1)  //最新的列表
+	tuijian := FindListNew("-1", 1) //推荐的列表
+	vvv := util.GetView(id, 1)
+	tp := GetTypeNew("0") //栏目分类
 	c.HTML(http.StatusOK, "view.html", gin.H{
-		"view":    u,
-		"body":    template.HTML(u.Body),
+		"view":    vvv,
+		"body":    template.HTML(vvv.Body),
 		"types":   tp,
-		"newlist": newList,
-		"tuijian": tuijian,
+		"newlist": util.Imgsrc(newList),
+		"tuijian": util.Imgsrc(tuijian),
 	})
 }
 
 //这里是列表页
 func Views(c *gin.Context) {
 	id1 := c.Param("id")
-	v1 := new(view)
-	list := v1.Findlist(id1, 1)
-	newList := v1.Findlist("0", 1)  //最新
-	tuijian := v1.Findlist("-1", 1) //推荐
-	types1 := new(Tp)
-	tp := types1.GetType("0") //栏目分类
-
-	page := c.DefaultQuery("page", "1")
-	pagenum, _ := strconv.Atoi(page)
-	var i int64
-	db := d.LinkDb()
-	db.Model(&view{}).Where("typeid = ?", id1).Count(&i)
-	p := util.GetPage(i, pagenum)
+	list := FindListNew(id1, 1)         //获取列表数据
+	newList := FindListNew("0", 1)      //最新
+	tuijian := FindListNew("-4", 1)     //推荐
+	tp := GetTypeNew("0")               //栏目分类
+	page := c.DefaultQuery("page", "1") //获取当前分页
+	pagenum, _ := strconv.Atoi(page)    //获取分页数据
+	i := util.GetTypeCount(id1)         //获取当前分类有多少条
+	p := util.GetPage(i, pagenum)       //获取分页数据
 
 	c.HTML(http.StatusOK, "list.html", gin.H{
-		"list":     list,
+		"list":     util.Imgsrc(list),
 		"typeinfo": list[0].Tps,
 		"types":    tp,
-		"newlist":  newList,
-		"tuijian":  tuijian,
+		"newlist":  util.Imgsrc(newList),
+		"tuijian":  util.Imgsrc(tuijian),
 		"pageinfo": p,
 	})
 }
 
 //这里是首页
 func Lists1(c *gin.Context) {
-	view2 := new(view)
-	views := view2.Findlist("0", 1)
-	tuijian := view2.Findlist("-1", 1)
-	types1 := new(Tp)
-	tp := types1.GetType("0")
-	//获取首页每个栏目的列表
-	tt := []Tp{}
-	for _, v := range tp {
-		v.Views = view2.Findlist1(strconv.Itoa(int(v.ID)))
-		tt = append(tt, v)
+	views := FindListNew("0", 1)    //最新
+	tuijian := FindListNew("-4", 1) //推荐
+	tp := GetTypeNew("0")           //分类
+	remen := FindListNew("-3", 1)   //热门
+	swiper := FindListNew("-2", 1)  //轮播
+	tp22 := GetTypeNew("0")         //获取分类
+	tnew := []d.Tp{}
+	for _, v := range tp22 {
+		v.Views = Findlist2(strconv.Itoa(int(v.ID)))
+		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
+		tnew = append(tnew, v)
 	}
-	fmt.Printf("数据是%+v", tt)
 	c.HTML(http.StatusOK, "index.html", gin.H{
-		"list":    views,
+		"list":    util.Imgsrc(views),
 		"types":   tp,
-		"tuijian": tuijian,
-		"tt":      tt,
+		"tuijian": util.Imgsrc(tuijian),
+		"tt":      tnew,
+		"remen":   util.Imgsrc(remen),
+		"swiper":  util.Imgsrc(swiper),
 	})
 }
 
-//这里查询列表,0获取全部的，-1是推荐，-2是轮播
-func (view) Findlist(id string, page int) (vi []view) {
+func FindListNew(id string, page int) (vi []d.View) {
 	db := d.LinkDb() //连接数据库模型
-	num := 10
+	//下面查询的字段去掉body数据，列表页不获取这个，减少内存的使用
+	db = db.Select("id", "created_at", "typeid", "title", "click", "pic", "tuijian", "swiper", "content")
+	num := 10 //一页默认10条
 	if page < 1 {
 		page = 1
 	}
-	page -= 1
+	page -= 1 //过滤掉的页面要减 1
+	order := "created_at desc"
 	switch id {
 	case "0":
-		db.Limit(num).Offset(page * num).Order("created_at desc").Preload("Tps").Find(&vi)
+		db.Limit(num).Offset(page * num).Order(order).Preload("Tps").Find(&vi)
 	case "-1":
-		db.Where("tuijian = ?", 1).Limit(num).Offset(page * num).Order("created_at desc").Preload("Tps").Find(&vi)
+		db.Where("tuijian = ?", 1).Limit(num).Order(order).Preload("Tps").Find(&vi)
+	case "-2":
+		db.Where("swiper = ?", 1).Limit(num / 2).Order(order).Find(&vi)
+	case "-3":
+		db.Limit(num).Offset(page * num).Order("click desc").Find(&vi)
+	case "-4":
+		db.Where("tuijian = ?", 1).Limit(3).Order(order).Find(&vi)
 	default:
-		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order("created_at desc").Preload("Tps").Find(&vi)
+		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Preload("Tps").Find(&vi)
 	}
 	return
 }
-func (view) Findlist1(id string) (vi []view) {
+
+func Findlist2(id string) (vi []d.View) {
 	db := d.LinkDb() //连接数据库模型
 	db.Where("typeid = ?", id).Limit(10).Order("created_at desc").Find(&vi)
 	return
