@@ -40,6 +40,7 @@ func GetView(c *gin.Context) {
 
 //这里是列表页
 func Views(c *gin.Context) {
+
 	id1 := c.Param("id")
 	list := FindListNew(id1, 1) //获取列表数据
 	typeinfo := GetTypeNew(id1)
@@ -64,6 +65,7 @@ func Views(c *gin.Context) {
 
 //这里是首页
 func Lists1(c *gin.Context) {
+
 	views := FindListNew("0", 1)    //最新
 	tuijian := FindListNew("-4", 1) //推荐
 	tp := GetTypeNew("0")           //分类
@@ -86,6 +88,7 @@ func Lists1(c *gin.Context) {
 	})
 }
 
+//获取当前分类ID下面的文章 ,一页10条
 func FindListNew(id string, page int) (vi []d.View) {
 	db := d.LinkDb() //连接数据库模型
 	//下面查询的字段去掉body数据，列表页不获取这个，减少内存的使用
@@ -113,6 +116,7 @@ func FindListNew(id string, page int) (vi []d.View) {
 	return
 }
 
+//获取当前分类下面的10条文章
 func Findlist2(id string) (vi []d.View) {
 	db := d.LinkDb() //连接数据库模型
 	db.Where("typeid = ?", id).Limit(10).Order("created_at desc").Find(&vi)

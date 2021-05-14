@@ -9,9 +9,6 @@ package server
 import (
 	"encoding/json"
 	"fmt"
-
-	//	"log"
-	//	"net/http"
 	"io/ioutil"
 	"os"
 )
@@ -32,20 +29,23 @@ func Get_contents(path string) ([]byte, error) {
 	return ioutil.ReadAll(f)
 }
 
-func GetDbConfig() {
+//获取数据配置信息
+func GetDbConfig() Contact {
 	var c Contact
 	var content []byte
 	var err error
-	content, err = Get_contents("/config/config.json")
+
+	content, err = Get_contents("config/config.json")
 	if err != nil {
 		fmt.Println("open file error: " + err.Error())
-		return
+		return c
 	}
 	err = json.Unmarshal([]byte(content), &c)
 	if err != nil {
 		fmt.Println("ERROR: ", err.Error())
-		return
+		return c
 	}
 	fmt.Println(c)
 	fmt.Printf("获取到配置文件的数据是%+v", c)
+	return c
 }

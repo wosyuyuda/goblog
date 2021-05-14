@@ -16,7 +16,7 @@ func DelType(c *gin.Context) {
 	if err != nil {
 		fmt.Printf("错误")
 	}
-	fmt.Println(id)
+	c.JSON(200, gin.H{"msg": "删除成功", "code": 200})
 }
 
 func GetTypeNew(id string) (Tp []d.Tp) {
@@ -35,7 +35,7 @@ func GetTypeNew(id string) (Tp []d.Tp) {
 //前端获取分类
 func Gt(c *gin.Context) {
 	tp := GetTypeNew("0")
-	c.JSON(200, gin.H{"msg": "验证码错误", "code": 200, "data": tp})
+	c.JSON(200, gin.H{"msg": "ok", "code": 200, "data": tp})
 }
 
 //前端添加跟保存分类

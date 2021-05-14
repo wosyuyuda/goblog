@@ -8,6 +8,7 @@ package model
 
 import (
 	"fmt"
+	s "test/server"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -76,9 +77,11 @@ func dbConn(User, Password, Host, Db string, Port int) *gorm.DB {
 }
 
 func GetDb() (conn *gorm.DB) {
+	d := s.GetDbConfig()
 	//这里可以切换成多数据库？
 	for {
-		conn = dbConn("gorm", "123456", "127.0.0.1", "gorm", 3306)
+		//conn = dbConn("gorm", "123456", "127.0.0.1", "gorm", 3306)
+		conn = dbConn(d.User, d.Pwd, d.Host, d.Db, d.Port)
 		if conn != nil {
 			break
 		}
