@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//删除分类
 func DelType(c *gin.Context) {
 	id := c.Param("id")
 	db := d.LinkDb() //连接数据库模型
@@ -34,13 +35,12 @@ func GetTypeNew(id string) (Tp []d.Tp) {
 //前端获取分类
 func Gt(c *gin.Context) {
 	tp := GetTypeNew("0")
-	c.JSON(200, gin.H{"msg": "获取分类成功", "code": 200, "data": tp})
+	c.JSON(200, gin.H{"msg": "验证码错误", "code": 200, "data": tp})
 }
 
 //前端添加跟保存分类
 func AddTypes(c *gin.Context) {
 	var err error
-
 	data := new(d.Tp)
 	data.Name = c.PostForm("name")
 	data.Info = c.PostForm("info")

@@ -16,7 +16,7 @@ import (
 //下面直接转过来不行
 type View struct {
 	gorm.Model
-	Typeid  int    `gorm:"size:10;comment:'分类ID'" json:"typeid"`   //分类的ID，关联
+	Typeid  int    `gorm:"size:10"  json:"typeid" form:"typeid"`   //分类的ID，关联
 	Title   string `gorm:"size:255" json:"title" form:"title"`     //标题
 	Body    string `json:"body" form:"body"`                       //详细的内容
 	Click   int    `gorm:"size:10" json:"click"`                   //点击量
@@ -24,28 +24,27 @@ type View struct {
 	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
 	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	Status  uint   `gorm:"size:1;default:'1'" json:"status"`       //文章状态，0删除，1正常
+	Status  uint   `gorm:"size:1" json:"status"`                   //文章状态，0删除，1正常
 	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
 
 //分类表
 type Tp struct {
 	ID     uint   `gorm:"primarykey" json:"id" form:"id"`
-	Name   string `gorm:"size:255;comment:'姓名'" form:"name" json:"name"`                  //名称
-	Level  int    `gorm:"size:10;default:0;comment:'分类排序'" form:"level" json:"level"`     //分类排序
-	Info   string `gorm:"size:255;comment:'分类介绍'" form:"info" json:"info"`                //介绍
-	Status string `gorm:"size:1;default:'1';comment:'状态1展示'" form:"status" json:"status"` //状态,默认1,0表示删除
+	Name   string `gorm:"size:255;" form:"name" json:"name"`               //名称
+	Level  int    `gorm:"size:10;default:0;" form:"level" json:"level"`    //分类排序
+	Info   string `gorm:"size:255;" form:"info" json:"info"`               //介绍
+	Status string `gorm:"size:1;default:'1';" form:"status" json:"status"` //状态,默认1,0表示删除
 	Views  []View `gorm:"-"`
 }
 
 //系统设置
 type Config struct {
-	ID      uint   `gorm:"primarykey" json:"id" form:"id"`                      //用户ID
-	Name    string `gorm:"size:255;comment:'名称'" json:"name" form:"name"`       //设置的名称
-	Type    int    `gorm:"size:10;comment:'所属分类'" form:"content" json:"type"`   //设置所属分类
-	Content string `gorm:"size:500;comment:'介绍'" json:"content" form:"content"` //设置的介绍
-	Value   string `gorm:"size:500;comment:'值'" json:"value" form:"value"`      //系统设置值
-	Status  string `gorm:"size:1;default:'1';comment:'状态1正常'" json:"status"`    //状态,默认1,0表示删除
+	ID      uint   `gorm:"primarykey"  json:"id" form:"id"`        //用户ID
+	Name    string `gorm:"size:255"  json:"name" form:"name"`      //设置的名称
+	Type    int    `gorm:"size:10"  json:"type" form:"type"`       //设置所属分类
+	Content string `gorm:"size:500" json:"content" form:"content"` //设置的介绍
+	Value   string `gorm:"size:500" json:"value" form:"value"`     //系统设置值
 }
 
 //用户表
@@ -54,7 +53,7 @@ type User struct {
 	Name   string `gorm:"size:255" json:"name"`
 	Age    int    `gorm:"size:2" json:"age"`
 	Gender int    `gorm:"size:2" json:"gender"` //1:男、2:女
-	Pwd    string `gorm:"size:255;comment:'用户密码'" json:"pwd"`
+	Pwd    string `gorm:"size:255" json:"pwd"`
 }
 
 //这里连接数据库，后面可以移到专门的配置文件
