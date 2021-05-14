@@ -63,7 +63,6 @@ func AddView(c *gin.Context) {
 		err = conn.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
 		msg = "更新成功"
 	} else {
-		conn.AutoMigrate(&d.View{})
 		err = conn.Create(&data).Error
 	}
 	if err != nil {

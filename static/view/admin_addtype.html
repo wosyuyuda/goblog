@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>添加分类</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://wodlayui.oss-cn-beijing.aliyuncs.com/css/layui.css" media="all">
+    <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js" charset="utf-8"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+</head>
+
+<body style='padding-top:20px'>
+    <div id='app'>
+        <h2></h2>
+
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类：</label>
+            <div class="check-box">
+                <button type="button"
+                    :class="0 == arcdata.id ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
+                    @click='sztype(-1)'>添加分类
+                </button>
+                <button type="button" v-for="(item,index) in types"
+                    :class="arcdata.id == item.id ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
+                    @click='sztype(index)'>{{ item.name }}
+                </button>
+            </div>
+        </div>
+
+
+        <fieldset class="layui-elem-field">
+            <blockquote class="layui-elem-quote">编辑区域</blockquote>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类名称</label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" autocomplete="off" class="layui-input" placeholder="请输入介绍"
+                            v-model="arcdata.name">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类介绍</label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" autocomplete="off" class="layui-input" placeholder="请输入介绍"
+                            v-model="arcdata.info">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类排序</label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="number" name="phone" autocomplete="off" class="layui-input" placeholder="数字越大越排前面"
+                            v-model="arcdata.level">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"></label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <a @click='tj()' href="javascript:void(0);" class='layui-btn'><i
+                                class="layui-icon layui-icon-release"></i> 提交</a>
+                                <button type="button" class="layui-btn layui-btn-danger "
+                                @click='del()'>删除
+                        </button>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <div id="ossfile">这里是预留的原来上传接口</div>
+    <div id="container" style="padding-top:20px">
+        <div style="display:none;"><a id="selectfiles" href="javascript:void(0);" class='layui-btn'>选择文件</a>
+            <a id="postfiles" href="javascript:void(0);" class='layui-btn'>开始上传</a>
+        </div>
+
+    </div>
+    <pre id="console"></pre>
+
+
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                type: -1,
+                types: [],
+                arcdata: {
+                    name: '',
+                    pic: '',//图集
+                    id: 0,
+                    info: '',
+                    level: 0
+                },
+
+            }
+        },
+        methods: {
+            sztype(index = -1) {
+                if (index == -1) {
+                    //新添加
+                    this.arcdata = {
+                        id: 0,
+                        info: '',
+                        level: 0,
+                        name: '',
+                    }
+                } else {
+                    this.arcdata = this.types[index]
+                }
+            },
+            del(){
+                let that=this
+                if(that.arcdata.id==0)return;
+                 //console.log(this.arcdata); return;
+                $.get("/admin/del/"+that.arcdata.id, {}, function (res) {
+                    if (res.code == 200) {
+                        layer.msg(res.msg);
+                        that.arcdata = [];
+                        // window.location.reload()
+                    } else {
+                        layer.msg('更新失败')
+                    }
+                });
+            },
+            //添加图片或者视频
+            addimg(url) {
+                this.arcdata.pic = url;
+            },
+            tj() {
+                let that = this;
+                let url = "/admin/addType"
+                if (this.type != 0) {
+                    url = "/admin/addType?type=edit"
+                }
+                delete that.arcdata.Views
+                //console.log(this.arcdata); return;//这里是添加到数据库的,
+                $.post(url, that.arcdata, function (res) {
+                    if (res.code == 200) {
+                        layer.msg(res.msg);
+                        that.arcdata = [];
+                         window.location.reload()
+                    } else {
+                        layer.msg('更新失败')
+                    }
+                });
+            }
+        }
+        ,
+        created() {
+            let that = this;
+            $.get("/admin/gettype", function (res, status) {
+                if (status == 'success') {
+                    console.log(res)
+                    that.types = res.data
+                } else {
+                    layer.msg('获取数据失败')
+                }
+            });
+        },
+        mounted() {
+            //这里是添加图片的接口
+            window.addimg = this.addimg;
+        },
+
+    })
+
+
+
+    layui.use(['form', 'upload', 'layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var upload = layui.upload;
+        var form = layui.form;
+
+
+
+        //监听提交
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            //console.log(data.field)
+            return false;
+        });
+
+
+
+    });
+
+
+
+</script>
+
+
+<script type="text/javascript" src="lib/crypto1/crypto/crypto.js"></script>
+<script type="text/javascript" src="lib/crypto1/hmac/hmac.js"></script>
+<script type="text/javascript" src="lib/crypto1/sha1/sha1.js"></script>
+<script type="text/javascript" src="lib/base64.js"></script>
+<script type="text/javascript" src="lib/plupload-2.1.2/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="upload.js"></script>
+
+</html>

@@ -34,7 +34,7 @@ func main() {
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
-	r.GET("/install/", install.Install) //文章详情页，这里的详情页可以开始获取数据了
+	r.GET("/install/", install.Install) //初始化博客
 	v2 := r.Group("/admin")
 	{
 		v2.GET("/login", con.Logins)      //登陆页
@@ -44,13 +44,14 @@ func main() {
 		v2.POST("/addUser", con.AddU)     //添加用户
 	}
 
-	r.Use(middleware.Islogin)
+	r.Use(middleware.Islogin) //判断是否登陆的中间件
 
 	v1 := r.Group("/admin")
 	{
 		v1.GET("/", con.AdminIndex)                //管理页，现在是啥也还没有
 		v1.GET("/list", con.AdminList)             //后台的文章列表，这里要加一个管理选项
 		v1.GET("/gettype", con.Gt)                 //后台的文章列表，这里要加一个管理选项
+		v1.GET("/del/:id", con.DelType)            //后台的文章列表，这里要加一个管理选项
 		v1.Any("/ueditor/controller", util.Action) //这里是百度编辑器图片上传必须要用的，正常图片上传也可以用这个接口
 		v1.GET("/view/:id", con.AdminGetId)        //获取文章信息的接口
 		v1.POST("/addView", con.AddView)           //添加与保存文章接口

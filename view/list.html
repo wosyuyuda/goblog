@@ -415,6 +415,9 @@
             <div class="pagination1 clearfix">
               <div class="page-control">
                 <ul class="pagination">
+                  {{if eq  .pageinfo.Num 0}} 
+                  当前分类数据为0
+                  {{end}}
                       {{if ne .pageinfo.Upage 0}} 
                       <li class="page-item"><a class="page-link" data-type="mip"
                         href="?page={{.pageinfo.Upage}}">{{.pageinfo.Upage}}</a></li>

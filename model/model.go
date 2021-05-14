@@ -24,15 +24,18 @@ type View struct {
 	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
 	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	Status  uint   `gorm:"size:1" json:"status"`                   //文章状态，0删除，1正常
+	Status  uint   `gorm:"size:1;default:'1'" json:"status"`       //文章状态，0删除，1正常
 	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
 
 //分类表
 type Tp struct {
-	ID    uint   `gorm:"primarykey"  json:"id"`
-	Name  string `gorm:"size:255"  json:"name"`
-	Views []View `gorm:"-"`
+	ID     uint   `gorm:"primarykey"  json:"id"`
+	Name   string `gorm:"size:255"  json:"name"`             //名称
+	Level  int    `gorm:"size:10;default:0"  json:"level"`   //分类排序
+	Info   string `gorm:"size:255"  json:"info"`             //介绍
+	Status string `gorm:"size:1;default:'1'"  json:"status"` //状态,默认1,0表示删除
+	Views  []View `gorm:"-"`
 }
 
 //系统设置
@@ -42,6 +45,7 @@ type Config struct {
 	Type    int    `gorm:"size:10"  json:"type"`                   //设置所属分类
 	Content string `gorm:"size:500" json:"content" form:"content"` //设置的介绍
 	Value   string `gorm:"size:500" json:"value" form:"value"`     //系统设置值
+	Status  string `gorm:"size:1;default:'1'"  json:"status"`      //状态,默认1,0表示删除
 }
 
 //用户表

@@ -7,6 +7,7 @@ package controller
  */
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -26,8 +27,8 @@ func GetView(c *gin.Context) {
 	id := c.Param("id")
 	newList := FindListNew("0", 1)  //最新的列表
 	tuijian := FindListNew("-1", 1) //推荐的列表
-	vvv := util.GetView(id, 1)
-	tp := GetTypeNew("0") //栏目分类
+	vvv := util.GetView(id, 1)      //获取文章详情
+	tp := GetTypeNew("0")           //栏目分类
 	c.HTML(http.StatusOK, "view.html", gin.H{
 		"view":    vvv,
 		"body":    template.HTML(vvv.Body),
@@ -40,18 +41,20 @@ func GetView(c *gin.Context) {
 //这里是列表页
 func Views(c *gin.Context) {
 	id1 := c.Param("id")
-	list := FindListNew(id1, 1)         //获取列表数据
+	list := FindListNew(id1, 1) //获取列表数据
+	typeinfo := GetTypeNew(id1)
 	newList := FindListNew("0", 1)      //最新
 	tuijian := FindListNew("-4", 1)     //推荐
-	tp := GetTypeNew("0")               //栏目分类
+	tp := GetTypeNew("0")               //栏目全部分类
 	page := c.DefaultQuery("page", "1") //获取当前分页
 	pagenum, _ := strconv.Atoi(page)    //获取分页数据
 	i := util.GetTypeCount(id1)         //获取当前分类有多少条
 	p := util.GetPage(i, pagenum)       //获取分页数据
-
+	fmt.Printf("最新数据是%+v", typeinfo[0])
+	fmt.Printf("分页信息%+v", p)
 	c.HTML(http.StatusOK, "list.html", gin.H{
 		"list":     util.Imgsrc(list),
-		"typeinfo": list[0].Tps,
+		"typeinfo": typeinfo[0], //如果没有一条数据是会报错的
 		"types":    tp,
 		"newlist":  util.Imgsrc(newList),
 		"tuijian":  util.Imgsrc(tuijian),
