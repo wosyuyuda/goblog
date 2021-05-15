@@ -60,35 +60,36 @@ static里面的静态资源是h ui的模板，想研究的自己去研究一下�
 3. golang的优点的话,熟悉了之后使用起来很方便,所有的函数有严格的数据格式要求,感觉比我之前用PHP学得快,只要输出这个函数,就知道他要传哪些数据进去,这些数据是什么格式,返回来的数据是什么,一看就懂,这里得点个赞  
 4. 再说一个golang的缺点,不支持默认参数!!!这影响了我很多的写方法,比如我想写一个获取分类的,如果是用PHP写,我会写成不传值获取全部,传值则获取这个值的分类,如果第二个值不传则默认不获取二级参数,如果传了就获取,而golang不行..必须得传,所以有些获取功能看着很怪,参考下面  
 golang的获取  
-`	newList := FindListNew("0", 1)      //最新
-	tuijian := FindListNew("-4", 1)     //推荐
+`  
+	newList := FindListNew("0", 1)      //最新  
+	tuijian := FindListNew("-4", 1)     //推荐  
 
-    func FindListNew(id string, page int) (vi []d.View) {
-    .......省略部分
-	switch id {
-	case "0":
-		db.Limit(num).Offset(page * num).Order(order).Preload("Tps").Find(&vi)
-    .......省略部分
-	default:
-		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Preload("Tps").Find(&vi)
-	}
-	return
-}
+    func FindListNew(id string, page int) (vi []d.View) {  
+    .......省略部分  
+	switch id {  
+	case "0":  
+		db.Limit(num).Offset(page * num).Order(order).Preload("Tps").Find(&vi)  
+    .......省略部分  
+	default:  
+		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Preload  ("Tps").Find(&vi)  
+	}  
+	return  
+}  
     `
 
     如果是php函数可以 这样写(参考thinkphp6),使用的时候是可以不传值,也可以只传一个或者俩个,真是贼方便   
 
 `
-$newlist = $this->getlist();//获取全部
-public function getlist($id=0,$page=1,$limt=10)
-{
-    $model=new ViewModel;
-    //笑死,php if里面声明的变量外面也可以用,golang不行.
-    if($id==0){
-        $data=$model->limit($limt)->page($page)->select();
-    }else{
-        $data=$model->where("id",$id)->limit($limt)->page($page)->select();
-    }
-    return $data;
+$newlist = $this->getlist();//获取全部  
+public function getlist($id=0,$page=1,$limt=10)  
+{  
+    $model=new ViewModel;  
+    //笑死,php if里面声明的变量外面也可以用,golang不行.  
+    if($id==0){  
+        $data=$model->limit($limt)->page($page)->select();  
+    }else{  
+        $data=$model->where("id",$id)->limit($limt)->page($page)->select();  
+    }  
+    return $data;  
 }
 `
