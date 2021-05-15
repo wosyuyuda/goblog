@@ -24,6 +24,8 @@ func main() {
 	gin.SetMode("debug")
 	r := gin.Default()
 
+	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下
+
 	r.LoadHTMLGlob("view/*")        //这里是引入模板文件
 	r.Static("/static", "static")   //引入静态目录
 	r.GET("/", con.Lists1)          //这个是首页，模板整整就可以啦
@@ -34,7 +36,7 @@ func main() {
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
-	r.GET("/install/", install.Install) //初始化博客
+
 	v2 := r.Group("/admin")
 	{
 		v2.GET("/login", con.Logins)      //登陆页
