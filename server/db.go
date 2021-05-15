@@ -45,7 +45,6 @@ func GetDbConfig() Contact {
 		fmt.Println("ERROR: ", err.Error())
 		return c
 	}
-	fmt.Println(c)
-	fmt.Printf("获取到配置文件的数据是%+v", c)
+	//fmt.Printf("获取到配置文件的数据是%+v", c)
 	return c
 }
