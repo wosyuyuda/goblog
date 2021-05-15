@@ -31,7 +31,7 @@ func Auser(db *gorm.DB) bool {
 		userNew := new(d.User)
 		userNew.Name = "longfei"
 		userNew.Pwd = util.Md5("123456") //md5加密一下
-		return db.Create(&userNew).Error != nil
+		return db.Create(&userNew).Error == nil
 	} else {
 		fmt.Println("后台有用户")
 		return false
@@ -43,7 +43,7 @@ func Atype(db *gorm.DB) bool {
 	tp := new(d.Tp)
 	tp.Name = "最新"
 	tp.Info = "第一个分类"
-	return db.Create(&tp).Error != nil
+	return db.Create(&tp).Error == nil
 }
 
 func Aview(db *gorm.DB) bool {
@@ -52,7 +52,7 @@ func Aview(db *gorm.DB) bool {
 	view.Typeid = 1
 	view.Content = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg"
 	view.Body = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg"
-	return db.Create(&view).Error != nil
+	return db.Create(&view).Error == nil
 }
 
 //初始化数据库表文件
