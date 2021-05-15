@@ -25,7 +25,7 @@ type View struct {
 	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
 	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	Status  uint   `gorm:"size:1" json:"status"`                   //文章状态，0删除，1正常
+	Status  uint   `gorm:"size:1;default:'1';" json:"status"`      //文章状态，0删除，1正常
 	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
 
@@ -59,7 +59,9 @@ type User struct {
 
 //这里连接数据库，后面可以移到专门的配置文件
 func LinkDb() *gorm.DB {
-	dsn := "gorm:123456@tcp(127.0.0.1:3306)/gorm?charset=utf8mb4&parseTime=True&loc=Local"
+	d := s.GetDbConfig() //服务获取config里面的数据库信息
+	//dsn := "gorm:123456@tcp(127.0.0.1:3306)/gorm?charset=utf8mb4&parseTime=True&loc=Local"
+	dsn := fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", d.User, d.Pwd, d.Host, d.Port, d.Db)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
 		panic(err)
@@ -77,7 +79,7 @@ func dbConn(User, Password, Host, Db string, Port int) *gorm.DB {
 }
 
 func GetDb() (conn *gorm.DB) {
-	d := s.GetDbConfig()
+	d := s.GetDbConfig() //服务获取config里面的数据库信息
 	//这里可以切换成多数据库？
 	for {
 		//conn = dbConn("gorm", "123456", "127.0.0.1", "gorm", 3306)
