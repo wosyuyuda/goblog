@@ -24,7 +24,7 @@ func Action(c *gin.Context) {
 	//自动读入配置文件，只要初始化UEditor即会发生
 	case "config":
 		jsonByte, _ := ioutil.ReadFile("static/ueditor/conf/config.json")
-		re, _ := regexp.Compile("\\/\\*[\\S\\s]+?\\*\\/")
+		re, _ := regexp.Compile(`\\/\\*[\\S\\s]+?\\*\\/`)
 		jsonByte = re.ReplaceAll(jsonByte, []byte(""))
 		c.Writer.Write(jsonByte)
 
@@ -116,7 +116,7 @@ func Action(c *gin.Context) {
 				return
 			}
 			data, _ := json.Marshal(map[string]string{
-				"url":      fmt.Sprintf("%s", ueBasePath+`images/`+datePath+name), //保存后的文件路径
+				"url":      fmt.Sprintf(ueBasePath + `images/` + datePath + name), //保存后的文件路径
 				"title":    "",                                                    //文件描述，对图片来说在前端会添加到title属性上
 				"original": file.Filename,                                         //原始文件名
 				"state":    "SUCCESS",                                             //上传状态，成功时返回SUCCESS,其他任何值将原样返回至图片上传框中
@@ -162,7 +162,7 @@ func Action(c *gin.Context) {
 				return
 			}
 			data, _ := json.Marshal(map[string]string{
-				"url":      fmt.Sprintf("%s", ueBasePath+`images/`+datePath+name), //保存后的文件路径
+				"url":      fmt.Sprintf(ueBasePath + `images/` + datePath + name), //保存后的文件路径
 				"title":    "",                                                    //文件描述，对图片来说在前端会添加到title属性上
 				"original": header.Filename,                                       //原始文件名
 				"state":    "SUCCESS",                                             //上传状态，成功时返回SUCCESS,其他任何值将原样返回至图片上传框中
