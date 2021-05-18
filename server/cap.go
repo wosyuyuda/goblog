@@ -41,4 +41,10 @@ func CaptMake() (id, b64s string, err error) {
 //验证captcha是否正确
 func CaptVerify(id string, capt string) bool {
 	return store.Verify(id, capt, false)
+	/* if store.Verify(id, capt, false) {
+		return true
+	} else {
+		return false
+	} */
+	//return
 }
