@@ -9,6 +9,6 @@ require (
 	github.com/go-sql-driver/mysql v1.6.0 // indirect
 	github.com/mojocn/base64Captcha v1.3.4 // indirect
 	golang.org/x/image v0.0.0-20210504121937-7319ad40d33e // indirect
-	gorm.io/driver/mysql v1.0.5 // indirect
-	gorm.io/gorm v1.21.8 // indirect
+	gorm.io/driver/mysql v1.1.0 // indirect
+	gorm.io/gorm v1.21.10 // indirect
 )
