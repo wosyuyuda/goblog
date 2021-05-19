@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"image/color"
 
 	"github.com/mojocn/base64Captcha"
@@ -41,13 +40,11 @@ func CaptMake() (id, b64s string, err error) {
 
 //验证captcha是否正确
 func CaptVerify(id string, capt string) bool {
-	fmt.Println("id:" + id)
-	fmt.Println("capt:" + capt)
-	//if store.Verify(id, capt, true) {
-	if store.Verify(id, capt, false) {
+	return store.Verify(id, capt, false)
+	/* if store.Verify(id, capt, false) {
 		return true
 	} else {
 		return false
-	}
+	} */
 	//return
 }

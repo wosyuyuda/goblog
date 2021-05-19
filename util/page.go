@@ -22,13 +22,13 @@ func PageNum(c *gin.Context) int {
 	return pagenum
 }
 
+//num一共多少条,p当前第几页
 func GetPage(num int64, p int) Pages {
 	page := Pages{}
-	off := 10 //一页默认10条
-	idPointer := (*int)(unsafe.Pointer(&num))
+	off := 10                                 //一页默认10条
+	idPointer := (*int)(unsafe.Pointer(&num)) //int64转int
 	znum := *idPointer
-
-	page.Pages = int(math.Floor(float64(znum/10))) + 1 //看一共有多少页
+	page.Pages = int(math.Ceil(float64(znum) / 10)) //看一共有多少页
 
 	page.Num = znum
 	page.Page = p //当前页
