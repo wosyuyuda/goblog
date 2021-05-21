@@ -32,7 +32,7 @@ func initConfig(db *gorm.DB) bool {
 	config[0].Type = 0
 	config[0].Value = "gomyblog"
 	config[0].Content = "网站标题"
-
+	return true
 }
 
 //添加用户
