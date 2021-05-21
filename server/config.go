@@ -1,6 +1,6 @@
 package server
 
-import (
+/* import (
 	d "goblog/model"
 )
 
@@ -10,4 +10,4 @@ func GetConfig(id string) *d.Config {
 	db.Where("id = ?", id).First(&c)
 	//db.Where("id = ?", id).Find(&c)
 	return c
-}
+} */

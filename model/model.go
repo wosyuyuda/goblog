@@ -8,7 +8,7 @@ package model
 
 import (
 	"fmt"
-	"test/server"
+	"goblog/server"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
