@@ -7,11 +7,11 @@ package main
  */
 
 import (
-	con "test/controller"
+	con "goblog/controller"
 
-	"test/install"
-	"test/middleware"
-	"test/util"
+	"goblog/install"
+	"goblog/middleware"
+	"goblog/util"
 
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"

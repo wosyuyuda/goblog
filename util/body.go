@@ -1,7 +1,7 @@
 package util
 
 import (
-	d "test/model"
+	d "goblog/model"
 )
 
 //循环的给文章添加默认图片

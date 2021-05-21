@@ -7,11 +7,11 @@ package controller
  */
 import (
 	"fmt"
+	d "goblog/model"
+	"goblog/server"
+	"goblog/util"
 	"net/http"
 	"strconv"
-	d "test/model"
-	"test/server"
-	"test/util"
 
 	"github.com/gin-gonic/gin"
 )

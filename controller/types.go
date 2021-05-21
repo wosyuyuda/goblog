@@ -2,8 +2,8 @@ package controller
 
 import (
 	"fmt"
+	d "goblog/model"
 	"strconv"
-	d "test/model"
 
 	"github.com/gin-gonic/gin"
 )
