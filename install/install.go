@@ -23,6 +23,18 @@ func Install(c *gin.Context) {
 
 }
 
+//初始化设置
+func initConfig(db *gorm.DB) bool {
+	//设置默认的系统设置
+	//先设置tdk标题跟描述
+	var config []d.Config
+	config[0].Name = "tdk"
+	config[0].Type = 0
+	config[0].Value = "gomyblog"
+	config[0].Content = "网站标题"
+
+}
+
 //添加用户
 func Auser(db *gorm.DB) bool {
 	var user d.User

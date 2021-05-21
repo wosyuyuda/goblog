@@ -49,6 +49,11 @@ type Config struct {
 	Value   string `gorm:"size:500" json:"value" form:"value"`     //系统设置值
 }
 
+//网站的标题关键词等.
+type Tdk struct {
+	Title string ` json:"title" form:"title"`
+}
+
 //用户表
 type User struct {
 	Id     int    `gorm:"primary_key" json:"id"`
