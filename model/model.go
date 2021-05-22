@@ -42,11 +42,12 @@ type Tp struct {
 
 //系统设置
 type Config struct {
-	ID      uint   `gorm:"primarykey"  json:"id" form:"id"`        //用户ID
+	ID      uint   `gorm:"primarykey"  json:"id" form:"id"`        //设置ID
 	Name    string `gorm:"size:255"  json:"name" form:"name"`      //设置的名称
-	Type    int    `gorm:"size:10"  json:"type" form:"type"`       //设置所属分类
+	Type    string `gorm:"size:10"  json:"type" form:"type"`       //设置所属分类
 	Content string `gorm:"size:500" json:"content" form:"content"` //设置的介绍
 	Value   string `gorm:"size:500" json:"value" form:"value"`     //系统设置值
+	Group   uint   `gorm:"size:6" json:"group" form:"group"`       //所属群组,方便一次调出来
 }
 
 //网站的标题关键词等.
