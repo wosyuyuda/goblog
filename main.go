@@ -46,18 +46,18 @@ func main() {
 		v2.POST("/addUser", con.AddU)     //添加用户
 	}
 
-	r.Use(middleware.Islogin) //判断是否登陆的中间件
+	r.Use(middleware.Islogin) //判断是否登陆的中间件,如果没有找到session,那么307到登陆页面
 
 	v1 := r.Group("/admin")
 	{
 		v1.GET("/", con.AdminIndex)                //管理页，现在是啥也还没有
 		v1.GET("/list", con.AdminList)             //后台的文章列表，这里要加一个管理选项
-		v1.GET("/gettype", con.Gt)                 //后台的文章列表，这里要加一个管理选项
-		v1.GET("/del/:id", con.DelType)            //后台的文章列表，这里要加一个管理选项
+		v1.GET("/gettype", con.Gt)                 //获取分类列表的一个选项
+		v1.GET("/del/:id", con.DelType)            //删除指定ID分类?
 		v1.Any("/ueditor/controller", util.Action) //这里是百度编辑器图片上传必须要用的，正常图片上传也可以用这个接口
-		v1.GET("/view/:id", con.AdminGetId)        //获取文章信息的接口
+		v1.GET("/view/:id", con.AdminGetId)        //获取文章信息的接口,用于前端的编辑
 		v1.POST("/addView", con.AddView)           //添加与保存文章接口
-		v1.POST("/addType", con.AddTypes)          //添加分类
+		v1.POST("/addType", con.AddTypes)          //添加与保存分类
 		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
 	}
 
