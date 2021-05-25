@@ -25,9 +25,8 @@ type View struct {
 	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
 	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	//下面的状态,unit,string谨慎变更,会影响查询的,状态感觉最好统一用int或者uint
-	Status uint `gorm:"size:1;default:1;" json:"status"` //文章状态，0删除，1正常
-	Tps    Tp   `json:"tps" gorm:"FOREIGNKEY:Typeid;"`   //这里放分类信息types
+	Status  uint   `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
+	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
 
 //分类表
