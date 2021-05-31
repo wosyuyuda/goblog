@@ -2,8 +2,8 @@ package install
 
 import (
 	"fmt"
-	d "test/model"
-	"test/util"
+	d "goblog/model"
+	"goblog/util"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -11,16 +11,47 @@ import (
 
 func Install(c *gin.Context) {
 	db := d.GetDb()
-	Idb(db)        //初始化数据库表
-	b := Auser(db) //添加第一个用户
-	e := Atype(db) //添加第一个分类
-	f := Aview(db) //添加第一篇文章
-	if b && e && f {
+	Idb(db)             //初始化数据库表
+	b := Auser(db)      //添加第一个用户,如果已经有用户,那么会返回错误
+	e := Atype(db)      //添加第一个分类
+	f := Aview(db)      //添加第一篇文章
+	g := initConfig(db) //添加网站的标题关键词描述
+	if b && e && f && g {
 		c.JSON(200, gin.H{"msg": "初始化成功", "code": 200})
 	} else {
 		c.JSON(200, gin.H{"msg": "初始化失败", "code": 400})
 	}
+}
 
+//初始化标题描述关键词,后期考虑用前端传过来的数据处理
+func initConfig(db *gorm.DB) bool {
+	//设置默认的系统设置
+	//先设置tdk标题跟描述,
+	var config1 = []d.Config{
+		{
+			Name:    "title",
+			Type:    "string",
+			Content: "网站的标题",
+			Value:   "goblog",
+			Group:   1,
+		},
+		{
+			Name:    "keyword",
+			Type:    "string",
+			Content: "网站的关键词",
+			Value:   "goblog,博客",
+			Group:   1,
+		},
+		{
+			Name:    "description",
+			Type:    "string",
+			Content: "网站的描述",
+			Value:   "golang的博客,改这些东西后面再看趴",
+			Group:   1,
+		},
+	}
+	//批量创建并返回创建结果
+	return db.CreateInBatches(config1, 3).Error == nil
 }
 
 //添加用户
@@ -46,6 +77,7 @@ func Atype(db *gorm.DB) bool {
 	return db.Create(&tp).Error == nil
 }
 
+//添加第一篇文章
 func Aview(db *gorm.DB) bool {
 	view := new(d.View)
 	view.Title = "这是第goblog的第一篇文章"

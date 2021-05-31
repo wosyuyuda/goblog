@@ -2,9 +2,13 @@
 
 # 初始化
  1.先在配置文件config/db.json 输入数据库地址账号密码  
- 2.运行main.go  
- 3.进入初始化 /install/ 创建用户,第一篇文章,第一个分类  
- 4.默认账号密码,longfei 123456
+ 2.go mod init初始化一下包  
+ 3.运行main.go//路由结构请看main.go的注释说明  
+ 4.进入初始化 /install/ 创建用户,第一篇文章,第一个分类  
+ 5.默认账号密码,longfei 123456
+
+# 喜欢的帮忙点个赞哪
+业余默默的写也不容易,对你有帮助的话不要吝啬自己的start,如果有问题的话可以给我留言哈,还有不少待优化的地方,待后面空了补齐
 
 # 介绍
 
@@ -17,22 +21,67 @@
 2. 项目的依赖请自行查看go.mod包,主要依赖gorm,gin,验证码
 
 # 目录结构
-1. controller 控制器
-    1.1 --admin.go 管理后台文件  
-    1.2 --index.go 前端页面的文件  
-    1.3 --user.go 啥用没有，后期留着用来管理用户或者管理员  
-    1.4 --list.go 列表功能，本来应该放在admin.go里面的，不过划分出来结构会更清晰一些  
-2. main.go启动文件，包含路由  
-3. model 数据库目录，添加数据库处理类的功能,新的已经把数据的结构全放到这个文件里了  
-4. server目录，后期添加一下处理服务的功能，现在没啥东西就先空着  
-5. static 静态资源目录，放一些css,js图片等资源  
-    5.1 css-lib-temp目录为hui前端框架的一些依赖     
-    5.2 view目录为添加编辑的一些静态html  
-    5.3 upload为上传的图片文件
-6. view目录用来放模板的目录  
-7. util目录用来放一些工具,比如处理列表的图片,转换数据格式,处理分页的一些数据,获取设置删除session,百度编辑器接收图片上传的一些工具  
-8. install 目录是初始化的目录,后面用来初始一些数据  
-9. middleware 中间件的目录,用来放一些中间件,比如验证登陆权限的  
+│  go.mod 包的声明文件,初始化需要用到  
+│  go.sum  
+│  main.go启动文件,主包,包含路由文件  
+│      
+├─config 设置  
+│      db.json 数据库的配置文件  
+│      set.json  
+│      
+├─controller 控制器文件  
+│      admin.go 管理员的控制器  
+│      config.go 设置相关  
+│      index.go 前台的控制器  
+│      types.go 分类相关  
+│      user.go 用户的一些功能相关  
+│      
+├─install 初即化的一些文件,  
+│      install.go初始化用户,新增加一个分类,新加文章与用户  
+│      
+├─middleware 中间件  
+│      islogin.go判断是否登陆的是中间件  
+│      
+├─model 连接数据库,数据库的结构声明文件  
+│      model.go  
+│      
+├─server 服务文件  
+│      cap.go 验证码  
+│      config.go 设置文件  
+│      db.go 数据库的服务  
+│      
+├─static  静态文件目录,包含h ui的一些静态文件与ueditor的静态文件,再加上后台的一些文件  
+│  │  
+│  ├─css  
+│  │              
+│  ├─lib  
+│  │                  
+│  ├─static  
+│  │  ├─h-ui  
+│  │                  
+│  ├─ueditor   
+│  │               
+│  └─view 后台新增编辑分类与文章,新加了一个设置页面  
+│          admin_addtype.html  分类管理  
+│          admin_addview.html  文章增改   
+│          admin_set.html  设置  
+│          
+├─util 常用的一些工具页面  
+│      body.go  内容的一些工具  
+│      md5.go  md5  
+│      page.go  分类的一些设置  
+│      session.go  
+│      ueditor.go  编辑器  
+│      
+└─view 这里是前端的一些模板文件,admin是后台的,其它的为前台的  
+        admin_addview.html  
+        admin_index.html  
+        admin_list.html  
+        index.html  
+        list.html   
+        login.html  
+        login1.html  
+        view.html  
 
 
 
@@ -55,6 +104,7 @@ static里面的静态资源是h ui的模板，想研究的自己去研究一下�
 
 # 注意事项
 本来打算添加编辑分类跟文章功能页面直接用mvc结构的,实在是vue.js的语法跟gin的模板语法冲突,木有办法,所以有俩个静态文件放在/static/view目录下面,分别是添加编辑文章与分类的功能  
+
 
 
 # 使用总结

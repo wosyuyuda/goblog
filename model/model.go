@@ -8,7 +8,7 @@ package model
 
 import (
 	"fmt"
-	s "test/server"
+	"goblog/server"
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -25,9 +25,8 @@ type View struct {
 	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
 	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	//下面的状态,unit,string谨慎变更,会影响查询的,状态感觉最好统一用int或者uint
-	Status uint `gorm:"size:1;default:1;" json:"status"` //文章状态，0删除，1正常
-	Tps    Tp   `json:"tps" gorm:"FOREIGNKEY:Typeid;"`   //这里放分类信息types
+	Status  uint   `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
+	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
 }
 
 //分类表
@@ -42,11 +41,17 @@ type Tp struct {
 
 //系统设置
 type Config struct {
-	ID      uint   `gorm:"primarykey"  json:"id" form:"id"`        //用户ID
+	ID      uint   `gorm:"primarykey"  json:"id" form:"id"`        //设置ID
 	Name    string `gorm:"size:255"  json:"name" form:"name"`      //设置的名称
-	Type    int    `gorm:"size:10"  json:"type" form:"type"`       //设置所属分类
+	Type    string `gorm:"size:10"  json:"type" form:"type"`       //设置所属分类
 	Content string `gorm:"size:500" json:"content" form:"content"` //设置的介绍
 	Value   string `gorm:"size:500" json:"value" form:"value"`     //系统设置值
+	Group   uint   `gorm:"size:6" json:"group" form:"group"`       //所属群组,方便一次调出来
+}
+
+//网站的标题关键词等.
+type Tdk struct {
+	Title string ` json:"title" form:"title"`
 }
 
 //用户表
@@ -62,7 +67,7 @@ type User struct {
 func LinkDb() *gorm.DB {
 
 	//dsn := "gorm:123456@tcp(127.0.0.1:3306)/gorm?charset=utf8mb4&parseTime=True&loc=Local"
-	d := s.GetDbConfig() //服务获取config里面的数据库信息
+	d := server.GetDbConfig() //服务获取config里面的数据库信息
 	dsn := fmt.Sprintf("%s:%s@(%s:%d)/%s?charset=utf8&parseTime=True&loc=Local", d.User, d.Pwd, d.Host, d.Port, d.Db)
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
@@ -81,7 +86,7 @@ func dbConn(User, Password, Host, Db string, Port int) *gorm.DB {
 }
 
 func GetDb() (conn *gorm.DB) {
-	d := s.GetDbConfig() //服务获取config里面的数据库信息
+	d := server.GetDbConfig() //服务获取config里面的数据库信息
 	//这里可以切换成多数据库？
 	for {
 		//conn = dbConn("gorm", "123456", "127.0.0.1", "gorm", 3306)

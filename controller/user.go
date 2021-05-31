@@ -9,8 +9,8 @@ package controller
 
 import (
 	"fmt"
-	d "test/model"
-	"test/util"
+	d "goblog/model"
+	"goblog/util"
 
 	"github.com/gin-gonic/gin"
 )
