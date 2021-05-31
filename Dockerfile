@@ -1,4 +1,6 @@
 FROM golang:alpine
+#还需要加上一个mysql的环境部署，再把mysql的账号密码整成gorm 123456
+#参考db.json里面的账号密码，这俩环境部署了应该就可以运行啦！！！
 
 # 为我们的镜像设置必要的环境变量
 ENV GO111MODULE=on \
