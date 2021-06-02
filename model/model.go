@@ -26,7 +26,7 @@ type View struct {
 	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
 	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
 	Status  uint   `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
-	Tps     Tp     `json:"tps" gorm:"FOREIGNKEY:Typeid;"`          //这里放分类信息types
+	Tps     Tp     `json:"tps" gorm:"-;FOREIGNKEY:Typeid;"`        //这里放分类信息types
 }
 
 //分类表

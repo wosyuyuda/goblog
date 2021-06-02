@@ -61,5 +61,5 @@ func main() {
 		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
 	}
 
-	r.Run(":8000") //开启端口访问,本地再试一下提交
+	r.Run(":8080") //开启端口访问,本地再试一下提交
 }
