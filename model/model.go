@@ -20,8 +20,8 @@ type View struct {
 	Swiper   uint   `gorm:"size:1" json:"swiper" form:"swiper"`   //是否为轮播图
 	Pic      string `gorm:"size:255" json:"pic" form:"pic"`       //文章的缩略图
 	Status   uint   `gorm:"size:1;default:1;" json:"status"`      //文章状态，0删除，1正常
-	Typename string `gorm:"-" json:"typename" form:"typename"`    //存储一下分类名称
-	Name     string `gorm:"-" json:"name" form:"name"`
+	Typename string `gorm:"-" json:"Typename" form:"Typename"`    //存储一下分类名称
+	Name     string `gorm:"-" json:"Name" form:"Name"`
 	Content  string `gorm:"size:500" json:"content" form:"content"` //文章的简介
 	Body     string `json:"body" form:"body"`                       //详细的内容
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types

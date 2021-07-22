@@ -8,7 +8,7 @@ import (
 
 //获取列表
 func GetViewlist(id interface{}, page int) (vi []model.View) {
-	db := dao.MDB.Table("views").Select("views.*, tps.name")
+	db := dao.MDB.Table("views").Select("views.*, tps.Name as Name")
 	db = db.Joins("left join tps on tps.id = views.typeid")
 	num := 10 //一页默认10条
 	if page < 1 {
@@ -36,7 +36,7 @@ func GetViewlist(id interface{}, page int) (vi []model.View) {
 //获取当前分类下面的10条文章
 func Findlist2(id string) (vi []model.View) {
 	fmt.Printf("start")
-	db := dao.MDB.Table("views").Select("views.*, tps.name")
+	db := dao.MDB.Table("views").Select("views.*, tps.Name as Name")
 	db = db.Joins("left join tps on tps.id = views.typeid")
 	if id != "0" {
 		db = db.Where("typeid = ?", id)
