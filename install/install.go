@@ -2,6 +2,7 @@ package install
 
 import (
 	"fmt"
+	"goblog/dao"
 	d "goblog/model"
 	"goblog/util"
 
@@ -10,7 +11,7 @@ import (
 )
 
 func Install(c *gin.Context) {
-	db := d.GetDb()
+	db := dao.MDB
 	Idb(db)             //初始化数据库表
 	b := Auser(db)      //添加第一个用户,如果已经有用户,那么会返回错误
 	e := Atype(db)      //添加第一个分类

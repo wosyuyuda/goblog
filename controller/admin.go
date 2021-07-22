@@ -7,6 +7,7 @@ package controller
  */
 import (
 	"fmt"
+	"goblog/dao"
 	d "goblog/model"
 	"goblog/server"
 	"goblog/util"
@@ -31,9 +32,9 @@ func AdminGetId(c *gin.Context) {
 
 //后台的文章的管理页面
 func AdminList(c *gin.Context) {
-	pagenum := util.PageNum(c)        //获取当前第几页
-	list := FindListNew("0", pagenum) //列表数据
-	i := util.GetTypeCount("0")       //获取总共的文章数量
+	pagenum := util.PageNum(c)               //获取当前第几页
+	list := server.GetViewlist("0", pagenum) //列表数据
+	i := util.GetTypeCount("0")              //获取总共的文章数量
 	p := util.GetPage(i, pagenum)
 	c.HTML(http.StatusOK, "admin_list.html", gin.H{
 		"list":     list,
@@ -57,7 +58,7 @@ func AddView(c *gin.Context) {
 	typeid := c.PostForm("typeid")
 	t, _ := strconv.Atoi(typeid)
 	data.Typeid = t
-	conn := d.GetDb()
+	conn := dao.MDB
 	msg := "创建成功"
 	if data.ID > 0 {
 		err = conn.Model(&d.View{}).Where("id = ?", data.ID).Updates(&data).Error
@@ -85,7 +86,7 @@ func Login(c *gin.Context) {
 	}
 	name := c.PostForm("name")
 	pwd := c.PostForm("pwd")
-	conn := d.GetDb()
+	conn := dao.MDB
 	u := new(User)
 	conn.Where("name = ?", name).Find(&u)
 	if util.Md5(pwd) != u.Pwd || u.Id == 0 {

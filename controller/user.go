@@ -3,12 +3,13 @@ package controller
 /*
  * @Description:
  * @Author: longfei
- * @LastEditors: Please set LastEditors
+ * @LastEditors: ylf
  * @FilePath: \go\controller\user.go
  */
 
 import (
 	"fmt"
+	"goblog/dao"
 	d "goblog/model"
 	"goblog/util"
 
@@ -30,7 +31,7 @@ func AddU(c *gin.Context) {
 }
 
 func (user *User) AddUser() {
-	conn := d.GetDb()
+	conn := dao.MDB
 	fmt.Println("进入创建")
 	conn.AutoMigrate(&User{})
 	err := conn.Create(user).Error
@@ -51,7 +52,7 @@ func (user *User) AddUser() {
 
 //删除数据
 func (user *User) DelUser() {
-	conn := d.GetDb()
+	conn := dao.MDB
 	err := conn.Delete(user).Error
 	if err != nil {
 		fmt.Println("删除失败")

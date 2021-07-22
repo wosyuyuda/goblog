@@ -2,6 +2,7 @@ package controller
 
 import (
 	"fmt"
+	"goblog/dao"
 	d "goblog/model"
 	"strconv"
 
@@ -11,7 +12,7 @@ import (
 //删除分类
 func DelType(c *gin.Context) {
 	id := c.Param("id")
-	db := d.LinkDb() //连接数据库模型
+	db := dao.MDB //连接数据库模型
 	err := db.Model(d.Tp{}).Where("id = ?", id).Update("status", "0").Error
 	if err != nil {
 		fmt.Printf("错误")
@@ -20,7 +21,7 @@ func DelType(c *gin.Context) {
 }
 
 func GetTypeNew(id string) (Tp []d.Tp) {
-	db := d.LinkDb() //连接数据库模型
+	db := dao.MDB //连接数据库模型
 	switch id {
 	case "0":
 		db.Where("status = ?", "1").Find(&Tp)
@@ -48,7 +49,7 @@ func AddTypes(c *gin.Context) {
 	data.Level = leve
 	fmt.Printf("这个保存数据传入的数据类型是%T 数据是%+v", data, data)
 	id := c.PostForm("id")
-	conn := d.GetDb()
+	conn := dao.MDB
 	conn.AutoMigrate(&d.Tp{})
 	if id != "0" {
 		err = conn.Model(&d.Tp{}).Where("id = ?", id).Updates(&data).Error

@@ -1,7 +1,14 @@
 {
-    "user": "gorm",
-    "pwd": "123456",
-    "host":"127.0.0.1",
-    "db":"gorm",
-    "port":3306
+    "db":{
+        "user": "gorm",
+        "pwd": "123456",
+        "host":"127.0.0.1",
+        "db":"gorm",
+        "port":3306
+    },
+    "tdk":{
+        "title":"gobolg",
+        "keyword":"gobolg",
+        "description":"gobolg"
+    }
 }

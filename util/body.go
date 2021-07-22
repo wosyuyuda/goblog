@@ -1,6 +1,7 @@
 package util
 
 import (
+	"goblog/dao"
 	d "goblog/model"
 )
 
@@ -17,7 +18,7 @@ func Imgsrc(v []d.View) []d.View {
 //获取分类下有多少文章，或者总共有多少
 func GetTypeCount(id string) int64 {
 	var i int64
-	db := d.LinkDb()
+	db := dao.MDB
 	if id == "0" {
 		db.Find(&d.View{}).Count(&i)
 	} else {
@@ -28,7 +29,7 @@ func GetTypeCount(id string) int64 {
 
 //获取当前文章信息，如果up为1那么点击数+1
 func GetView(id string, up int) *d.View {
-	db := d.LinkDb()
+	db := dao.MDB
 	u := new(d.View)
 	db.Where("id = ?", id).Find(&u)
 	db.Model(&u).Preload("Tps").Find(&u)
