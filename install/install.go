@@ -99,8 +99,11 @@ func Aview(db *gorm.DB) bool {
 
 //初始化数据库表文件
 func Idb(db *gorm.DB) {
-	db.AutoMigrate(&d.User{})
-	db.AutoMigrate(&d.Tp{})
-	db.AutoMigrate(&d.View{})
-	db.AutoMigrate(&d.Config{})
+	db.AutoMigrate(
+		&d.User{},
+		&d.Link{},
+		&d.Tp{},
+		&d.View{},
+		&d.Config{},
+	)
 }

@@ -548,8 +548,13 @@
                     </div>
                     <div class="sec-panel-body">
                         <div class="list list-links">
-                            <a href="https://www.ibiaoqin.cn" data-type="mip" data-title="ibiaoqin" title="ibiaoqin"
-                                target="_blank">ibiaoqin</a>
+                            <a href="https://www.iq2.cn" data-type="mip" data-title="龙飞程序博客" title="龙飞程序博客"
+                                target="_blank">龙飞程序博客</a>
+                                {{range $i, $v := .link}}
+                                <a href="{{$v.Url}}" data-type="mip" 
+                                data-title="{{$v.Name}}" title="{{$v.Name}}"
+                                target="_blank">{{$v.Name}}</a>
+                                {{end}}
                         </div>
                     </div>
                 </div>

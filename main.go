@@ -58,6 +58,8 @@ func main() {
 		v1.POST("/addView", con.AddView)           //添加与保存文章接口
 		v1.POST("/addType", con.AddTypes)          //添加与保存分类
 		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
+		v1.GET("/link", con.GetLink)     //友情链接
+		v1.POST("/addlink", con.AddLink) //友链添加与编辑
 	}
 
 	r.Run(":8080") //开启端口访问,本地再试一下提交
