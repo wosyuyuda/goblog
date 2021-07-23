@@ -8,53 +8,34 @@ package controller
  */
 
 import (
-	"fmt"
 	"goblog/dao"
 	d "goblog/model"
+	"goblog/server"
 	"goblog/util"
 
 	"github.com/gin-gonic/gin"
 )
 
-type User struct {
-	d.User
+func EditUser(c *gin.Context) {
+	uid := util.GetSession(c, "uid")
+	var user d.User
+	err := c.ShouldBind(&user)
+	if err != nil {
+		server.Fail(c)
+		return
+	}
+	if user.Id == uid {
+		//仅更新用户名,如果密码有则修改密码
+		if user.Pwd != "" {
+			user.Pwd = util.Md5jiayan(user.Pwd)
+		}
+		err = dao.MDB.Where("id = ?", user.Id).Updates(user).Error
+		util.SetSession(c, "name", user.Name) //更新session里面的名称
+	}
+	server.IfRes(err, c)
 }
 
-func AddU(c *gin.Context) {
-	user := new(User)
-	user.Name = "longfei"
-	user.Age = 18
-	user.Gender = 1
-	pwd := "123456"
-	user.Pwd = util.Md5jiayan(pwd)
-	user.AddUser() //user.id = 1，添加之后user中的id会变成数据库中生成的值
-}
-
-func (user *User) AddUser() {
-	conn := dao.MDB
-	fmt.Println("进入创建")
-	conn.AutoMigrate(&User{})
-	err := conn.Create(user).Error
-	if err != nil {
-		fmt.Println("创建失败")
-	}
-}
-
-//修改数据
-/* func (user *User) UpdateUser() {
-	conn := d.GetDb()
-
-	err := conn.Model(&User{}).Update(user).Error
-	if err != nil {
-		fmt.Println("修改失败")
-	}
-} */
-
-//删除数据
-func (user *User) DelUser() {
-	conn := dao.MDB
-	err := conn.Delete(user).Error
-	if err != nil {
-		fmt.Println("删除失败")
-	}
+//获取当前用户名
+func GetUserName(c *gin.Context) {
+	server.OkWithData(util.GetSession(c, "name"), c)
 }

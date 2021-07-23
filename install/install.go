@@ -29,7 +29,7 @@ func initConfig(db *gorm.DB) bool {
 	return true
 	//设置默认的系统设置
 	//先设置tdk标题跟描述,
-	var config1 = []d.Config{
+	/* var config1 = []d.Config{
 		{
 			Name:    "title",
 			Type:    "string",
@@ -53,7 +53,7 @@ func initConfig(db *gorm.DB) bool {
 		},
 	}
 	//批量创建并返回创建结果
-	return db.CreateInBatches(config1, 3).Error == nil
+	return db.CreateInBatches(config1, 3).Error == nil */
 }
 
 //添加用户

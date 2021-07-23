@@ -87,7 +87,7 @@ func Login(c *gin.Context) {
 	name := c.PostForm("name")
 	pwd := c.PostForm("pwd")
 	conn := dao.MDB
-	u := new(User)
+	var u d.User
 	conn.Where("name = ?", name).Find(&u)
 	if util.Md5jiayan(pwd) != u.Pwd || u.Id == 0 {
 		c.JSON(200, gin.H{"msg": "账号不存在或者密码错误", "code": 400})
@@ -95,7 +95,8 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	util.SetSession(c, "uid", u.Id) //把用户的ID存进session
+	util.SetSession(c, "uid", u.Id)    //把用户的ID存进session
+	util.SetSession(c, "name", u.Name) //把用户名存进session
 	c.JSON(200, gin.H{"msg": "登陆成功", "code": 200})
 
 }
