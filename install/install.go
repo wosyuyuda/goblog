@@ -74,6 +74,10 @@ func Auser(db *gorm.DB) bool {
 //添加一个分类
 func Atype(db *gorm.DB) bool {
 	tp := new(d.Tp)
+	db.First(&tp)
+	if tp.ID != 0 {
+		return false
+	}
 	tp.Name = "简介"
 	tp.Info = "第一个分类"
 	return db.Create(&tp).Error == nil
@@ -82,6 +86,10 @@ func Atype(db *gorm.DB) bool {
 //添加第一篇文章
 func Aview(db *gorm.DB) bool {
 	view := new(d.View)
+	db.First(&view)
+	if view.ID != 0 {
+		return false
+	}
 	view.Title = "欢迎使用goblog"
 	view.Typeid = 1
 	view.Content = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg 作者原来是个phper转golang了,此代码适合同样转golang的初学者"

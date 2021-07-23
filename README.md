@@ -1,6 +1,7 @@
 # gomybolg
 
 # 初始化
+最新版博客网址:https://www.iq2.cn  
  1.先在配置文件config/db.json 输入数据库地址账号密码  
  2.go mod init初始化一下包  
  3.运行main.go//路由结构请看main.go的注释说明  
