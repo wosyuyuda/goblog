@@ -66,6 +66,7 @@ type Tdk struct {
 	Title       string ` json:"title" form:"title"`
 	Keyword     string ` json:"keyword" form:"keyword"`
 	Description string ` json:"description" form:"description"`
+	Beian       string ` json:"beian" form:"beian"`
 }
 
 //用户表

@@ -34,6 +34,7 @@ func GetView(c *gin.Context) {
 		"types":   tp,
 		"newlist": util.Imgsrc(newList),
 		"tuijian": util.Imgsrc(tuijian),
+		"tdk":     config.GetTDK(),
 	})
 }
 
@@ -69,6 +70,7 @@ func Views(c *gin.Context) {
 		"newlist":  util.Imgsrc(newList),
 		"tuijian":  util.Imgsrc(tuijian),
 		"pageinfo": p,
+		"tdk":      config.GetTDK(),
 	})
 }
 
@@ -91,13 +93,13 @@ func Lists1(c *gin.Context) {
 		tnew = append(tnew, v)
 	}
 	fmt.Printf("转换后的数据%+v", tnew)
-	tdk := config.GetTDK()
+
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    util.Imgsrc(views),
 		"types":   tp,
 		"tuijian": util.Imgsrc(tuijian),
 		"tt":      tnew,
-		"tdk":     tdk,
+		"tdk":     config.GetTDK(),
 		"remen":   util.Imgsrc(remen),
 		"swiper":  util.Imgsrc(swiper),
 	})

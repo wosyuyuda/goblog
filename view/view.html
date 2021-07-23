@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
   <link rel="shortcut icon" href="/static/favicon1.ico" type="image/x-icon" />
-    <title>{{.view.Title}}</title>
+    <title>{{.view.Title}}-power by goblog</title>
    <!--  <meta name="keywords" content="{dede:field.keywords/}">
     <meta name="description" content="{dede:field.description function='html2text(@me)'/}">
   <meta property="og:type" content="article" />
@@ -71,9 +71,9 @@
         <div class="entry-head">
          <h1 class="entry-title">{{.view.Title}}</h1>
          <div class="entry-info">
-          
-          <span>{{.view.Content}}</span>
-          <span class="dot">•</span>
+          <a class="nickname" href="/list/{{.view.Typeid}}">分类</a>
+          <span class="dot">•</span><span>time</span>
+          <span class="dot">•</span><span>阅读 {{.view.Click}}</span>
          </div>
         </div>
         <div class="entry-content clearfix">
@@ -95,7 +95,7 @@
          <div class="entry-action">
           <div class="btn-zan" data-id="855">
            <i class="fa fa-thumbs-up"></i> 赞 
-           <span class="entry-action-num">(629)</span>
+           <span class="entry-action-num">({{.view.Click}})</span>
           </div>
           <div class="btn-dashang">
            <i class="fa fa-usd"></i> 关注 
@@ -154,7 +154,7 @@
          </div>
          <div class="item-content">
           <p class="item-title"><a href="/view/{{$v.ID}}">{{$v.Title}}</a></p>
-          <p class="item-date">{{$v.CreatedAt}}</p>
+          <p class="item-date">{{$v.Ctime}}</p>
          </div></li>
          {{end}}
        </ul>
@@ -177,7 +177,9 @@
       </ul>
       <div class="copyright ">
         Copyright &copy; 2020  版权所有 
-       <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer "></a> Powered by 
+       <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
+        {{.tdk.Beian}}
+      </a> 
        <a href="#" target="_blank " rel="noopener noreferrer "></a>
        <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
       </div>

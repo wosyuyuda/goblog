@@ -7,8 +7,10 @@
         "port":3306
     },
     "tdk":{
-        "title":"gobolg",
-        "keyword":"gobolg",
-        "description":"gobolg"
+        "title":"龙飞的技术分享",
+        "keyword":"龙飞",
+        "description":"龙飞的一些技术分享啦,欢迎关注",
+        "biean":"湘ICP备2021011740号",
+        "goan":""
     }
 }

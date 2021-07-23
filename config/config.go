@@ -24,5 +24,6 @@ func GetTDK() (tdk model.Tdk) {
 	tdk.Title = Configv.GetString("tdk.title")
 	tdk.Keyword = Configv.GetString("tdk.keyword")
 	tdk.Description = Configv.GetString("tdk.description")
+	tdk.Beian = Configv.GetString("tdk.biean")
 	return
 }

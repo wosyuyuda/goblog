@@ -14,18 +14,19 @@ func Install(c *gin.Context) {
 	db := dao.MDB
 	Idb(db)             //初始化数据库表
 	b := Auser(db)      //添加第一个用户,如果已经有用户,那么会返回错误
-	e := Atype(db)      //添加第一个分类
-	f := Aview(db)      //添加第一篇文章
+	l := Atype(db)      //添加第一个分类
+	o := Aview(db)      //添加第一篇文章
 	g := initConfig(db) //添加网站的标题关键词描述
-	if b && e && f && g {
+	if b && l && o && g {
 		c.JSON(200, gin.H{"msg": "初始化成功", "code": 200})
 	} else {
 		c.JSON(200, gin.H{"msg": "初始化失败", "code": 400})
 	}
 }
 
-//初始化标题描述关键词,后期考虑用前端传过来的数据处理
+//初始化标题描述关键词,后期考虑用前端传过来的数据处理,直接放到配置文件了..好像没啥用了
 func initConfig(db *gorm.DB) bool {
+	return true
 	//设置默认的系统设置
 	//先设置tdk标题跟描述,
 	var config1 = []d.Config{
@@ -81,10 +82,10 @@ func Atype(db *gorm.DB) bool {
 //添加第一篇文章
 func Aview(db *gorm.DB) bool {
 	view := new(d.View)
-	view.Title = "这是第goblog的第一篇文章"
+	view.Title = "欢迎使用goblog"
 	view.Typeid = 1
-	view.Content = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg"
-	view.Body = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg"
+	view.Content = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg 作者原来是个phper转golang了,此代码适合同样转golang的初学者"
+	view.Body = "欢迎使用goblog,更多内容可以进入我的gitee https://gitee.com/wosylf/gomybolg 作者原来是个phper转golang了,此代码适合同样转golang的初学者"
 	return db.Create(&view).Error == nil
 }
 
