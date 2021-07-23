@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <title>{{.title}}</title>
-    <meta name="description" content="">
+    <title>{{.tdk.Title}}</title>
+    <meta name="description" content="{{.tdk.Description}}">
     <link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css" />
     <link rel="stylesheet" type="text/css" href="/static/just.css?1" />
     <style mip-custom="">
@@ -456,7 +456,7 @@
                                                 <a class="nickname" href="/list/{{$v.Typeid}}"
                                                     target="_blank">{{$v.Typename}}</a>
                                             </div>
-                                            <span class="item-meta-li date">{{$v.CreatedAt}}</span>
+                                            <span class="item-meta-li date">{{$v.Ctime}}</span>
                                             <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i>
                                                 {{$v.Click}}</span>
                                         </div>
@@ -495,7 +495,7 @@
                                                 <a class="nickname" href="/list/{{$v1.ID}}"
                                                     target="_blank">{{$v1.Name}}</a>
                                             </div>
-                                            <span class="item-meta-li date">{{$v.CreatedAt}}</span>
+                                            <span class="item-meta-li date">{{$v.Ctime}}</span>
                                             <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i>
                                                 {{$v.Click}}</span>
                                         </div>

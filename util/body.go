@@ -3,6 +3,7 @@ package util
 import (
 	"goblog/dao"
 	d "goblog/model"
+	"time"
 )
 
 //循环的给文章添加默认图片
@@ -11,6 +12,8 @@ func Imgsrc(v []d.ViewJson) []d.ViewJson {
 		if len(v[i].Pic) == 0 {
 			v[i].Pic = "/static/no-images.jpg"
 		}
+		tm := time.Unix(int64(v[i].CreatedAt), 0)
+		v[i].Ctime = tm.Format("2006-01-02 03:04:05")
 	}
 	return v
 }

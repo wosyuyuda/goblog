@@ -13,16 +13,13 @@ import (
 	"net/http"
 	"strconv"
 
+	"goblog/config"
 	d "goblog/model"
 	"goblog/server"
 	"goblog/util"
 
 	"github.com/gin-gonic/gin"
 )
-
-/* type view struct {
-	d.View
-} */
 
 //这里是详情页
 func GetView(c *gin.Context) {
@@ -93,12 +90,14 @@ func Lists1(c *gin.Context) {
 		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
 		tnew = append(tnew, v)
 	}
-
+	fmt.Printf("转换后的数据%+v", tnew)
+	tdk := config.GetTDK()
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    util.Imgsrc(views),
 		"types":   tp,
 		"tuijian": util.Imgsrc(tuijian),
 		"tt":      tnew,
+		"tdk":     tdk,
 		"remen":   util.Imgsrc(remen),
 		"swiper":  util.Imgsrc(swiper),
 	})

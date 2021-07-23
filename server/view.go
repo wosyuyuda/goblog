@@ -44,6 +44,5 @@ func Findlist2(id string) (vi []model.ViewJson) {
 		db = db.Where("typeid = ?", id)
 	}
 	db.Limit(10).Order("created_at desc").Find(&vi)
-	//fmt.Printf("查到的数据是%+v", vi)
 	return
 }

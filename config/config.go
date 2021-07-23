@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"goblog/model"
 
 	"github.com/spf13/viper"
 )
@@ -17,4 +18,11 @@ func init() {
 	if err != nil {
 		panic(fmt.Errorf("fatal error config file: %s", err))
 	}
+}
+
+func GetTDK() (tdk model.Tdk) {
+	tdk.Title = Configv.GetString("tdk.title")
+	tdk.Keyword = Configv.GetString("tdk.keyword")
+	tdk.Description = Configv.GetString("tdk.description")
+	return
 }
