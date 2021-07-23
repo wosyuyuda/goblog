@@ -7,10 +7,10 @@
         "port":3306
     },
     "tdk":{
-        "title":"龙飞的技术分享",
+        "title":"goblog",
         "keyword":"龙飞",
-        "description":"龙飞的一些技术分享啦,欢迎关注",
-        "biean":"湘ICP备2021011740号",
+        "description":"golang写的博客,方便初学者学习与使用",
+        "biean":"",
         "goan":""
     },
     "adminuri":"/login"
