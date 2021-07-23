@@ -21,16 +21,16 @@ import (
 
 func main() {
 	//先以正常模式运行，下面去掉为调试模式
-	//gin.SetMode(gin.ReleaseMode)
-	gin.SetMode("debug")
+	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode("debug")
 	r := gin.Default()
 	r.NoRoute(con.Not404)               //404页面
-	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下
+	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
 
 	r.LoadHTMLGlob("view/*")        //这里是引入模板文件
 	r.Static("/static", "static")   //引入静态目录
-	r.GET("/", con.Lists1)          //这个是首页，模板整整就可以啦
-	r.GET("/list/:id", con.Views)   //具体列表页
+	r.GET("/", con.Index)           //这个是首页，模板整整就可以啦
+	r.GET("/list/:id", con.Lists)   //具体列表页
 	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
 	//r.GET("/test", con.Test)        //测试
 

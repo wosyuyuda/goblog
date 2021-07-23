@@ -55,7 +55,7 @@ func Not404(c *gin.Context) {
 }
 
 //这里是列表页
-func Views(c *gin.Context) {
+func Lists(c *gin.Context) {
 
 	id1 := c.Param("id")
 	typeinfo := GetTypeNew(id1)
@@ -88,7 +88,7 @@ func Views(c *gin.Context) {
 }
 
 //这里是首页
-func Lists1(c *gin.Context) {
+func Index(c *gin.Context) {
 
 	views := server.Findlist2("0")         //最新
 	tuijian := server.GetViewlist("-4", 1) //推荐
