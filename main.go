@@ -23,7 +23,7 @@ func main() {
 	//gin.SetMode(gin.ReleaseMode)
 	gin.SetMode("debug")
 	r := gin.Default()
-
+	r.NoRoute(con.Not404)               //404页面
 	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下
 
 	r.LoadHTMLGlob("view/*")        //这里是引入模板文件
@@ -46,9 +46,7 @@ func main() {
 		v2.POST("/addUser", con.AddU)     //添加用户
 	}
 
-	r.Use(middleware.Islogin) //判断是否登陆的中间件,如果没有找到session,那么307到登陆页面
-
-	v1 := r.Group("/admin")
+	v1 := r.Group("/admin", middleware.Islogin)
 	{
 		v1.GET("/", con.AdminIndex)                //管理页，现在是啥也还没有
 		v1.GET("/list", con.AdminList)             //后台的文章列表，这里要加一个管理选项

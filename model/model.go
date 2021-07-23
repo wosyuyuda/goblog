@@ -12,9 +12,9 @@ import (
 
 //下面直接转过来不行
 type View struct {
-	ID        uint `gorm:"primarykey"`
-	CreatedAt uint
-	UpdatedAt uint
+	ID        uint           `gorm:"primarykey"  json:"id" form:"id"`
+	CreatedAt uint           `gorm:"size:255" json:"createtime" form:"createtime"`
+	UpdatedAt uint           `gorm:"size:255" json:"updatetime" form:"updatetime"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 	Typeid    int            `gorm:"size:10"  json:"typeid" form:"typeid"`   //分类的ID，关联
 	Title     string         `gorm:"size:255" json:"title" form:"title"`     //标题

@@ -1,0 +1,67 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<meta content="telephone=no" name="format-detection">
+<meta content="email=no" name="format-detection">
+<link rel="stylesheet" type="text/css" href="/static/static/h-ui/css/H-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/static/lib/Hui-iconfont/1.0.8/iconfont.min.css">
+<title>404页面</title>
+<style type="text/css">
+html {overflow-y:auto}
+.Hui-nav-toggle { display: none!important }
+#page-404 .Hui-wraper{padding:20px; width:auto}
+@media (max-width: 767px) {
+	#page-websafecolor .Hui-wraper{ padding:15px}
+}
+</style>
+</head>
+<body id="page-404" onLoad="prettyPrint()">
+<header class="navbar-wrapper">
+	<div class="navbar navbar-black">
+		<div class="container-fluid cl"> 
+            <a class="logo navbar-logo hidden-xs" href="/">longfei</a>
+            
+             <span class="logo navbar-slogan hidden-xs">简单 &middot; 分享 &middot; 小知识</span> 
+
+			<nav id="Hui-nav" class="nav navbar-nav">
+				<ul class="cl">
+					<li id="Huinav_1"> <a href="/">首页</a> </li>
+                    {{range $i, $v := .types}}
+                    <li id="Huinav_{{$i}}"> <a href="/list/{{$v.ID}}">{{$v.Name}}</a> </li>               {{end}}	 
+				</ul>
+			</nav>
+			<nav class="navbar-userbar f-r hidden-xs hidden-sm">
+				<!-- <a href="javascript:void(0);" onclick="addFavoritepage();return !1;" class="btn btn-primary radius" title="收藏">收藏本页</a> -->
+			</nav>
+		</div>
+	</div>
+</header>
+
+<section class="container mt-300">
+	<article class="page-error minWP text-c">
+		<p class="error-title"><i class="Hui-iconfont va-m">&#xe688;</i><span class="va-m"> 404</span></p>
+		<p class="error-description">不好意思，您访问的页面不存在~</p>
+		<p class="error-info">您可以：<a href="javascript:;" onclick="history.go(-1)" class="c-primary">&lt; 返回上一页</a><span class="ml-20">|</span><a href="/" class="c-primary ml-20">去首页 &gt;</a></p>
+	</article>
+	<!--高速版-->
+<div id="SOHUCS" sid=""></div>
+
+</section>
+<footer class="footer mt-20">
+	<div class="container-fluid">
+
+		<p>Copyright &copy;2013-2020 <br>
+			<a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
+                {{.tdk.Beian}}
+              </a> <br>
+	</div>
+</footer>
+
+</body>
+</html>

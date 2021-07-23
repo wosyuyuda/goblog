@@ -35,7 +35,7 @@ func GetView(id string, up int) *d.View {
 	db := dao.MDB
 	u := new(d.View)
 	db.Where("id = ?", id).Find(&u)
-	db.Model(&u).Preload("Tps").Find(&u)
+	//db.Model(&u).Find(&u)
 	if up == 1 {
 		db.Model(&u).Update("click", u.Click+1) //点击量加1
 	}

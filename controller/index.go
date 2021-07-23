@@ -23,11 +23,17 @@ import (
 
 //这里是详情页
 func GetView(c *gin.Context) {
-	id := c.Param("id")
+	vvv := util.GetView(c.Param("id"), 1) //获取文章详情
+	fmt.Printf("111%+v", vvv)
+	if vvv.ID == 0 {
+		Not404(c)
+		c.Abort()
+		return
+	}
+	tp := GetTypeNew("0")                  //栏目分类
 	newList := server.GetViewlist("0", 1)  //最新的列表
 	tuijian := server.GetViewlist("-1", 1) //推荐的列表
-	vvv := util.GetView(id, 1)             //获取文章详情
-	tp := GetTypeNew("0")                  //栏目分类
+
 	c.HTML(http.StatusOK, "view.html", gin.H{
 		"view":    vvv,
 		"body":    template.HTML(vvv.Body),
@@ -39,12 +45,13 @@ func GetView(c *gin.Context) {
 }
 
 //关联查询测试用
-/* func Test(c *gin.Context) {
-	var vi []model.ViewJson
-	dao.MDB.Table("views").Select("views.title,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid").Find(&vi)
-	fmt.Printf("%+v", vi)
-	c.JSON(200, gin.H{"msg": "获取成功", "code": 200, "data": vi})
-} */
+func Not404(c *gin.Context) {
+	tp := GetTypeNew("0") //栏目分类
+	c.HTML(http.StatusNotFound, "404.html", gin.H{
+		"types": tp,
+		"tdk":   config.GetTDK(),
+	})
+}
 
 //这里是列表页
 func Views(c *gin.Context) {
@@ -53,7 +60,12 @@ func Views(c *gin.Context) {
 	typeinfo := GetTypeNew(id1)
 
 	list := server.GetViewlist(id1, 1) //获取列表数据
-
+	fmt.Printf("%+v", list)
+	if len(list) == 0 || id1 == "0" {
+		Not404(c)
+		c.Abort()
+		return
+	}
 	newList := server.GetViewlist("0", 1)  //最新
 	tuijian := server.GetViewlist("-4", 1) //推荐
 	tp := GetTypeNew("0")                  //栏目全部分类
