@@ -6,7 +6,7 @@ import (
 )
 
 //循环的给文章添加默认图片
-func Imgsrc(v []d.View) []d.View {
+func Imgsrc(v []d.ViewJson) []d.ViewJson {
 	for i := 0; i < len(v); i++ {
 		if len(v[i].Pic) == 0 {
 			v[i].Pic = "/static/no-images.jpg"

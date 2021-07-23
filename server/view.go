@@ -6,9 +6,9 @@ import (
 	"goblog/model"
 )
 
-//获取列表
-func GetViewlist(id interface{}, page int) (vi []model.View) {
-	db := dao.MDB.Table("views").Select("views.*, tps.Name as Name")
+//获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
+func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
+	db := dao.MDB.Table("views").Select("views.title,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	db = db.Joins("left join tps on tps.id = views.typeid")
 	num := 10 //一页默认10条
 	if page < 1 {
@@ -28,19 +28,22 @@ func GetViewlist(id interface{}, page int) (vi []model.View) {
 	case "-4":
 		db.Where("tuijian = ?", 1).Limit(3).Order(order).Find(&vi)
 	default:
+
 		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Find(&vi)
+		fmt.Printf("123%+v", &vi)
 	}
 	return
 }
 
 //获取当前分类下面的10条文章
-func Findlist2(id string) (vi []model.View) {
+func Findlist2(id string) (vi []model.ViewJson) {
 	fmt.Printf("start")
-	db := dao.MDB.Table("views").Select("views.*, tps.Name as Name")
+	db := dao.MDB.Table("views").Select("views.title,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	db = db.Joins("left join tps on tps.id = views.typeid")
 	if id != "0" {
 		db = db.Where("typeid = ?", id)
 	}
-	db.Limit(10).Order("created_at desc").Scan(&vi)
+	db.Limit(10).Order("created_at desc").Find(&vi)
+	//fmt.Printf("查到的数据是%+v", vi)
 	return
 }

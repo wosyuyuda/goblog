@@ -73,7 +73,7 @@ func Auser(db *gorm.DB) bool {
 //添加一个分类
 func Atype(db *gorm.DB) bool {
 	tp := new(d.Tp)
-	tp.Name = "最新"
+	tp.Name = "简介"
 	tp.Info = "第一个分类"
 	return db.Create(&tp).Error == nil
 }

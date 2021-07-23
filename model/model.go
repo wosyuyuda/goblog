@@ -7,34 +7,47 @@ package model
  */
 
 import (
+	"time"
+
 	"gorm.io/gorm"
 )
 
 //下面直接转过来不行
 type View struct {
 	gorm.Model
-	Typeid   int    `gorm:"size:10"  json:"typeid" form:"typeid"` //分类的ID，关联
-	Title    string `gorm:"size:255" json:"title" form:"title"`   //标题
-	Click    int    `gorm:"size:10" json:"click"`                 //点击量
-	Tuijian  uint   `gorm:"size:1" json:"tuijian" form:"tuijian"` //是否为推荐
-	Swiper   uint   `gorm:"size:1" json:"swiper" form:"swiper"`   //是否为轮播图
-	Pic      string `gorm:"size:255" json:"pic" form:"pic"`       //文章的缩略图
-	Status   uint   `gorm:"size:1;default:1;" json:"status"`      //文章状态，0删除，1正常
-	Typename string `gorm:"-" json:"Typename" form:"Typename"`    //存储一下分类名称
-	Name     string `gorm:"-" json:"Name" form:"Name"`
-	Content  string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	Body     string `json:"body" form:"body"`                       //详细的内容
+	Typeid  int    `gorm:"size:10"  json:"typeid" form:"typeid"`   //分类的ID，关联
+	Title   string `gorm:"size:255" json:"title" form:"title"`     //标题
+	Click   int    `gorm:"size:10" json:"click"`                   //点击量
+	Tuijian uint   `gorm:"size:1" json:"tuijian" form:"tuijian"`   //是否为推荐
+	Swiper  uint   `gorm:"size:1" json:"swiper" form:"swiper"`     //是否为轮播图
+	Pic     string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
+	Status  uint   `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
+	Content string `gorm:"size:500" json:"content" form:"content"` //文章的简介
+	Body    string `json:"body" form:"body"`                       //详细的内容
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
+}
+
+type ViewJson struct {
+	View
+	ID        uint `gorm:"primarykey"`
+	CreatedAt time.Time
+	Typeid    int    `gorm:"size:10"  json:"typeid" form:"typeid"`   //分类的ID，关联
+	Title     string `gorm:"size:255" json:"title" form:"title"`     //标题
+	Pic       string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
+	Status    uint   `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
+	Content   string `gorm:"size:500" json:"content" form:"content"` //文章的简介
+	Typename  string ` json:"Typename" form:"Typename"`              //存储一下分类名称
+
 }
 
 //分类表
 type Tp struct {
-	ID     uint   `gorm:"primarykey" json:"id" form:"id"`
-	Name   string `gorm:"size:255;" form:"name" json:"name"`               //名称
-	Level  int    `gorm:"size:10;default:0;" form:"level" json:"level"`    //分类排序
-	Info   string `gorm:"size:255;" form:"info" json:"info"`               //介绍
-	Status string `gorm:"size:1;default:'1';" form:"status" json:"status"` //状态,默认1,0表示删除
-	Views  []View `gorm:"-"`
+	ID     uint       `gorm:"primarykey" json:"id" form:"id"`
+	Name   string     `gorm:"size:255;" form:"name" json:"name"`               //名称
+	Level  int        `gorm:"size:10;default:0;" form:"level" json:"level"`    //分类排序
+	Info   string     `gorm:"size:255;" form:"info" json:"info"`               //介绍
+	Status string     `gorm:"size:1;default:'1';" form:"status" json:"status"` //状态,默认1,0表示删除
+	Views  []ViewJson `gorm:"-"`
 }
 
 //系统设置

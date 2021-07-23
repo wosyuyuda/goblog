@@ -31,7 +31,7 @@ func main() {
 	r.GET("/", con.Lists1)          //这个是首页，模板整整就可以啦
 	r.GET("/list/:id", con.Views)   //具体列表页
 	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
-
+	//r.GET("/test", con.Test)        //测试
 	//设置session开始让下面调用
 	store := cookie.NewStore([]byte("secret"))
 	r.Use(sessions.Sessions("mysession", store))
