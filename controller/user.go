@@ -26,7 +26,7 @@ func AddU(c *gin.Context) {
 	user.Age = 18
 	user.Gender = 1
 	pwd := "123456"
-	user.Pwd = util.Md5(pwd)
+	user.Pwd = util.Md5jiayan(pwd)
 	user.AddUser() //user.id = 1，添加之后user中的id会变成数据库中生成的值
 }
 

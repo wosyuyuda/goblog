@@ -63,7 +63,7 @@ func Auser(db *gorm.DB) bool {
 	if user.Id == 0 {
 		userNew := new(d.User)
 		userNew.Name = "longfei"
-		userNew.Pwd = util.Md5("123456") //md5加密一下
+		userNew.Pwd = util.Md5jiayan("123456") //md5加盐后加密一下
 		return db.Create(&userNew).Error == nil
 	} else {
 		fmt.Println("后台有用户")

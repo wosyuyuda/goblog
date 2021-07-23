@@ -5,8 +5,13 @@ import (
 	"encoding/hex"
 )
 
-func Md5(s string) string {
+func tmd5(s string) string {
 	h := md5.New()
 	h.Write([]byte(s))
 	return hex.EncodeToString(h.Sum(nil))
+}
+
+//md5加盐
+func Md5jiayan(s string) string {
+	return tmd5(s + "a")
 }

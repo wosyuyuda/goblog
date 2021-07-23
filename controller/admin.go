@@ -89,7 +89,7 @@ func Login(c *gin.Context) {
 	conn := dao.MDB
 	u := new(User)
 	conn.Where("name = ?", name).Find(&u)
-	if util.Md5(pwd) != u.Pwd || u.Id == 0 {
+	if util.Md5jiayan(pwd) != u.Pwd || u.Id == 0 {
 		c.JSON(200, gin.H{"msg": "账号不存在或者密码错误", "code": 400})
 		c.Abort()
 		return
