@@ -12,5 +12,7 @@
         "description":"龙飞的一些技术分享啦,欢迎关注",
         "biean":"湘ICP备2021011740号",
         "goan":""
-    }
+    },
+    "adminuri":"/login"
+
 }

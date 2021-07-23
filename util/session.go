@@ -18,7 +18,8 @@ func GetSession(c *gin.Context, key string) interface{} {
 }
 
 func NullSession(c *gin.Context, key string) {
+	SetSession(c, key, 0) //笑死,清除不行,只能改为0
 	session := sessions.Default(c)
 	session.Delete(key)
-
+	session.Clear()
 }

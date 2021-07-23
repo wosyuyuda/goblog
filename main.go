@@ -7,6 +7,7 @@ package main
  */
 
 import (
+	"goblog/config"
 	con "goblog/controller"
 
 	"goblog/install"
@@ -32,18 +33,18 @@ func main() {
 	r.GET("/list/:id", con.Views)   //具体列表页
 	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
 	//r.GET("/test", con.Test)        //测试
-	//设置session开始让下面调用
-	store := cookie.NewStore([]byte("secret"))
-	r.Use(sessions.Sessions("mysession", store))
+
+	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
 
 	v2 := r.Group("/admin")
 	{
-		v2.GET("/login", con.Logins)      //登陆页
-		v2.GET("/getcode", con.GetCode)   //获取验证码
-		v2.GET("/loginout", con.Loginout) //退出登陆
-		v2.POST("/sub", con.Login)        //用户登陆提交的接口
-		v2.POST("/addUser", con.AddU)     //添加用户
+		loginuri := config.Configv.GetString("adminuri") //获取配置的URI
+		v2.GET(loginuri, con.Logins)                     //登陆页,修改配置文件,修改无效
+		v2.GET("/getcode", con.GetCode)                  //获取验证码
+		v2.GET("/loginout", con.Loginout)                //退出登陆
+		v2.POST("/sub", con.Login)                       //用户登陆提交的接口
+		v2.POST("/addUser", con.AddU)                    //添加用户
 	}
 
 	v1 := r.Group("/admin", middleware.Islogin)

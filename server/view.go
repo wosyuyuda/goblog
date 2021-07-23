@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"goblog/dao"
 	"goblog/model"
 )
@@ -30,14 +29,14 @@ func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
 	default:
 
 		db.Where("typeid = ?", id).Limit(num).Offset(page * num).Order(order).Find(&vi)
-		fmt.Printf("123%+v", &vi)
+		//fmt.Printf("123%+v", &vi)
 	}
 	return
 }
 
 //获取当前分类下面的10条文章
 func Findlist2(id string) (vi []model.ViewJson) {
-	fmt.Printf("start")
+	//fmt.Printf("start")
 	db := dao.MDB.Table("views").Select("views.id,views.click,views.title,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
 	db = db.Joins("left join tps on tps.id = views.typeid")
 	if id != "0" {

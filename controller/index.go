@@ -7,7 +7,6 @@ package controller
  */
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
 	"net/http"
@@ -60,7 +59,7 @@ func Views(c *gin.Context) {
 	typeinfo := GetTypeNew(id1)
 
 	list := server.GetViewlist(id1, 1) //获取列表数据
-	fmt.Printf("%+v", list)
+	//fmt.Printf("%+v", list)
 	if len(list) == 0 || id1 == "0" {
 		Not404(c)
 		c.Abort()
@@ -89,10 +88,7 @@ func Views(c *gin.Context) {
 //这里是首页
 func Lists1(c *gin.Context) {
 
-	views := server.Findlist2("0") //最新
-	jsonByte, _ := json.Marshal(views)
-	fmt.Printf("首页的最新列表%+v", string(jsonByte))
-
+	views := server.Findlist2("0")         //最新
 	tuijian := server.GetViewlist("-4", 1) //推荐
 	tp := GetTypeNew("0")                  //分类
 	remen := server.GetViewlist("-3", 1)   //热门
@@ -104,7 +100,7 @@ func Lists1(c *gin.Context) {
 		v.Views = util.Imgsrc(v.Views) //对图片进行批量替换，如果无图则设置默认
 		tnew = append(tnew, v)
 	}
-	fmt.Printf("转换后的数据%+v", tnew)
+	//fmt.Printf("转换后的数据%+v", tnew)
 
 	c.HTML(http.StatusOK, "index.html", gin.H{
 		"list":    util.Imgsrc(views),
