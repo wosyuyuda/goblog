@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>友链管理</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://wodlayui.oss-cn-beijing.aliyuncs.com/css/layui.css" media="all">
+    <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js" charset="utf-8"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+</head>
+
+<body style='padding-top:20px'>
+    <div id='app'>
+        <h2></h2>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">修改信息</label>
+        </div>
+
+
+            
+
+            <blockquote class="layui-elem-quote">修改账号或者密码</blockquote>
+            <div class="layui-form-item">
+                
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="text" name="phone" autocomplete="off" class="layui-input" placeholder="请输入名称"
+                            v-model="data1.name">
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="password" name="phone" autocomplete="off" class="layui-input" 
+                        placeholder="不改请留空"
+                            v-model="data1.pwd">
+                    </div>
+                    <div class="layui-input-inline">
+                        <a @click='tj()' href="javascript:void(0);" class='layui-btn'><i
+                                class="layui-icon layui-icon-release"></i> 确认修改</a>
+
+                    </div>
+                </div>
+            </div>
+           
+    </div>
+
+
+
+
+</body>
+<script>
+    new Vue({
+        el: "#app",
+        data() {
+            return {
+                name:"" ,
+                data1:{
+                    name:"",
+                    pwd:"",
+                }
+            }
+        },
+        methods: {
+            tj() {
+                console.log(11)
+                $.post("/admin/edituser",this.data1, function (res, status) {
+                if (status == 'success') {
+                    layer.msg('成功')
+                    setTimeout(function () { window.location.reload(); }, 1000);
+                } else {
+                    layer.msg('失败')
+                }
+                 });
+            }
+        }
+        ,
+        created() {
+            let that = this;
+            $.get("/admin/getname", function (res, status) {
+                if (status == 'success') {
+                    console.log(res)
+                    that.data1.name = res.data
+                } else {
+                    layer.msg('获取数据失败')
+                }
+            });
+        },
+
+    })
+
+
+
+    layui.use(['form', 'layer'], function () {
+        var $ = layui.jquery;
+        var layer = layui.layer;
+        var form = layui.form;
+
+
+
+        //监听提交
+        //监听提交
+        form.on('submit(demo1)', function (data) {
+            //console.log(data.field)
+            return false;
+        });
+
+
+
+    });
+
+
+
+</script>
+
+
+
+</html>

@@ -71,9 +71,9 @@ type Tdk struct {
 
 //用户表
 type User struct {
-	Id     int    `gorm:"primary_key" json:"id"`
-	Name   string `gorm:"size:255" json:"name"`
-	Age    int    `gorm:"size:2" json:"age"`
-	Gender int    `gorm:"size:2" json:"gender"` //1:男、2:女
-	Pwd    string `gorm:"size:255" json:"pwd"`
+	Id     int    `gorm:"primary_key" json:"id"  form:"id"`
+	Name   string `gorm:"size:255" json:"name"  form:"name"`
+	Age    int    `gorm:"size:2" json:"age" form:"age"`
+	Gender int    `gorm:"size:2" json:"gender" form:"gender"` //1:男、2:女
+	Pwd    string `gorm:"size:255" json:"pwd" form:"pwd"`
 }

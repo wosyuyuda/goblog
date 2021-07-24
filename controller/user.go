@@ -8,6 +8,7 @@ package controller
  */
 
 import (
+	"fmt"
 	"goblog/dao"
 	d "goblog/model"
 	"goblog/server"
@@ -20,18 +21,22 @@ func EditUser(c *gin.Context) {
 	uid := util.GetSession(c, "uid")
 	var user d.User
 	err := c.ShouldBind(&user)
+	fmt.Printf("接收到的数据是%+v", user)
 	if err != nil {
 		server.Fail(c)
 		return
 	}
-	if user.Id == uid {
-		//仅更新用户名,如果密码有则修改密码
-		if user.Pwd != "" {
-			user.Pwd = util.Md5jiayan(user.Pwd)
-		}
-		err = dao.MDB.Where("id = ?", user.Id).Updates(user).Error
-		util.SetSession(c, "name", user.Name) //更新session里面的名称
+
+	//仅更新用户名,如果密码有则修改密码
+	if user.Pwd != "" { //修改账号跟密码
+		user.Pwd = util.Md5jiayan(user.Pwd)
+		err = dao.MDB.Where("id = ?", uid).Updates(user).Error
+	} else { //仅修改账号
+		err = dao.MDB.Where("id = ?", uid).Update("name", user.Name).Error
 	}
+
+	util.SetSession(c, "name", user.Name) //更新session里面的名称
+
 	server.IfRes(err, c)
 }
 

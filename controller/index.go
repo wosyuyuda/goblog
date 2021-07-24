@@ -14,7 +14,6 @@ import (
 
 	"goblog/config"
 	"goblog/dao"
-	"goblog/model"
 	d "goblog/model"
 	"goblog/server"
 	"goblog/util"
@@ -103,7 +102,7 @@ func Index(c *gin.Context) {
 		tnew = append(tnew, v)
 	}
 	//fmt.Printf("转换后的数据%+v", tnew)
-	var link []model.Link
+	var link []d.Link
 	dao.MDB.Find(&link)
 	//fmt.Printf("link%+v", link)
 	c.HTML(http.StatusOK, "index.html", gin.H{

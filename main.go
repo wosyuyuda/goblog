@@ -39,11 +39,11 @@ func main() {
 
 	v2 := r.Group("/admin")
 	{
-		loginuri := config.Configv.GetString("adminuri") //获取配置的URI
-		v2.GET(loginuri, con.Logins)                     //登陆页,修改配置文件,修改无效
-		v2.GET("/getcode", con.GetCode)                  //获取验证码
-		v2.GET("/loginout", con.Loginout)                //退出登陆
-		v2.POST("/sub", con.Login)                       //用户登陆提交的接口
+		cfg := config.Configv
+		v2.GET(cfg.GetString("adminuri"), con.Logins) //登陆页,修改配置文件,修改无效
+		v2.GET("/getcode", con.GetCode)               //获取验证码
+		v2.GET("/loginout", con.Loginout)             //退出登陆
+		v2.POST("/sub", con.Login)                    //用户登陆提交的接口
 		//v2.POST("/addUser", con.AddU)                    //添加用户
 	}
 
@@ -58,9 +58,10 @@ func main() {
 		v1.POST("/addView", con.AddView)           //添加与保存文章接口
 		v1.POST("/addType", con.AddTypes)          //添加与保存分类
 		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
-		v1.GET("/link", con.GetLink)      //友情链接
-		v1.POST("/addlink", con.AddLink)  //友链添加与编辑
-		v1.POST("edituser", con.EditUser) //编辑用户信息
+		v1.GET("/link", con.GetLink)        //友情链接
+		v1.POST("/addlink", con.AddLink)    //友链添加与编辑
+		v1.GET("/getname", con.GetUserName) //获取用户名
+		v1.POST("/edituser", con.EditUser)  //编辑用户信息
 	}
 
 	r.Run(":8080") //开启端口访问,本地再试一下提交
