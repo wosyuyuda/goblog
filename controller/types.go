@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"goblog/dao"
 	d "goblog/model"
+	"goblog/util"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -61,5 +62,6 @@ func AddTypes(c *gin.Context) {
 		fmt.Println("失败")
 		c.JSON(400, gin.H{"msg": "失败", "code": 400})
 	}
+	util.DelAll()
 	c.JSON(200, gin.H{"msg": "成功", "code": 200})
 }

@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"goblog/config"
 	"goblog/dao"
 	"goblog/model"
@@ -68,9 +69,6 @@ func SearchView(views *model.ListInfo) (err error) {
 
 //获取列表新的
 func GetListV(views *model.ListInfo) (err error) {
-	//fmt.Printf("info%+v", views)
-	JoinDao := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid")
-	//util.Ini(&pa)
 	pa := views.Page
 	if pa.Page == 0 {
 		pa.Page = 1
@@ -78,6 +76,13 @@ func GetListV(views *model.ListInfo) (err error) {
 	if pa.Num == 0 {
 		pa.Num = 10
 	}
+	err = util.GetListCache(views)
+	if err == nil {
+		return
+	}
+	//fmt.Printf("info%+v", views)
+	JoinDao := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid")
+	//util.Ini(&pa)
 	db := JoinDao
 	if pa.ID != 0 {
 		db = db.Where("typeid = ?", pa.ID)
@@ -91,15 +96,22 @@ func GetListV(views *model.ListInfo) (err error) {
 	err = db.Find(&views.Views).Count(&pa.Sum).Error
 	views.Page.Sum = pa.Sum
 	util.PagesinfoTo(views)
+	util.SetListCache(views)
 	return
 }
 
 //获取最新,推荐,tdk
 func Getinfo() (baseinfo model.BaseInfo, err error) {
-	//var baseinfo model.BaseInfo
-	baseinfo.New = util.Imgsrc(GetViewlist("0", 1))      //最新
-	baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
-	baseinfo.Tdk = config.GetTDK()
-	err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息
+	err = util.GetCache(util.BaseCache, &baseinfo)
+	if err != nil {
+		fmt.Println("没有缓存")
+		baseinfo.New = util.Imgsrc(GetViewlist("0", 1))      //最新
+		baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
+		baseinfo.Tdk = config.GetTDK()
+		err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息
+		util.SetCache(util.BaseCache, &baseinfo)
+	} else {
+		fmt.Println("找到缓存啦")
+	}
 	return
 }

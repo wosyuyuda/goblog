@@ -33,6 +33,7 @@ func main() {
 	r.GET("/list/:id", con.NewList) //新列表页
 	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
 	r.GET("/search", con.NewList)   //搜索文章
+	r.GET("/test", con.Test)        //搜索文章
 
 	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面

@@ -72,6 +72,7 @@ func AddView(c *gin.Context) {
 		c.Abort()
 		return
 	}
+	util.DelAll()
 	c.JSON(200, gin.H{"msg": msg, "code": 200})
 }
 
