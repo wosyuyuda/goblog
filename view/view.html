@@ -49,7 +49,7 @@
       </ul>
      </nav>
      <div class="navbar-action pull-right">
-           <p class="navbar-search" action="/plus/search/" method="get" role="search"><a class="navbar-search-icon j-navbar-search" on="tap:search.toggle" href="#"></a></p>
+           <p class="navbar-search" action="/search" method="get" role="search"><a class="navbar-search-icon j-navbar-search" on="tap:search.toggle" href="#"></a></p>
       <div id="j-user-wrap">
              <a class="login" href="/#">登录</a>
       </div>
@@ -199,10 +199,10 @@
    <div class="lightbox">
     <article class="search popup">
      <section class="popup_main">
-      <mip-form method="get" class="search_form" url="/plus/search.php" action="/plus/search.php">
-       <input name="q" type="text" class="text_input" placeholder="输入关键字…" />
-       <input type="submit" class="search_btn" value="搜索" />
-      </mip-form>
+      <mip-form method="get" class="search_form" url="/search" action="/search">
+        <input name="keyword" type="text" class="text_input" placeholder="输入关键字…" />
+        <input type="submit" class="search_btn" value="搜索" />
+    </mip-form>
       <span on="tap:search.toggle" class="close lightbox-close">&times;</span>
      </section>
     </article>
