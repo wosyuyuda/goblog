@@ -34,7 +34,10 @@ func GetTypeCount(id string) int64 {
 
 //获取当前文章信息，如果up为1那么点击数+1
 func GetView(id string, up int) (dd d.View) {
-	dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
+	err := GetViewCache(id, &dd)
+	if err != nil {
+		dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
+	}
 	if up == 1 {
 		dao.MDB.Model(&d.View{}).Where("id = ?", id).UpdateColumn("click", gorm.Expr("click + ?", 1)) //点击量加1
 	}

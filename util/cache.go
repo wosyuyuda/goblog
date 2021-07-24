@@ -10,8 +10,10 @@ import (
 )
 
 const (
-	BaseCache = "baseinfo"       //首页基础缓存
-	ListCache = "listcache%d-%d" //列表缓存,分类-页码
+	BaseCache    = "baseinfo"       //首页基础缓存
+	ListCache    = "listcache%d-%d" //列表缓存,分类-页码
+	ViewCache    = "viewcache-%s"   //文章详情的缓存
+	ViewCacheNum = "viewcache-%d"   //文章详情的缓存
 )
 
 //简单的文件缓存,缓存首页与列表信息,先不整过期时间
@@ -49,6 +51,19 @@ func GetListCache(views *model.ListInfo) (err error) {
 	str := fmt.Sprintf(ListCache, views.Page.ID, views.Page.Page)
 	err = GetCache(str, views)
 	return
+}
+
+//获取文章的缓存
+func GetViewCache(id string, v *model.View) (err error) {
+	str := fmt.Sprintf(ViewCache, id)
+	err = GetCache(str, v)
+	return
+}
+
+//设置文章详情的缓存
+func SetViewCache(v *model.View) {
+	str := fmt.Sprintf(ViewCacheNum, v.ID)
+	SetCache(str, v)
 }
 
 //删除所有缓存
