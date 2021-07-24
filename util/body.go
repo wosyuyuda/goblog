@@ -37,6 +37,7 @@ func GetView(id string, up int) (dd d.View) {
 	err := GetViewCache(id, &dd)
 	if err != nil {
 		dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
+		SetViewCache(&dd)
 	}
 	if up == 1 {
 		dao.MDB.Model(&d.View{}).Where("id = ?", id).UpdateColumn("click", gorm.Expr("click + ?", 1)) //点击量加1
