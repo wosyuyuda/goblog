@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <title>{{.tdk.Title}}-power by goblog</title>
-    <meta name="Keywords" content="{{.tdk.Keyword}}">
-    <meta name="description" content="{{.tdk.Description}}">
+    <title>{{.base.Tdk.Title}}-power by goblog</title>
+    <meta name="Keywords" content="{{.base.Tdk.Keyword}}">
+    <meta name="description" content="{{.base.Tdk.Description}}">
     <link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css" />
     <link rel="stylesheet" type="text/css" href="/static/just.css?1" />
     <style mip-custom="">
@@ -336,7 +336,7 @@
                     <ul>
                         <li><button on="tap:right-sidebar.close"> X </button></li>
 
-                        {{range $i, $v := .types}}
+                        {{range $i, $v := .base.Typeinfo}}
                         <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
                                 title="{{$v.Name}}">{{$v.Name}}</a></li>
                         {{end}}
@@ -351,7 +351,7 @@
                 <nav class="navbar-left primary-menu">
                     <ul id="menu-justnews-menu" class="nav navbar-nav">
                         <li class="menu-item dropdown active"><a href="/">首页</a></li>
-                        {{range $i, $v := .types}}
+                        {{range $i, $v := .base.Typeinfo}}
                         <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
                                 title="{{$v.Name}}" class="dropdown-toggle">{{$v.Name}}</a></li>
                         {{end}}
@@ -393,7 +393,7 @@
                             </ul>
                         </div>
                         <ul class="feature-post pull-right">
-                            {{range $i, $v := .tuijian}}
+                            {{range $i, $v := .base.Tuijian}}
                             <li><a target="_blank" href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}"
                                     title="{{.Title}}">
                                     <mip-img layout="container" class="j-lazy" src="{{$v.Pic}}"></mip-img>
@@ -432,7 +432,7 @@
 
 
                             <ul class="article-list tab-list active">
-                                {{range $i, $v := .list}}
+                                {{range $i, $v := .base.New}}
                                 <li class="item">
                                     <div class="item-img">
                                         <a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
@@ -571,7 +571,7 @@
                 <div class="footer-col footer-col-copy ">
                     <ul class="footer-nav hidden-xs ">
 
-                        {{range $i, $v := .types}}
+                        {{range $i, $v := .base.Typeinfo}}
                         <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}"
                                 data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
                         {{end}}
@@ -579,7 +579,7 @@
                     <div class="copyright ">
                         Copyright &copy; 2020 龙飞博客版权所有--power by goblog
                         <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
-                            {{.tdk.Beian}}
+                            {{.base.Tdk.Beian}}
                         </a>
                       
                         <a href="#" target="_blank " rel="noopener noreferrer "></a>

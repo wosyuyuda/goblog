@@ -13,6 +13,9 @@
         "biean":"",
         "goan":""
     },
+    "con":{
+        "domain":"www.iq2.cn"
+    },
     "adminuri":"/login"
 
 }

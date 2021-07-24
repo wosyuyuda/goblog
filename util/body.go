@@ -4,6 +4,8 @@ import (
 	"goblog/dao"
 	d "goblog/model"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 //循环的给文章添加默认图片
@@ -31,13 +33,10 @@ func GetTypeCount(id string) int64 {
 }
 
 //获取当前文章信息，如果up为1那么点击数+1
-func GetView(id string, up int) *d.View {
-	db := dao.MDB
-	u := new(d.View)
-	db.Where("id = ?", id).Find(&u)
-	//db.Model(&u).Find(&u)
+func GetView(id string, up int) (dd d.View) {
+	dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
 	if up == 1 {
-		db.Model(&u).Update("click", u.Click+1) //点击量加1
+		dao.MDB.Model(&d.View{}).Where("id = ?", id).UpdateColumn("click", gorm.Expr("click + ?", 1)) //点击量加1
 	}
-	return u
+	return
 }

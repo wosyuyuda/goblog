@@ -25,19 +25,21 @@ type View struct {
 	Status    uint           `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
 	Content   string         `gorm:"size:500" json:"content" form:"content"` //文章的简介
 	Body      string         `json:"body" form:"body"`                       //详细的内容
+	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
+	Typename  string         `gorm:"-" json:"typename" form:"typename"`
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
 }
 
 type ViewJson struct {
 	View
-	ID        uint `gorm:"primarykey"`
+	ID        uint `gorm:"primarykey" json:"id" form:"id"`
 	CreatedAt uint
-	Typeid    int    `gorm:"size:10"  json:"typeid" form:"typeid"`   //分类的ID，关联
-	Title     string `gorm:"size:255" json:"title" form:"title"`     //标题
-	Pic       string `gorm:"size:255" json:"pic" form:"pic"`         //文章的缩略图
-	Status    uint   `gorm:"size:1;default:1;" json:"status"`        //文章状态，0删除，1正常
-	Content   string `gorm:"size:500" json:"content" form:"content"` //文章的简介
-	Typename  string ` json:"Typename" form:"Typename"`              //存储一下分类名称
+	Typeid    int    ` json:"typeid" form:"typeid"`     //分类的ID，关联
+	Title     string ` json:"title" form:"title"`       //标题
+	Pic       string ` json:"pic" form:"pic"`           //文章的缩略图
+	Status    uint8  ` json:"status"`                   //文章状态，0删除，1正常
+	Content   string `json:"content" form:"content"`    //文章的简介
+	Typename  string ` json:"typename" form:"typename"` //存储一下分类名称
 	Ctime     string ` json:"ctime" form:"ctime"`
 }
 
