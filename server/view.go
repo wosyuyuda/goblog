@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"goblog/config"
 	"goblog/dao"
 	"goblog/model"
@@ -95,8 +94,8 @@ func GetListV(views *model.ListInfo) (err error) {
 	db = db.Limit(pa.Num).Offset((pa.Page - 1) * pa.Num).Order("created_at desc")
 	err = db.Find(&views.Views).Count(&pa.Sum).Error
 	views.Page.Sum = pa.Sum
-	util.PagesinfoTo(views)
-	util.SetListCache(views)
+	util.PagesinfoTo(views)  //处理一下页面分类信息
+	util.SetListCache(views) //设置进缓存
 	return
 }
 
@@ -104,14 +103,12 @@ func GetListV(views *model.ListInfo) (err error) {
 func Getinfo() (baseinfo model.BaseInfo, err error) {
 	err = util.GetCache(util.BaseCache, &baseinfo)
 	if err != nil {
-		fmt.Println("没有缓存")
+		//fmt.Println("没有缓存")
 		baseinfo.New = util.Imgsrc(GetViewlist("0", 1))      //最新
 		baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
 		baseinfo.Tdk = config.GetTDK()
 		err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息
 		util.SetCache(util.BaseCache, &baseinfo)
-	} else {
-		fmt.Println("找到缓存啦")
 	}
 	return
 }
