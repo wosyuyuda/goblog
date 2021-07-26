@@ -72,6 +72,7 @@ func AddView(c *gin.Context) {
 		c.Abort()
 		return
 	}
+	util.DelAll()            //删除缓存
 	util.SetViewCache(&data) //更新或者添加view都设置缓存
 	c.JSON(200, gin.H{"msg": msg, "code": 200})
 }
