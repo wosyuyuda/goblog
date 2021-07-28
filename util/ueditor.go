@@ -56,8 +56,8 @@ func Action(c *gin.Context) {
 					return
 				}
 			}
-
-			name := time.Now().Format("150405") + header.Filename
+			var Suffix = regexp.MustCompile(`\.+[a-z]+`)
+			name := fmt.Sprintf("%d", time.Now().UnixNano()/1e6) + Suffix.FindString(header.Filename)
 			out, err := os.Create(ueBasePath + `images/` + datePath + name)
 			if err != nil {
 				log.Fatal(err)
