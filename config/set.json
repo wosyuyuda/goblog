@@ -15,7 +15,8 @@
         "goanurl":"2"
     },
     "con":{
-        "domain":"www.iq2.cn"
+        "domain":"www.iq2.cn",
+        "baidutonjiid":""
     },
     "adminuri":"/login"
 

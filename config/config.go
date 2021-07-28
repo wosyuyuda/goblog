@@ -27,6 +27,5 @@ func GetTDK() (tdk model.Tdk) {
 	tdk.Beian = Configv.GetString("tdk.biean")
 	tdk.Goan = Configv.GetString("tdk.goan")
 	tdk.Goanurl = Configv.GetString("tdk.goanurl")
-
 	return
 }
