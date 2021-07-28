@@ -11119,15 +11119,14 @@ UE.commands['insertimage'] = {
             var html = [], str = '', ci;
             ci = opt[0];
             if (opt.length == 1) {
-                str = '<img src="' + ci.src + '" ' + (ci._src ? ' _src="' + ci._src + '" ' : '') +
+                str = '<mip-img src="' + ci.src + '" ' + (ci._src ? ' _src="' + ci._src + '" ' : '') +
                     (ci.width ? 'width="' + ci.width + '" ' : '') +
                     (ci.height ? ' height="' + ci.height + '" ' : '') +
-                    (ci['floatStyle'] == 'left' || ci['floatStyle'] == 'right' ? ' style="float:' + ci['floatStyle'] + ';"' : '') +
                     (ci.title && ci.title != "" ? ' title="' + ci.title + '"' : '') +
                     (ci.border && ci.border != "0" ? ' border="' + ci.border + '"' : '') +
                     (ci.alt && ci.alt != "" ? ' alt="' + ci.alt + '"' : '') +
                     (ci.hspace && ci.hspace != "0" ? ' hspace = "' + ci.hspace + '"' : '') +
-                    (ci.vspace && ci.vspace != "0" ? ' vspace = "' + ci.vspace + '"' : '') + '/>';
+                    (ci.vspace && ci.vspace != "0" ? ' vspace = "' + ci.vspace + '"' : '') + '></mip-img>';
                 if (ci['floatStyle'] == 'center') {
                     str = '<p style="text-align: center">' + str + '</p>';
                 }
@@ -11135,12 +11134,11 @@ UE.commands['insertimage'] = {
 
             } else {
                 for (var i = 0; ci = opt[i++];) {
-                    str = '<p ' + (ci['floatStyle'] == 'center' ? 'style="text-align: center" ' : '') + '><img src="' + ci.src + '" ' +
+                    str = '<p ' + (ci['floatStyle'] == 'center' ? 'style="text-align: center" ' : '') + '><mip-img src="' + ci.src + '" ' +
                         (ci.width ? 'width="' + ci.width + '" ' : '') + (ci._src ? ' _src="' + ci._src + '" ' : '') +
                         (ci.height ? ' height="' + ci.height + '" ' : '') +
-                        ' style="' + (ci['floatStyle'] && ci['floatStyle'] != 'center' ? 'float:' + ci['floatStyle'] + ';' : '') +
                         (ci.border || '') + '" ' +
-                        (ci.title ? ' title="' + ci.title + '"' : '') + ' /></p>';
+                        (ci.title ? ' title="' + ci.title + '"' : '') + ' ></mip-img></p>';
                     html.push(str);
                 }
             }
@@ -13184,7 +13182,7 @@ UE.plugins['insertcode'] = function() {
                 rng = me.selection.getRange(),
                 pre = domUtils.findParentByTagName(rng.startContainer,'pre',true);
             if(pre){
-                pre.className = 'brush:'+lang+';toolbar:false;';
+                pre.className = 'layui-code;';
             }else{
                 var code = '';
                 if(rng.collapsed){
@@ -13264,7 +13262,7 @@ UE.plugins['insertcode'] = function() {
 
                     });
                 }
-                me.execCommand('inserthtml','<pre id="coder"class="brush:'+lang+';toolbar:false">'+code+'</pre>',true);
+                me.execCommand('inserthtml','<pre class="layui-code">'+code+'</pre>',true);
 
                 pre = me.document.getElementById('coder');
                 domUtils.removeAttributes(pre,'id');
@@ -23703,9 +23701,9 @@ UE.plugin.register('autoupload', function (){
         };
 
         if (filetype == 'image') {
-            loadingHtml = '<img class="loadingclass" id="' + loadingId + '" src="' +
+            loadingHtml = '<mip-img class="loadingclass" id="' + loadingId + '" src="' +
                 me.options.themePath + me.options.theme +
-                '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" >';
+                '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" ></mip-img>';
             successHandler = function(data) {
                 var link = urlPrefix + data.url,
                     loader = me.document.getElementById(loadingId);
@@ -23720,9 +23718,9 @@ UE.plugin.register('autoupload', function (){
             };
         } else {
             loadingHtml = '<p>' +
-                '<img class="loadingclass" id="' + loadingId + '" src="' +
+                '<mip-img class="loadingclass" id="' + loadingId + '" src="' +
                 me.options.themePath + me.options.theme +
-                '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" >' +
+                '/images/spacer.gif" title="' + (me.getLang('autoupload.loading') || '') + '" ></mip-img>' +
                 '</p>';
             successHandler = function(data) {
                 var link = urlPrefix + data.url,

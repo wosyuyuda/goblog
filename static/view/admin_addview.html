@@ -307,16 +307,19 @@
                 },
                 tj() {
                     let that = this;
-                  let b=  this.arcdata.body = UE.getEditor('editor').getContent()
+                  let b=  UE.getEditor('editor').getContent()
                     let url = "/admin/addView";
                     if (getQueryVariable('type') == 'edit') {
                         url = "/admin/addView?type=edit";
                     }
                     this.arcdata.tuijian=this.arcdata.tuijian?1:0;
                     this.arcdata.swiper=this.arcdata.swiper?1:0;
-                    this.arcdata.content=b.replace(/(<([^>]+)>)/ig, "").slice(0,60)
+                    this.arcdata.content=b.replace(/(<([^>]+)>)/ig, "").slice(0,120)
+                    b =b.replace(/<img ([^>]*)\/>/ig, "<mip-img $1></mip-img>"); //正则替换img的内容到mip图片
+                    this.arcdata.body= b.replace(/<img ([^>]*)><\/img>/ig, "<mip-img $1></mip-img>"); 
+                    
                     this.arcdata.typeid=this.arcdata.typeid!=0?this.arcdata.typeid:this.types[0].id
-                    console.log(this.arcdata);
+                    console.log(this.arcdata.body);
                     //return;
                     $.post(url,  that.arcdata , function (res) {
                         if (res.code == 200) {
@@ -341,7 +344,9 @@
                                 ue = UE.getEditor('editor');
                                 ue.ready(function () {
                                     //设置编辑器的内容
-                                    ue.setContent(res.data.body);
+                                    let body=res.data.body
+                                    body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>"); 
+                                    ue.setContent(body);
                                 });
                                 that.types = res.type
                                 res.data.tuijian=res.data.tuijian==1?true:false
@@ -394,12 +399,4 @@
     <!--/请在上方写此页面业务相关的脚本-->
    
 </body>
- <!-- 这里是使用crypto1上传到阿里云的js代码，这个暂时是用不了啦，测试就先用golang传本地吧 -->
-<!-- <script type="text/javascript" src="/up/lib/crypto1/crypto/crypto.js"></script>
-<script type="text/javascript" src="/up/lib/crypto1/hmac/hmac.js"></script>
-<script type="text/javascript" src="/up/lib/crypto1/sha1/sha1.js"></script>
-<script type="text/javascript" src="/up/lib/base64.js"></script>
-<script type="text/javascript" src="/up/lib/plupload-2.1.2/js/plupload.full.min.js"></script>
-<script type="text/javascript" src="/up/upload.js"></script> -->
-
 </html>
