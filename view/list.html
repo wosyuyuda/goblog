@@ -493,10 +493,12 @@
           <div class="copyright ">
             Copyright &copy; 2020 版权所有
             <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
-              {{.tdk.Beian}}
-            </a> 
-            <a href="#" target="_blank " rel="noopener noreferrer "></a>
-            <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
+              {{.base.Tdk.Beian}}
+          </a> |
+          <a href=" {{.base.Tdk.Goanurl}}" target="_blank " rel="nofollow noopener noreferrer ">
+              {{.base.Tdk.Goan}}
+          </a>
+           
           </div>
         </div>
         <div class="footer-col footer-col-sns ">
@@ -528,17 +530,9 @@
   </mip-fixed>
 
   <script src="https://c.mipcdn.com/static/v1/mip.js"></script>
-  <script src="https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js"></script>
   <script src="https://c.mipcdn.com/static/v1/mip-adsense/mip-adsense.js" type="text/javascript"
     charset="utf-8"></script>
-  <mip-stats-cnzz token="1261053552">
-    </mip-stats-bidu>
-    <script src="https://c.mipcdn.com/static/v1/mip-stats-cnzz/mip-stats-cnzz.js"></script>
-    <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>
-    <mip-pix
-      src="https://www.lf19.cn{dede:field name='phpurl'/}/count.php?aid={dede:field name='id'/}&mid={dede:field name='mid'/}">
-    </mip-pix>
-    <script src="https://c.mipcdn.com/static/v1/mip-gototop/mip-gototop.js" type="text/javascript"
+      <script src="https://c.mipcdn.com/static/v1/mip-gototop/mip-gototop.js" type="text/javascript"
       charset="utf-8"></script>
     <script src="https://c.mipcdn.com/static/v1/mip-history/mip-history.js" type="text/javascript"
       charset="utf-8"></script>

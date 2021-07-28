@@ -69,6 +69,8 @@ type Tdk struct {
 	Keyword     string ` json:"keyword" form:"keyword"`
 	Description string ` json:"description" form:"description"`
 	Beian       string ` json:"beian" form:"beian"`
+	Goan        string ` json:"goan" form:"goan"`       //公安的备案号
+	Goanurl     string ` json:"goanurl" form:"goanurl"` //备案的网址
 }
 
 //用户表

@@ -10,8 +10,9 @@
         "title":"goblog",
         "keyword":"龙飞",
         "description":"golang写的博客,方便初学者学习与使用",
-        "biean":"",
-        "goan":""
+        "biean":"3",
+        "goan":"1",
+        "goanurl":"2"
     },
     "con":{
         "domain":"www.iq2.cn"
