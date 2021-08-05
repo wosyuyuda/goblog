@@ -19,7 +19,7 @@
         "baidutonjiid":""
     },
     "baidu":{
-        "url":"http://data.zz.baidu.com/urls?site=www.iq2.cn&token=eH9597z33GYFRfDr",
+        "url":"http://data.zz.baidu.com/urls?site=www.iq2.cn&token=*********",
         "domain":"https://www.iq2.cn"
     },
     "adminuri":"/login"
