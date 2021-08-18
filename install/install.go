@@ -99,7 +99,8 @@ func Aview(db *gorm.DB) bool {
 
 //初始化数据库表文件
 func Idb(db *gorm.DB) {
-	db.AutoMigrate(
+	db.Set("gorm:table_options",
+		"ENGINE=MyISAM DEFAULT CHARSET=utf8").AutoMigrate(
 		&d.User{},
 		&d.Link{},
 		&d.Tp{},

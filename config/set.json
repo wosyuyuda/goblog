@@ -12,7 +12,8 @@
         "description":"golang写的博客,方便初学者学习与使用",
         "biean":"3",
         "goan":"1",
-        "goanurl":"2"
+        "goanurl":"2",
+        "tonjiid":"bf02b970151cd2396c34a286097a2b82"
     },
     "con":{
         "domain":"www.iq2.cn",
@@ -21,6 +22,7 @@
     "baidu":{
         "url":"http://data.zz.baidu.com/urls?site=www.iq2.cn&token=*********",
         "domain":"https://www.iq2.cn"
+        
     },
     "adminuri":"/login"
 
