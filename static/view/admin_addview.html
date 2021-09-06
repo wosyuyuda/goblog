@@ -304,6 +304,9 @@
                 //添加图片或者视频
                 addimg(url) {
                     this.arcdata.pic = url;
+                    let b=  UE.getEditor('editor').getContent()
+                    b+="<p><img src='"+url+"'/></p>"
+                    ue.setContent(b);
                 },
                 tj() {
                     let that = this;
