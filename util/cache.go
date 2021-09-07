@@ -63,6 +63,9 @@ func GetViewCache(id string, v *model.View) (err error) {
 //设置文章详情的缓存
 func SetViewCache(v *model.View) {
 	str := fmt.Sprintf(ViewCacheNum, v.ID)
+	if v.Tuijian == 3 {
+		str = fmt.Sprintf(ViewCacheNum, 0)
+	}
 	SetCache(str, v)
 }
 

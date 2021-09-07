@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="row cl">
+                <div class="row cl"  v-if="isuser==0">
                     <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
                     <div class="formControls col-xs-8 col-sm-9">
                         <button type="button" v-for="(item,index) in types"
@@ -64,7 +64,7 @@
                 </div>
 
 
-                <div class="row cl">
+                <div class="row cl" v-if="isuser==0">
                     <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>类型：</label>
                     <div class="formControls col-xs-8 col-sm-9">
                         <button type="button"
@@ -244,30 +244,31 @@
             var ue = UE.getEditor('editor');
 
         });
-     
-        layui.use('upload', function(){
-  var upload = layui.upload;
-   
-  //执行实例
-  var uploadInst = upload.render({
-    elem: '#up' //绑定元素
-    ,url: '/admin/ueditor/controller?action=uploadimage' //上传接口
-    ,done: function(res){
-      //上传完毕回调
-      console.log(res)
-      addimg(res.url)
-    }
-    ,error: function(){
-      //请求异常回调
-    }
-  });
-});
+
+        layui.use('upload', function () {
+            var upload = layui.upload;
+
+            //执行实例
+            var uploadInst = upload.render({
+                elem: '#up' //绑定元素
+                , url: '/admin/ueditor/controller?action=uploadimage' //上传接口
+                , done: function (res) {
+                    //上传完毕回调
+                    console.log(res)
+                    addimg(res.url)
+                }
+                , error: function () {
+                    //请求异常回调
+                }
+            });
+        });
 
         new Vue({
             el: "#app",
             data() {
                 return {
                     isv: false,
+                    isuser: 0,
                     type: 1,
                     arcdata: {
                         //这里的字段后期要改一下，改成跟数据库一致就少处理几道了
@@ -293,41 +294,48 @@
                     this.arcdata.typeid = id;
                 },
                 sztype1(id) {
-                   console.log(id)
-                   if(id==4){//推荐
-                    this.arcdata.tuijian=!this.arcdata.tuijian
-                   }
-                   if(id==2){//轮播
-                    this.arcdata.swiper=!this.arcdata.swiper
-                   }
+                    console.log(id)
+                    if (id == 4) {//推荐
+                        this.arcdata.tuijian = !this.arcdata.tuijian
+                    }
+                    if (id == 2) {//轮播
+                        this.arcdata.swiper = !this.arcdata.swiper
+                    }
                 },
                 //添加图片或者视频
                 addimg(url) {
                     this.arcdata.pic = url;
-                    let b=  UE.getEditor('editor').getContent()
-                    b+="<p><img src='"+url+"'/></p>"
+                    let b = UE.getEditor('editor').getContent()
+                    b += "<p><img src='" + url + "'/></p>"
+                    ue = UE.getEditor('editor');
                     ue.setContent(b);
                 },
                 tj() {
                     let that = this;
-                  let b=  UE.getEditor('editor').getContent()
+                    let b = UE.getEditor('editor').getContent()
                     let url = "/admin/addView";
                     if (getQueryVariable('type') == 'edit') {
                         url = "/admin/addView?type=edit";
                     }
-                    this.arcdata.tuijian=this.arcdata.tuijian?1:0;
-                    this.arcdata.swiper=this.arcdata.swiper?1:0;
-                    this.arcdata.content=b.replace(/(<([^>]+)>)/ig, "").slice(0,120)
-                    b =b.replace(/<img ([^>]*)\/>/ig, "<mip-img $1></mip-img>"); //正则替换img的内容到mip图片
-                    this.arcdata.body= b.replace(/<img ([^>]*)><\/img>/ig, "<mip-img $1></mip-img>"); 
                     
-                    this.arcdata.typeid=this.arcdata.typeid!=0?this.arcdata.typeid:this.types[0].id
-                    console.log(this.arcdata.body);
+                    this.arcdata.tuijian = this.arcdata.tuijian ? 1 : 0;
+                    this.arcdata.swiper = this.arcdata.swiper ? 1 : 0;
+                    if(this.isuser==1||this.isuser==2){
+                        url = "/admin/edit/user?type="+that.isuser;  //编辑用户信息
+                        this.arcdata.tuijian=3
+                    }
+                    this.arcdata.content = b.replace(/(<([^>]+)>)/ig, "").slice(0, 120)
+                    b = b.replace(/<img ([^>]*)\/>/ig, "<mip-img $1></mip-img>"); //正则替换img的内容到mip图片
+                    this.arcdata.body = b.replace(/<img ([^>]*)><\/img>/ig, "<mip-img $1></mip-img>");
+
+                    this.arcdata.typeid = this.arcdata.typeid != 0 ? this.arcdata.typeid : this.types[0].id
+                    console.log(this.arcdata);
                     //return;
-                    $.post(url,  that.arcdata , function (res) {
+                    $.post(url, that.arcdata, function (res) {
                         if (res.code == 200) {
                             layer.msg(res.msg);
                             that.arcdata = [];
+                           // return
                             setTimeout(function () { window.location.reload() }, 500);
                         } else {
                             layer.msg('更新失败')
@@ -338,35 +346,63 @@
             ,
             created() {
                 let that = this;
-                if (getQueryVariable('type') == 'edit') {//如果是编辑
+                let tp = getQueryVariable('type')
+                if (tp == 'edit') {//如果是编辑
                     let id = getQueryVariable('id')
-                    if (id != '') {
+                    if (id > 1) {
                         $.get("/admin/view/" + id, function (res, status) {
                             if (status == 'success' && res.code == 200) {
                                 console.log(res.data);
                                 ue = UE.getEditor('editor');
                                 ue.ready(function () {
                                     //设置编辑器的内容
-                                    let body=res.data.body
-                                    body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>"); 
+                                    let body = res.data.body
+                                    body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>");
                                     ue.setContent(body);
                                 });
                                 that.types = res.type
-                                res.data.tuijian=res.data.tuijian==1?true:false
-                                res.data.swiper=res.data.swiper==1?true:false
-                                delete res.data.tps 
-                                delete res.data.content 
-                                delete res.data.CreatedAt 
-                                delete res.data.UpdatedAt 
-                                delete res.data.DeletedAt 
-                                
+                                res.data.tuijian = res.data.tuijian == 1 ? true : false
+                                res.data.swiper = res.data.swiper == 1 ? true : false
+                                delete res.data.tps
+                                delete res.data.content
+                                delete res.data.CreatedAt
+                                delete res.data.UpdatedAt
+                                delete res.data.DeletedAt
+
                                 that.arcdata = res.data;
-                                
+
                                 console.log(that.arcdata)
                             } else {
                                 layer.msg('异常')
                             }
                         });
+                    } else if (id == -1) {
+                        //开始获取个人信息
+                        that.isuser = 1
+                        $.get("/admin/edit/getuserinfo", function (res, status) {
+                            if (status == 'success' && res.code == 200) {
+                                if (res.data.createtime != 0) {
+                                    delete res.data.tps
+                                delete res.data.content
+                                delete res.data.CreatedAt
+                                delete res.data.UpdatedAt
+                                delete res.data.DeletedAt
+                                    ue = UE.getEditor('editor');
+                                    ue.ready(function () {
+                                        //设置编辑器的内容
+                                        let body = res.data.body
+                                        body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>");
+                                        ue.setContent(body);
+                                    });
+                                    that.arcdata = res.data;
+                                }else{
+                                    that.isuser = 2
+                                }
+                            } else {
+                                layer.msg('异常')
+                            }
+                            console.log(res)
+                        })
                     } else {
                         layer.msg('异常ID')
                     }
@@ -374,7 +410,7 @@
                 } else {//如果是添加
                     $.get("/admin/gettype", function (res, status) {
                         if (status == 'success' && res.code == 200) {
-                            that.types=res.data
+                            that.types = res.data
                             console.log(that.types)
                         } else {
                             layer.msg('未登陆')
@@ -400,6 +436,7 @@
         }
     </script>
     <!--/请在上方写此页面业务相关的脚本-->
-   
+
 </body>
+
 </html>

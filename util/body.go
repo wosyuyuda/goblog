@@ -1,6 +1,7 @@
 package util
 
 import (
+	"fmt"
 	"goblog/dao"
 	d "goblog/model"
 	"time"
@@ -36,8 +37,15 @@ func GetTypeCount(id string) int64 {
 func GetView(id string, up int) (dd d.View) {
 	err := GetViewCache(id, &dd)
 	if err != nil {
-		dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
-		SetViewCache(&dd)
+		if id != "0" {
+			dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
+		} else {
+			dao.MDB.Model(&d.View{}).Where("status = ?", 3).Find(&dd)
+		}
+		fmt.Println(dd)
+		if dd.ID != 0 {
+			SetViewCache(&dd)
+		}
 	}
 	if up == 1 {
 		dao.MDB.Model(&d.View{}).Where("id = ?", id).UpdateColumn("click", gorm.Expr("click + ?", 1)) //点击量加1

@@ -12,10 +12,11 @@ import (
 
 func Install(c *gin.Context) {
 	db := dao.MDB
-	Idb(db)             //初始化数据库表
-	b := Auser(db)      //添加第一个用户,如果已经有用户,那么会返回错误
-	l := Atype(db)      //添加第一个分类
-	o := Aview(db)      //添加第一篇文章
+	Idb(db)        //初始化数据库表
+	b := Auser(db) //添加第一个用户,如果已经有用户,那么会返回错误
+	l := Atype(db) //添加第一个分类
+	o := Aview(db) //添加第一篇文章
+	//添加自我介绍
 	g := initConfig(db) //添加网站的标题关键词描述
 	if b && l && o && g {
 		c.JSON(200, gin.H{"msg": "初始化成功", "code": 200})

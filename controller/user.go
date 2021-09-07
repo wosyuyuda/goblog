@@ -44,3 +44,29 @@ func EditUser(c *gin.Context) {
 func GetUserName(c *gin.Context) {
 	server.OkWithData(util.GetSession(c, "name"), c)
 }
+
+//获取个人简介信息
+func GetUserInfo(c *gin.Context) {
+	vvv := util.GetView("0", 2) //获取文章详情
+	server.OkWithData(vvv, c)
+}
+
+//编辑个人简介
+func EditUserInfo(c *gin.Context) {
+	var data d.View
+	err := c.ShouldBind(&data)
+	if err != nil {
+		server.FailWithMessage(err.Error(), c)
+		return
+	}
+	if data.Tuijian == 3 {
+		data.Status = 3
+	}
+	if data.ID != 0 {
+		err = dao.MDB.Where("id = ?", data.ID).Updates(data).Error
+	} else {
+		err = dao.MDB.Create(&data).Error
+	}
+	util.DelAll() //删除缓存
+	server.ResDataError(data, err, c)
+}

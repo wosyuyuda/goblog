@@ -33,6 +33,7 @@ func main() {
 	r.GET("/list/:id", con.NewList) //新列表页
 	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
 	r.GET("/search", con.NewList)   //搜索文章
+	r.GET("/about", con.About)      //关于我们
 	r.GET("/test", con.Test)        //搜索文章
 
 	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
@@ -59,10 +60,12 @@ func main() {
 		v1.POST("/addView", con.AddView)           //添加与保存文章接口
 		v1.POST("/addType", con.AddTypes)          //添加与保存分类
 		//v1.GET("/addView1", con.AdminAddView) //添加文章界面，笑死，gin模板语法跟vue.js模板语法冲突，已转到静态页面'/static/view/admin_addview.html'
-		v1.GET("/link", con.GetLink)        //友情链接
-		v1.POST("/addlink", con.AddLink)    //友链添加与编辑
-		v1.GET("/getname", con.GetUserName) //获取用户名
-		v1.POST("/edituser", con.EditUser)  //编辑用户信息
+		v1.GET("/link", con.GetLink)                 //友情链接
+		v1.POST("/addlink", con.AddLink)             //友链添加与编辑
+		v1.GET("/getname", con.GetUserName)          //获取用户名
+		v1.POST("/edituser", con.EditUser)           //编辑用户信息
+		v1.GET("/edit/getuserinfo", con.GetUserInfo) //获取个人简介
+		v1.POST("/edit/user", con.EditUserInfo)      //编辑个人简介
 	}
 
 	r.Run(":8080") //开启端口访问,本地再试一下提交

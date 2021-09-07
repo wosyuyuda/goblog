@@ -338,6 +338,8 @@
             <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
                 title="{{$v.Name}}">{{$v.Name}}</a></li>
             {{end}}
+            <li><a target="_blank" href="/about" data-type="mip" data-title="关于我"
+              title="关于我">关于我</a></li>
           </ul>
         </mip-sidebar>
         <h1 class="logo "><a href="/" rel="home ">
@@ -353,15 +355,16 @@
             <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
                 title="{{$v.Name}}" class="dropdown-toggle">{{$v.Name}}</a></li>
             {{end}}
+            <li class="menu-item "><a href="/about">关于我</a></li>
           </ul>
         </nav>
         <div class="navbar-action pull-right">
           <p class="navbar-search" action="/plus/search/" method="get" role="search"><a
               class="navbar-search-icon j-navbar-search" on="tap:search.toggle" href="#"></a></p>
           <div id="j-user-wrap">
-            <a class="login" href="/#">登录</a>
+            
           </div>
-          <a class="publish" href="#"> 投稿</a>
+         
         </div>
       </div>
     </div>
@@ -488,6 +491,8 @@
             <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}" data-type="mip"
                 data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
             {{end}}
+            <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/about" data-type="mip"
+              data-title="关于我" title="关于我">关于我</a>. </li>
           </ul>
           <div class="copyright ">
             Copyright &copy; 2020 版权所有

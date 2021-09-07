@@ -46,6 +46,30 @@ func GetView(c *gin.Context) {
 	})
 }
 
+//获取个人简介信息
+func About(c *gin.Context) {
+	vvv := util.GetView("0", 2) //个人简介
+	if vvv.ID == 0 {
+		Not404(c)
+		c.Abort()
+		return
+	}
+	tm := time.Unix(int64(vvv.CreatedAt), 0)
+	vvv.Ctime = tm.Format("2006-01-02 15:04:05")
+
+	baseinfo, err := server.Getinfo()
+	if err != nil {
+		server.Fail(c)
+		return
+	}
+	//fmt.Printf("wyth%+v", baseinfo)
+	c.HTML(http.StatusOK, "about.html", gin.H{
+		"view": vvv,
+		"body": template.HTML(vvv.Body),
+		"base": baseinfo,
+	})
+}
+
 //关联查询测试用
 func Not404(c *gin.Context) {
 	tp := GetTypeNew("0") //栏目分类
