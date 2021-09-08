@@ -17,7 +17,7 @@ func init() {
 //获取列表,恶心死了gorm- 字段无法进入join关联查询结果...调了我半天.
 func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid")
+	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 
 	num := 10 //一页默认10条
 	if page < 1 {
@@ -47,7 +47,7 @@ func GetViewlist(id interface{}, page int) (vi []model.ViewJson) {
 //获取当前分类下面的10条文章
 func Findlist2(id string) (vi []model.ViewJson) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid")
+	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	if id != "0" {
 		JoinDao = JoinDao.Where("typeid = ?", id)
 	}
@@ -58,7 +58,7 @@ func Findlist2(id string) (vi []model.ViewJson) {
 //获取搜索到的信息
 func SearchView(views *model.ListInfo) (err error) {
 	db := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename")
-	JoinDao := db.Joins("left join tps on tps.id = views.typeid")
+	JoinDao := db.Joins("left join tps on tps.id = views.typeid").Where("views.status = 1")
 	util.Ini(&views.Page)
 	//fmt.Printf("pageinfo=%+v", *views)
 	//开始处理一下page信息
@@ -82,7 +82,7 @@ func GetListV(views *model.ListInfo) (err error) {
 	//fmt.Printf("info%+v", views)
 	JoinDao := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid")
 	//util.Ini(&pa)
-	db := JoinDao
+	db := JoinDao.Where("views.status = 1")
 	if pa.ID != 0 {
 		db = db.Where("typeid = ?", pa.ID)
 		dao.MDB.Where("id = ?", pa.ID).First(&views.Listinfo)
