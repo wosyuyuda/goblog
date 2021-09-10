@@ -7,7 +7,7 @@
  3.运行main.go//路由结构请看main.go的注释说明  
  4.进入初始化 /install/ 创建用户,第一篇文章,第一个分类  
  5.默认账号密码,longfei 123456,这个在insall里面,后期有空也放到set.json里面去   
- 6.测试地址:http://test.ibiaoqin.cn/  管理地址 http://test.ibiaoqin.cn/admin  
+ 6.后台登陆地址:http://localhost:8080/admin/login (这里可以在set.json里面设置一个,默认是这个地址,改了一个后重新运行可以不用暴露后台地址)    
  7.上面的测试地址加了一个nginx负载均衡,两个服务器的数据库未做同步,所以有时候刷新数据会不一样.  
  8.如果是初学者,建议查看dao,config目录,一个封装了数据库,一个封装了设置目录,比较杂的一些功能都是放在controller目录,,server跟util目录功能有些混装,等空了再重构一下,现在先放着  
 
