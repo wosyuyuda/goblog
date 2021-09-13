@@ -30,6 +30,15 @@ type View struct {
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
 }
 
+//评论
+type Comment struct {
+	ID        uint   `gorm:"primarykey"  json:"id" form:"id"`
+	CreatedAt uint   `gorm:"size:255" json:"createtime" form:"createtime"`
+	Status    int8   `gorm:"size:1;default:1;" json:"status" form:"status"` //状态，0删除，1正常
+	Uid       uint   `gorm:"index"  json:"uid" form:"uid"`                  //发表评论的ID
+	Name      string `gorm:"size:24" json:"name" form:"name"`               //发表评论的id
+}
+
 type ViewJson struct {
 	View
 	ID        uint `gorm:"primarykey" json:"id" form:"id"`
