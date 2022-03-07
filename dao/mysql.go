@@ -59,6 +59,6 @@ func Page(page *model.PageList) *gorm.DB {
 	if page.Status != 0 {
 		db = db.Where("status = ?", page.Status)
 	}
-	db = db.Count(&page.Sum)
+	//db = db.Count(&page.Sum)
 	return db
 }

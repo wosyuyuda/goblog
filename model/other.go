@@ -9,16 +9,17 @@ type Link struct {
 
 //分类页码,分类信息
 type PageList struct {
-	ID      int    ` form:"id" json:"id" uri:"id"`                 //分类ID
-	Keyword string ` form:"keyword" json:"keyword"  uri:"keyword"` //关键词
-	Page    int    ` form:"page" json:"page" uri:"page"`           //页码
-	Num     int    ` form:"num" json:"num" uri:"num"`              //一页多少条,默认是10
-	Sum     int64  ` form:"sum" json:"sum" uri:"sum"`              //全部多少条
-	Nex     int    ` form:"nex" json:"nex"`                        //上一页
-	Up      int    ` form:"up" json:"up"`                          //下一页
-	Status  int    ` form:"status" json:"status"`                  //
-	SumPage int    ` form:"sumpage" json:"sumpage"`
-	List    []View ` form:"list" json:"list"`
+	ID      int       ` form:"id" json:"id" uri:"id"`                 //分类ID
+	Keyword string    ` form:"keyword" json:"keyword"  uri:"keyword"` //关键词
+	Page    int       ` form:"page" json:"page" uri:"page"`           //页码
+	Num     int       ` form:"num" json:"num" uri:"num"`              //一页多少条,默认是10
+	Sum     int64     ` form:"sum" json:"sum" uri:"sum"`              //全部多少条
+	Nex     int       ` form:"nex" json:"nex"`                        //上一页
+	Up      int       ` form:"up" json:"up"`                          //下一页
+	Status  int       ` form:"status" json:"status"`                  //
+	SumPage int       ` form:"sumpage" json:"sumpage"`
+	List    []View    ` form:"list" json:"list"`
+	Comment []Comment ` form:"comment" json:"comment"`
 }
 
 //列表信息

@@ -14,7 +14,7 @@ func AddComment(comment *model.Comment) (err error) {
 
 //后台评论列表
 func CommentList(page *model.PageList) (err error) {
-	err = dao.Page(page).Find(page.List).Error
+	err = dao.Page(page).Find(&page.Comment).Count(&page.Sum).Error
 	return
 }
 
