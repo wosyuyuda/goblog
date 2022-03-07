@@ -38,6 +38,20 @@ func IfRes(err error, c *gin.Context) {
 	}
 }
 
+func RData(err error, c *gin.Context, data ...interface{}) {
+	if err != nil {
+		//如果失败直接返回错误
+		FailWithMessage(err.Error(), c)
+	} else {
+		if len(data) > 0 {
+			OkWithData(data[0], c)
+		} else {
+			Ok(c)
+		}
+		//否则返回成功
+	}
+}
+
 //返回错误判断，如果不等于nil那么把错误信息返回，否则返回正确的数据
 func ResDataError(data interface{}, err error, c *gin.Context) {
 	if err != nil {

@@ -16,7 +16,9 @@ type PageList struct {
 	Sum     int64  ` form:"sum" json:"sum" uri:"sum"`              //全部多少条
 	Nex     int    ` form:"nex" json:"nex"`                        //上一页
 	Up      int    ` form:"up" json:"up"`                          //下一页
+	Status  int    ` form:"status" json:"status"`                  //
 	SumPage int    ` form:"sumpage" json:"sumpage"`
+	List    []View ` form:"list" json:"list"`
 }
 
 //列表信息

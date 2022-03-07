@@ -3,7 +3,7 @@ package main
 /*
  * @Description:
  * @Author: longfei
- * @FilePath: \go\main.go
+ * @FilePath: \gomybolg\main.go
  */
 
 import (
@@ -27,14 +27,15 @@ func main() {
 	r.NoRoute(con.Not404)               //404页面
 	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
 
-	r.LoadHTMLGlob("view/*")        //这里是引入模板文件
-	r.Static("/static", "static")   //引入静态目录
-	r.GET("/", con.Index)           //这个是首页，模板整整就可以啦
-	r.GET("/list/:id", con.NewList) //新列表页
-	r.GET("/view/:id", con.GetView) //文章详情页，这里的详情页可以开始获取数据了
-	r.GET("/search", con.NewList)   //搜索文章
-	r.GET("/about", con.About)      //关于我们
-	r.GET("/test", con.Test)        //搜索文章
+	r.LoadHTMLGlob("view/*")              //这里是引入模板文件
+	r.Static("/static", "static")         //引入静态目录
+	r.GET("/", con.Index)                 //这个是首页，模板整整就可以啦
+	r.GET("/list/:id", con.NewList)       //新列表页
+	r.GET("/view/:id", con.GetView)       //文章详情页，这里的详情页可以开始获取数据了
+	r.POST("/addComment", con.AddComment) //添加评论接口
+	r.GET("/search", con.NewList)         //搜索文章
+	r.GET("/about", con.About)            //关于我们
+	r.GET("/test", con.Test)              //搜索文章
 
 	r.Use(sessions.Sessions("mysession", cookie.NewStore([]byte("secret"))))
 	//这里加一个判断是否登陆的中间件，如果没有缓存的用户ID，直接跳出到登陆页面
@@ -53,6 +54,8 @@ func main() {
 	{
 		v1.GET("/", con.AdminIndex)                //管理页，现在是啥也还没有
 		v1.GET("/list", con.AdminList)             //后台的文章列表，这里要加一个管理选项
+		v1.GET("/comment_list", con.ListComment)   //评论列表，后台再添加一个审核的接口
+		v1.GET("/comment_verify", con.F审核)         //评论列表，后台再添加一个审核的接口
 		v1.GET("/gettype", con.Gt)                 //获取分类列表的一个选项
 		v1.GET("/del/:id", con.DelType)            //删除指定ID分类?
 		v1.Any("/ueditor/controller", util.Action) //这里是百度编辑器图片上传必须要用的，正常图片上传也可以用这个接口

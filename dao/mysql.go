@@ -3,6 +3,7 @@ package dao
 import (
 	"fmt"
 	"goblog/config"
+	"goblog/model"
 	"log"
 	"time"
 
@@ -39,4 +40,25 @@ func init() {
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。现在是一小时? time.Minute*5
 	sqlDB.SetConnMaxLifetime(time.Second * 30)
 
+	MDB.Set("gorm:table_options",
+		"ENGINE=MyISAM DEFAULT CHARSET=utf8").AutoMigrate(
+		&model.User{},
+		&model.Link{},
+		&model.Tp{},
+		&model.View{},
+		&model.Config{},
+		&model.Comment{},
+	)
+}
+
+func Page(page *model.PageList) *gorm.DB {
+	db := MDB.Limit(page.Num).Offset((page.Page - 1) * page.Num)
+	if page.Keyword != "" {
+		db = db.Where("title LIKE ?", "%"+page.Keyword+"%")
+	}
+	if page.Status != 0 {
+		db = db.Where("status = ?", page.Status)
+	}
+	db = db.Count(&page.Sum)
+	return db
 }

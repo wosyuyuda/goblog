@@ -127,9 +127,10 @@
           </div>
          </div>
          <div >
-           <mip-form method="post"  fetch-url="#" clear>
+           <mip-form method="post"  fetch-url="/addComment" clear>
           <input type="text" name="name"  placeholder="名称">
-          <textarea class="md-input"  name="comment" placeholder="在此输入你想说的话"></textarea>
+          <input type="hidden" name="id" value="{{.view.ID}}">
+          <textarea class="md-input"  name="body" placeholder="在此输入你想说的话"></textarea>
           <div submit-success>
             <template type="mip-mustache">
                提交成功

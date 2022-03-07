@@ -3,7 +3,7 @@ package model
 /*
  * @Description:
  * @Author: longfei
- * @FilePath: \go\model\model.go
+ * @FilePath: \gomybolg\model\model.go
  */
 
 import (
@@ -16,17 +16,18 @@ type View struct {
 	CreatedAt uint           `gorm:"size:255" json:"createtime" form:"createtime"`
 	UpdatedAt uint           `gorm:"size:255" json:"updatetime" form:"updatetime"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
-	Typeid    int            `gorm:"size:10"  json:"typeid" form:"typeid"`          //分类的ID，关联
-	Title     string         `gorm:"size:255" json:"title" form:"title"`            //标题
-	Click     int            `gorm:"size:10" json:"click"`                          //点击量
-	Tuijian   int8           `gorm:"size:1" json:"tuijian" form:"tuijian"`          //是否为推荐
-	Swiper    int8           `gorm:"size:1" json:"swiper" form:"swiper"`            //是否为轮播图
-	Pic       string         `gorm:"size:255" json:"pic" form:"pic"`                //文章的缩略图
-	Status    int8           `gorm:"size:1;default:1;" json:"status" form:"status"` //文章状态，0删除，1正常
-	Content   string         `gorm:"size:500" json:"content" form:"content"`        //文章的简介
-	Body      string         `gorm:"size:5000" json:"body" form:"body"`             //详细的内容
+	Typeid    int            `gorm:"size:10"  json:"typeid" form:"typeid"`             //分类的ID，关联
+	Title     string         `gorm:"type:varchar(255);" json:"title" form:"title"`     //标题
+	Click     int            `gorm:"size:10" json:"click"`                             //点击量
+	Tuijian   int8           `gorm:"size:1" json:"tuijian" form:"tuijian"`             //是否为推荐
+	Swiper    int8           `gorm:"size:1" json:"swiper" form:"swiper"`               //是否为轮播图
+	Pic       string         `gorm:"type:varchar(255);" json:"pic" form:"pic"`         //文章的缩略图
+	Status    int8           `gorm:"size:1;default:1;" json:"status" form:"status"`    //文章状态，0删除，1正常
+	Content   string         `gorm:"type:varchar(500);" json:"content" form:"content"` //文章的简介
+	Body      string         `gorm:"type:varchar(5000);" json:"body" form:"body"`      //详细的内容
 	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
 	Typename  string         `gorm:"-" json:"typename" form:"typename"`
+	Comment   []Comment      `gorm:"-" json:"comment" form:"comment"` //评论列表
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
 }
 
@@ -34,15 +35,16 @@ type View struct {
 type Comment struct {
 	ID        uint   `gorm:"primarykey"  json:"id" form:"id"`
 	CreatedAt uint   `gorm:"size:255" json:"createtime" form:"createtime"`
-	Status    int8   `gorm:"size:1;default:1;" json:"status" form:"status"` //状态，0删除，1正常
-	Uid       uint   `gorm:"index"  json:"uid" form:"uid"`                  //发表评论的ID
+	Status    int8   `gorm:"size:1;default:1;" json:"status" form:"status"` //状态，0删除，1正常,2审核
+	Body      string `gorm:"type:varchar(5000);" json:"body" form:"body"`   //详细的内容
+	Vid       uint   `gorm:"index"  json:"vid" form:"vid"`                  //发表评论的ID
 	Name      string `gorm:"size:24" json:"name" form:"name"`               //发表评论的id
 }
 
 type ViewJson struct {
 	View
-	ID        uint `gorm:"primarykey" json:"id" form:"id"`
 	CreatedAt uint
+	ID        uint   `gorm:"primarykey" json:"id" form:"id"`
 	Typeid    int    ` json:"typeid" form:"typeid"`     //分类的ID，关联
 	Title     string ` json:"title" form:"title"`       //标题
 	Pic       string ` json:"pic" form:"pic"`           //文章的缩略图

@@ -3,7 +3,7 @@ package controller
 /*
  * @Description:
  * @Author: longfei
- * @FilePath: \go\controller\index.go
+ * @FilePath: \gomybolg\controller\index.go
  */
 
 import (
@@ -30,9 +30,12 @@ func GetView(c *gin.Context) {
 		c.Abort()
 		return
 	}
-	tm := time.Unix(int64(vvv.CreatedAt), 0)
-	vvv.Ctime = tm.Format("2006-01-02 15:04:05")
-
+	vvv.Ctime = time.Unix(int64(vvv.CreatedAt), 0).Format("2006-01-02 15:04:05")
+	err := server.ViewComment(&vvv)
+	if err != nil {
+		server.Fail(c)
+		return
+	}
 	baseinfo, err := server.Getinfo()
 	if err != nil {
 		server.Fail(c)
