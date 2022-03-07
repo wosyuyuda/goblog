@@ -8,7 +8,7 @@ import (
 //添加评论
 func AddComment(comment *model.Comment) (err error) {
 	comment.Status = 2 //设置默认审核
-	err = dao.MDB.Where(comment).Error
+	err = dao.MDB.Create(comment).Error
 	return
 }
 
