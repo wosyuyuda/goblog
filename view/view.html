@@ -113,7 +113,6 @@
           <div class="entry-page-prev j-lazy">
           {dede:prenext get='pre'/}
            <div class="entry-page-info">
-           
             <span class="pull-left">&laquo; 上一篇</span>
            <!--  <span class="pull-right">2018年10月07日 12:29:44</span>-->
            </div>
@@ -127,7 +126,23 @@
            </div>
           </div>
          </div>
-		 
+         <div >
+           <mip-form method="post"  fetch-url="#" clear>
+          <input type="text" name="name"  placeholder="名称">
+          <textarea class="md-input"  name="comment" placeholder="在此输入你想说的话"></textarea>
+          <div submit-success>
+            <template type="mip-mustache">
+               提交成功
+            </template>
+        </div>
+        <div submit-error>
+            <template type="mip-mustache">
+              提交失败
+            </template>
+        </div>
+          <input type="submit" value="提交">
+      </mip-form>
+    </div>
         </div>
        </div>
       </article>
