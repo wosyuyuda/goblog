@@ -3,18 +3,31 @@ package config
 import (
 	"fmt"
 	"goblog/model"
+	"os"
 
 	"github.com/spf13/viper"
 )
 
-var Configv *viper.Viper
+var (
+	Configv *viper.Viper
+	setpath = "config/set.json"
+	tempset = "config/temp.json"
+)
 
 func init() {
 	Configv = viper.New()
 	Configv.SetConfigType("json")
-	Configv.SetConfigFile("config/set.json")
+	//判断配置文件是否存在,如果不存在就用默认的(git提交时配置文件不迁移)
+	exit, err := PathExists(setpath)
+	if err != nil {
+		panic(fmt.Errorf("fatal error config file: %s", err))
+	}
+	if !exit {
+		setpath = tempset
+	}
+	Configv.SetConfigFile(setpath)
 	Configv.WatchConfig()
-	err := Configv.ReadInConfig()
+	err = Configv.ReadInConfig()
 	if err != nil {
 		panic(fmt.Errorf("fatal error config file: %s", err))
 	}
@@ -29,4 +42,15 @@ func GetTDK() (tdk model.Tdk) {
 	tdk.Goanurl = Configv.GetString("tdk.goanurl")
 	tdk.Tongjiid = Configv.GetString("tdk.tonjiid")
 	return
+}
+
+func PathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
 }
