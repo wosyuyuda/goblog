@@ -26,6 +26,6 @@ func ViewComment(view *model.View) (err error) {
 
 //评论的审核与删除
 func F审核(评论 *model.Comment) (错误 error) {
-	错误 = dao.MDB.Where("id = ?", 评论.ID).Update("status", 评论.Status).Error
+	错误 = dao.MDB.Model(评论).Select("status").Where("id = ?", 评论.ID).Update("status", 评论.Status).Error
 	return
 }

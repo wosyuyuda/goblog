@@ -52,6 +52,12 @@ func init() {
 }
 
 func Page(page *model.PageList) *gorm.DB {
+	if page.Page == 0 {
+		page.Page = 1
+	}
+	if page.Num < 10 {
+		page.Num = 10
+	}
 	db := MDB.Limit(page.Num).Offset((page.Page - 1) * page.Num)
 	if page.Keyword != "" {
 		db = db.Where("title LIKE ?", "%"+page.Keyword+"%")

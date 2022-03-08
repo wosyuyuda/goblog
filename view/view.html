@@ -126,7 +126,7 @@
            </div>
           </div>
          </div>
-         <div >
+      <div >
         <mip-form method="post"  fetch-url="/addComment" clear>
           <input type="text" name="name"  placeholder="名称">
           <input type="hidden" name="vid" value="{{.view.ID}}">
@@ -143,6 +143,11 @@
         </div>
           <input type="submit" value="提交">
       </mip-form>
+    </div>
+    <div id="xhz-render-body">
+      {{range $i, $v := .view.Comment}}
+      <p>{{$v.Name}}:{{$v.Body}}</p>
+      {{end}}
     </div>
         </div>
        </div>
