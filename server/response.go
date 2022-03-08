@@ -38,6 +38,18 @@ func IfRes(err error, c *gin.Context) {
 	}
 }
 
+func RComment(err error, c *gin.Context) {
+	c.Header("Content-Type", "text/html; charset=utf-8")
+	if err != nil {
+		c.String(200, `<script language="javascript">alert("留言失败");
+		</script>`)
+	} else {
+		c.String(200, `<script language="javascript">alert("留言成功,等待审核");
+		</script>`)
+
+	}
+}
+
 func RData(err error, c *gin.Context, data ...interface{}) {
 	if err != nil {
 		//如果失败直接返回错误

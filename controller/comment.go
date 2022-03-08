@@ -16,7 +16,7 @@ func AddComment(c *gin.Context) {
 		return
 	}
 	err = server.AddComment(&comment)
-	server.RData(err, c, &comment)
+	server.RComment(err, c)
 }
 
 //评论列表
