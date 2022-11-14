@@ -3,18 +3,24 @@ package server
 import (
 	"bytes"
 	"goblog/config"
+	"goblog/util"
 	"html/template"
 	"io/ioutil"
 
 	"github.com/gin-gonic/gin"
 )
 
-//方便后期整一个模板的配置功能,
+//方便后期整一个模板的配置功能,如果是手机端访问，那么获取手机的模板
 func F自己写的模板方法(c *gin.Context, temp string, db interface{}) {
 	//此处可以加一个获取配置的模板目录方法，这样就能更智能些
 	tempdir := config.Configv.GetString("tempdir")
 	/* temp = "temp/xing/" + temp */
-	content, err := ioutil.ReadFile("temp" + tempdir + "/" + temp)
+	dir := "temp" + tempdir + "/"
+	//判断当前环境是否为手机，判断是否开户了手机端支持
+	if config.IsMobile == 1 && util.F判断是否为手机访问(c.GetHeader("User-Agent")) {
+		dir += "m/"
+	}
+	content, err := ioutil.ReadFile(dir + temp)
 	if err != nil {
 		RData(err, c)
 		return

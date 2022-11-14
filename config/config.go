@@ -9,9 +9,10 @@ import (
 )
 
 var (
-	Configv *viper.Viper
-	setpath = "config/set.json"
-	tempset = "config/temp.json"
+	Configv  *viper.Viper
+	setpath  = "config/set.json"
+	tempset  = "config/temp.json"
+	IsMobile = 0 //是否支持移动端
 )
 
 func init() {
@@ -25,6 +26,7 @@ func init() {
 	if !exit {
 		setpath = tempset
 	}
+	IsMobile = Configv.GetInt("ismobile") //看内置模板是否支持手机
 	Configv.SetConfigFile(setpath)
 	Configv.WatchConfig()
 	err = Configv.ReadInConfig()
