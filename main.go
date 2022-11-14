@@ -25,11 +25,12 @@ func main() {
 	gin.SetMode("debug")
 	r := gin.Default()
 	r.Delims("{[", "]}")
-	r.NoRoute(con.Not404)               //404页面
-	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
+	r.NoRoute(con.Not404)                                                      //404页面
+	r.GET("/install/", install.Install)                                        //初始化博客,新下载可以先用这个初始化一下,
+	r.LoadHTMLGlob("view/*")                                                   //这里是引入模板文件
+	r.Static("/static", "static")                                              //引入静态目录
+	r.Static("/default", "temp"+config.Configv.GetString("tempdir")+"/static") //引入静态目录
 
-	r.LoadHTMLGlob("view/*")              //这里是引入模板文件
-	r.Static("/static", "static")         //引入静态目录
 	r.GET("/", con.Index)                 //这个是首页，模板整整就可以啦
 	r.GET("/list/:id", con.NewList)       //新列表页
 	r.GET("/view/:id", con.GetView)       //文章详情页，这里的详情页可以开始获取数据了
