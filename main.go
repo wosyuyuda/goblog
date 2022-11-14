@@ -24,6 +24,7 @@ func main() {
 	//gin.SetMode(gin.ReleaseMode)
 	gin.SetMode("debug")
 	r := gin.Default()
+	r.Delims("{[", "]}")
 	r.NoRoute(con.Not404)               //404页面
 	r.GET("/install/", install.Install) //初始化博客,新下载可以先用这个初始化一下,
 

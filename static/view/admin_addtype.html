@@ -27,7 +27,7 @@
                 </button>
                 <button type="button" v-for="(item,index) in types"
                     :class="arcdata.id == item.id ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
-                    @click='sztype(index)'>{{ item.name }}
+                    @click='sztype(index)'>{[ item.name ]}
                 </button>
             </div>
         </div>

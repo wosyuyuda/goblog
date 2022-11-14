@@ -32,8 +32,8 @@ html {overflow-y:auto}
 			<nav id="Hui-nav" class="nav navbar-nav">
 				<ul class="cl">
 					<li id="Huinav_1"> <a href="/">首页</a> </li>
-                    {{range $i, $v := .types}}
-                    <li id="Huinav_{{$i}}"> <a href="/list/{{$v.ID}}">{{$v.Name}}</a> </li>               {{end}}	 
+                    {[range $i, $v := .types]}
+                    <li id="Huinav_{[$i]}"> <a href="/list/{[$v.ID]}">{[$v.Name]}</a> </li>               {[end]}	 
 				</ul>
 			</nav>
 			<nav class="navbar-userbar f-r hidden-xs hidden-sm">
@@ -58,7 +58,7 @@ html {overflow-y:auto}
 
 		<p>Copyright &copy;2013-2020 <br>
 			<a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
-                {{.tdk.Beian}}
+                {[.tdk.Beian]}
               </a> <br>
 	</div>
 </footer>

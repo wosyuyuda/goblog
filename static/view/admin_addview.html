@@ -49,7 +49,7 @@
                     <div class="formControls col-xs-8 col-sm-9">
                         <button type="button" v-for="(item,index) in types"
                             :class="item.id == arcdata.typeid ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
-                            @click='sztype(item.id)'>{{ item.name }}
+                            @click='sztype(item.id)'>{[ item.name ]}
                         </button>
                     </div>
                 </div>

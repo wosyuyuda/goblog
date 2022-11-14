@@ -52,7 +52,7 @@
                     <a class="btn btn-primary radius" data-title="添加资讯" data-href="/static/view/admin_addview.html"
                         onclick="Hui_admin_tab(this)" href="javascript:;"><i class="Hui-iconfont">&#xe600;</i>
                         添加资讯</a></span> -->
-                <span class="r">共有数据：<strong>{{list.sum}}</strong> 条</span>
+                <span class="r">共有数据：<strong>{[list.sum]}</strong> 条</span>
             </div>
             <div class="mt-20">
                 <table class="table table-border table-bordered table-bg table-hover table-sort table-responsive">
@@ -70,12 +70,12 @@
                         <tr class="text-c" 
                             v-for="item in list.comment" :key="item.id">
                             <td><input type="checkbox" :value="item.id" name=""></td>
-                            <td>{{item.id}}</td>
+                            <td>{[item.id]}</td>
                             <td class="text-l"><u style="cursor:pointer" class="text-primary"  title="查看"></u>
-                                {{item.body}}
+                                {[item.body]}
                             </td>
-                            <td>{{item.name}}</td>
-                            <td class="td-status"><span class="label label-success radius">{{item.status==1?'已发布':item.status==2?'审核中':'已删除'}}</span></td>
+                            <td>{[item.name]}</td>
+                            <td class="td-status"><span class="label label-success radius">{[item.status==1?'已发布':item.status==2?'审核中':'已删除']}</span></td>
                             <td class="f-14 td-manage">
                                 <a style="text-decoration:none" @click="xj(item.id)"
                                     href="javascript:;" title="下架">

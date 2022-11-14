@@ -6,9 +6,9 @@
   <meta name="applicable-device" content="pc,mobile" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
-  <title>{{.list.Listinfo.Name}}-power by goblog</title>
-  <meta name="keywords" content="{{.list.Listinfo.Info}}">
-  <meta name="description" content="{{.list.Listinfo.Info}}">
+  <title>{[.list.Listinfo.Name]}-power by goblog</title>
+  <meta name="keywords" content="{[.list.Listinfo.Info]}">
+  <meta name="description" content="{[.list.Listinfo.Info]}">
 
   <link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css" />
   <link rel="stylesheet" type="text/css" href="/static/just.css" />
@@ -319,7 +319,7 @@
       height: 50px;
     }
   </style>
-  <link rel="canonical" href="/list/{{.list.Listinfo.ID}}">
+  <link rel="canonical" href="/list/{[.list.Listinfo.ID]}">
 </head>
 
 <body class="home blog">
@@ -334,10 +334,10 @@
           <ul>
             <li><button on="tap:right-sidebar.close"> X </button></li>
             <li><a target="_blank" href="/">网站首页</a></li>
-            {{range $i, $v := .baseinfo.Typeinfo}}
-            <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
-                title="{{$v.Name}}">{{$v.Name}}</a></li>
-            {{end}}
+            {[range $i, $v := .baseinfo.Typeinfo]}
+            <li><a target="_blank" href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}"
+                title="{[$v.Name]}">{[$v.Name]}</a></li>
+            {[end]}
             <li><a target="_blank" href="/about" data-type="mip" data-title="关于我"
               title="关于我">关于我</a></li>
           </ul>
@@ -351,10 +351,10 @@
           <ul id="menu-justnews-menu" class="nav navbar-nav">
             <li class="menu-item "><a href="/">首页</a></li>
 
-            {{range $i, $v := .baseinfo.Typeinfo}}
-            <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
-                title="{{$v.Name}}" class="dropdown-toggle">{{$v.Name}}</a></li>
-            {{end}}
+            {[range $i, $v := .baseinfo.Typeinfo]}
+            <li class="menu-item "><a href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}"
+                title="{[$v.Name]}" class="dropdown-toggle">{[$v.Name]}</a></li>
+            {[end]}
             <li class="menu-item "><a href="/about">关于我</a></li>
           </ul>
         </nav>
@@ -373,10 +373,10 @@
     <div id="wrap">
       <div class="banner banner-white j-lazy banner1">
         <div class="banner-inner">
-          <h1>{{.list.Listinfo.Name}}
+          <h1>{[.list.Listinfo.Name]}
           </h1>
           <div class="page-description">
-            <p>{{.list.Listinfo.Info}}</p>
+            <p>{[.list.Listinfo.Info]}</p>
           </div>
         </div>
       </div>
@@ -385,50 +385,50 @@
           <div class="sec-panel archive-list">
             <!--   <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense> -->
             <ul class="article-list">
-              {{range $i, $v := .list.Views}}
+              {[range $i, $v := .list.Views]}
               <li class="item">
                 <div class="item-img">
-                  <a target="_blank" href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}"
-                    title="{{$v.Title}}">
+                  <a target="_blank" href="/view/{[$v.ID]}" data-type="mip" data-title="{[$v.Title]}"
+                    title="{[$v.Title]}">
                     <mip-img layout="container"
                       class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy "
-                      src="{{$v.Pic}}" alt="{{$v.Title}}"></mip-img>
+                      src="{[$v.Pic]}" alt="{[$v.Title]}"></mip-img>
                   </a>
-                  <a target="_blank" class="item-category" href="/list/{{$v.Typeid}}">{{$v.Typename}}</a>
+                  <a target="_blank" class="item-category" href="/list/{[$v.Typeid]}">{[$v.Typename]}</a>
                 </div>
                 <div class="item-content">
-                  <h2 class="item-title"><a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
-                      data-title="{{$v.Title}}" title="{{$v.Title}}">{{$v.Title}}</a></h2>
+                  <h2 class="item-title"><a target="_blank" href="/view/{[$v.ID]}" data-type="mip"
+                      data-title="{[$v.Title]}" title="{[$v.Title]}">{[$v.Title]}</a></h2>
                   <div class="item-excerpt">
-                    <p> {{$v.Content}}...</p>
+                    <p> {[$v.Content]}...</p>
                   </div>
                   <div class="item-meta">
                     <div class="item-meta-li author">
-                      <a class="nickname" href="/list/{{$v.Typeid}}" target="_blank">{{$v.Typename}}</a>
+                      <a class="nickname" href="/list/{[$v.Typeid]}" target="_blank">{[$v.Typename]}</a>
                     </div>
-                    <span class="item-meta-li date">{{$v.Ctime}} </span>
-                    <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i> {{$v.Click}}</span>
+                    <span class="item-meta-li date">{[$v.Ctime]} </span>
+                    <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i> {[$v.Click]}</span>
                   </div>
                 </div>
               </li>
-              {{end}}
+              {[end]}
             </ul>
 
             <div class="pagination1 clearfix">
               <div class="page-control">
                 <ul class="pagination">
                   
-                  共有{{.list.Page.Sum}}条 :
+                  共有{[.list.Page.Sum]}条 :
 
-                      {{if ne .list.Page.Up 0}} 
+                      {[if ne .list.Page.Up 0]} 
                       <li class="page-item"><a class="page-link" data-type="mip"
-                        href="?page={{.list.Page.Up}}">{{.list.Page.Up}}</a></li>
-            {{else}}            {{end}}
-            <li class="page-item active"><span class="page-link">{{.list.Page.Page}}</span></li>
-            {{if ne .list.Page.Nex 0}} 
+                        href="?page={[.list.Page.Up]}">{[.list.Page.Up]}</a></li>
+            {[else]}            {[end]}
+            <li class="page-item active"><span class="page-link">{[.list.Page.Page]}</span></li>
+            {[if ne .list.Page.Nex 0]} 
                       <li class="page-item"><a class="page-link" data-type="mip"
-                        href="?page={{.list.Page.Nex}}">{{.list.Page.Nex}}</a></li>
-            {{end}}
+                        href="?page={[.list.Page.Nex]}">{[.list.Page.Nex]}</a></li>
+            {[end]}
                 </ul>
               </div>
             </div>
@@ -442,9 +442,9 @@
               <h3 class="widget-title"><span>推荐文章</span></h3>
               <ul>
 
-                {{range $i, $v := .baseinfo.Tuijian}}
-                <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark" title="{{$v.Title}}">{{$v.Title}}</a></li>
-                {{end}}
+                {[range $i, $v := .baseinfo.Tuijian]}
+                <li><a target="_blank" href="/view/{[$v.ID]}" rel="bookmark" title="{[$v.Title]}">{[$v.Title]}</a></li>
+                {[end]}
 
               </ul>
             </div>
@@ -454,20 +454,20 @@
             <h3 class="widget-title"><span>最新文章</span></h3>
             <ul>
 
-              {{range $i, $v := .baseinfo.New}}
+              {[range $i, $v := .baseinfo.New]}
               <li class="item">
                 <div class="item-img">
-                  <a href="/view/{{$v.ID}}">
+                  <a href="/view/{[$v.ID]}">
                     <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image"
-                      src="{{$v.Pic}}"></mip-img>
+                      src="{[$v.Pic]}"></mip-img>
                   </a>
                 </div>
                 <div class="item-content">
-                  <p class="item-title"><a href="/view/{{$v.ID}}">{{$v.Title}}</a></p>
-                  <p class="item-date">{{$v.Ctime}}</p>
+                  <p class="item-title"><a href="/view/{[$v.ID]}">{[$v.Title]}</a></p>
+                  <p class="item-date">{[$v.Ctime]}</p>
                 </div>
               </li>
-              {{end}}
+              {[end]}
             </ul>
           </div>
         </aside>
@@ -487,17 +487,17 @@
         </div>
         <div class="footer-col footer-col-copy ">
           <ul class="footer-nav hidden-xs ">
-            {{range $i, $v := .baseinfo.Typeinfo}}
-            <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}" data-type="mip"
-                data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
-            {{end}}
+            {[range $i, $v := .baseinfo.Typeinfo]}
+            <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{[$v.ID]}" data-type="mip"
+                data-title="{[$v.Name]}" title="{[$v.Name]}">{[$v.Name]}</a>. </li>
+            {[end]}
             <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/about" data-type="mip"
               data-title="关于我" title="关于我">关于我</a>. </li>
           </ul>
           <div class="copyright ">
             Copyright &copy; 2020 版权所有
             <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
-              {{.baseinfo.Tdk.Beian}}
+              {[.baseinfo.Tdk.Beian]}
             </a> 
             <a href="#" target="_blank " rel="noopener noreferrer "></a>
             <mip-stats-baidu token="bf02b970151cd2396c34a286097a2b82"></mip-stats-baidu>

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
   <link rel="shortcut icon" href="/static/favicon1.ico" type="image/x-icon" />
-    <title>{{.view.Title}}-power by goblog</title>
+    <title>{[.view.Title]}-power by goblog</title>
    <!--  <meta name="keywords" content="{dede:field.keywords/}">
     <meta name="description" content="{dede:field.description function='html2text(@me)'/}">
   <meta property="og:type" content="article" />
@@ -18,8 +18,8 @@
   <link rel="stylesheet" type="text/css" href="/static/just.css?1" />
 <!--   <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
   <script src="/static/layui/layui.js" charset="utf-8"></script> -->
-   <style mip-custom=""> .q-content .topic-tab,.q-content .q-answer .as-user,.q-content .q-answer .as-comment-name,.profile-QAPress-tab .QAPress-tab-item { color: #3ca5f6 } .q-content .q-topic-wrap a:hover,.q-content .q-answer .as-action a:hover,.q-content .topic-tab:hover,.q-content .topic-title:hover { color: #4285f4 } .q-content .put-top,.q-content .topic-tab.current-tab,.q-content .q-answer .as-submit .btn-submit,.q-content .q-answer .as-comments-submit,.q-content .q-add-header .btn-post,.q-content .q-pagination .current,.q-btn-new,.profile-QAPress-tab .QAPress-tab-item.active,.q-mobile-ask a { background-color: #3ca5f6 } .q-content .q-answer .as-submit .btn-submit:hover,.q-content .q-answer .as-comments-submit:hover,.q-content .q-add-header .btn-post:hover,.q-content .topic-tab.current-tab:hover,.q-content .q-pagination a:hover,.q-btn-new:hover,.profile-QAPress-tab .QAPress-tab-item:hover,.q-mobile-ask a:hover { background-color: #4285f4 } .q-content .q-answer .as-comments-input:focus,.profile-QAPress-tab .QAPress-tab-item { border-color: #3ca5f6 } .profile-QAPress-tab .QAPress-tab-item:hover { border-color: #4285f4 }.page-template-page-fullnotitle.member-login #wrap,.page-template-page-fullnotitle.member-register #wrap{background-image:url('https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/login.jpg')}.j-share{position:fixed!important;top:50%!important}.header .logo img{max-height:40px}@media (max-width: 767px){.header .logo img{max-height:36px}}.footer-col-logo img{height:60px}.navbar-action #j-user-wrap,.navbar-action .login { display: inline-block; } .list.tabs .tab { display:inline-block; font-size: 16px; font-size: .16rem; color: #666; line-height: 48px; font-weight: 400; text-decoration: none; margin-right: 10px; cursor: pointer; } .list.tabs .tab:active{ color: #3ca5f6; font-weight: 500; border-bottom: 2px solid #3ca5f6; } mip-vd-tabs .mip-vd-tabs-nav-view .mip-vd-tabs-nav .mip-vd-tabs-nav-selected { border-bottom: 2px solid #38f; color: #38f; } mip-vd-tabs .mip-vd-tabs-scroll-touch{margin-top:-31px;} .apple1{background:url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/wx.png);} .footer-col-logo img{margin-right: 1px;} .footer-col {margin-left:10px;} .banner1{background: url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/banner.jpg); height: 300px; display: table; } ul.pagination li { display: inline-block; } ul.pagination li:active{color:blue;}#right-sidebar { background: #2b2b2b !important; } mip-sidebar { z-index: 99999 !important; } mip-sidebar { position: fixed !important; top: 0; max-height: 100% !important; height: 100%; max-width: 80% !important; background-color: #efefef; min-width: 45px !important; overflow-x: hidden !important; overflow-y: auto !important; z-index: 9999 !important; -webkit-overflow-scrolling: touch; will-change: transform; display: none; } #right-sidebar ul li { height: 42px; line-height: 42px; padding: 0px 35px; font-size: 16px; border-bottom: 1px solid #111; border-top: 1px solid #444; } #right-sidebar ul li button { width: 30px; font-size: 22px; background: #2b2b2b; color: #fff; border: 1px solid #2b2b2b; } #right-sidebar ul li a { color: #fff; }.search-icon { color: #fff; background: none; border: none; } .search-icon1 { color: #000; background: none; border: none; } .search-index { position: relative; line-height: 85px; transition: all .3s ease-out 0s; } .popup { display: inline-block; position: fixed; z-index: 10002; text-align: center; top: 0; right: 0; left: 0; bottom: 0; height: 100%; width: 100%; background-color: rgba(0,0,0,0.2); } .search.popup .popup_main { width: 630px; } .popup .popup_main { padding: 40px 60px; border: 1px #eee solid; background-color: #fff; } .popup>section { position: absolute; top: 45%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); } .search_form form { padding: 0 90px 0 0; overflow: hidden; margin: 0 auto; } .mip-layout-container { display: block; position: relative; } mip-form form { position: relative; } .search_form form input { height: 42px; background-color: #fff; float: left; border-radius: 0; } mip-form input[type='text'], mip-form input[type='input'], mip-form input[type='datetime'], mip-form input[type='email'], mip-form input[type='number'], mip-form input[type='tel'], mip-form input[type='url'] { padding-right: 30px; } .search_form form .search_btn { margin-right: -80px; width: 80px; background-color: #2C74E6; color: #fff; border: none; } .search_form form input { height: 42px; background-color: #fff; float: left; border-radius: 0; } mip-form input[type='submit'] { border: 0!important; border-radius: 0!important; } input[type="email"], input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], select, textarea { background-color: #fbfbfb; border: 1px #f2f2f2 solid; padding: 10px; width: 100%; min-width: 60px; font-size: 12px; font-family: '微软雅黑'; } span.lightbox-close { position: absolute; top: 12px; right: 12px; font-size: 30px; color: #a0ce4e; cursor: pointer; text-align: right; width: 50px; height: 50px; } </style>
-  <link rel="canonical" href="/view/{{.view.ID}}">
+   <style mip-custom=""> .q-content .topic-tab,.q-content .q-answer .as-user,.q-content .q-answer .as-comment-name,.profile-QAPress-tab .QAPress-tab-item { color: #3ca5f6 } .q-content .q-topic-wrap a:hover,.q-content .q-answer .as-action a:hover,.q-content .topic-tab:hover,.q-content .topic-title:hover { color: #4285f4 } .q-content .put-top,.q-content .topic-tab.current-tab,.q-content .q-answer .as-submit .btn-submit,.q-content .q-answer .as-comments-submit,.q-content .q-add-header .btn-post,.q-content .q-pagination .current,.q-btn-new,.profile-QAPress-tab .QAPress-tab-item.active,.q-mobile-ask a { background-color: #3ca5f6 } .q-content .q-answer .as-submit .btn-submit:hover,.q-content .q-answer .as-comments-submit:hover,.q-content .q-add-header .btn-post:hover,.q-content .topic-tab.current-tab:hover,.q-content .q-pagination a:hover,.q-btn-new:hover,.profile-QAPress-tab .QAPress-tab-item:hover,.q-mobile-ask a:hover { background-color: #4285f4 } .q-content .q-answer .as-comments-input:focus,.profile-QAPress-tab .QAPress-tab-item { border-color: #3ca5f6 } .profile-QAPress-tab .QAPress-tab-item:hover { border-color: #4285f4 }.page-template-page-fullnotitle.member-login #wrap,.page-template-page-fullnotitle.member-register #wrap{background-image:url('https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/login.jpg')}.j-share{position:fixed!important;top:50%!important}.header .logo img{max-height:40px}@media (max-width: 767px){.header .logo img{max-height:36px]}.footer-col-logo img{height:60px}.navbar-action #j-user-wrap,.navbar-action .login { display: inline-block; } .list.tabs .tab { display:inline-block; font-size: 16px; font-size: .16rem; color: #666; line-height: 48px; font-weight: 400; text-decoration: none; margin-right: 10px; cursor: pointer; } .list.tabs .tab:active{ color: #3ca5f6; font-weight: 500; border-bottom: 2px solid #3ca5f6; } mip-vd-tabs .mip-vd-tabs-nav-view .mip-vd-tabs-nav .mip-vd-tabs-nav-selected { border-bottom: 2px solid #38f; color: #38f; } mip-vd-tabs .mip-vd-tabs-scroll-touch{margin-top:-31px;} .apple1{background:url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/wx.png);} .footer-col-logo img{margin-right: 1px;} .footer-col {margin-left:10px;} .banner1{background: url(https://yyadcs.oss-cn-beijing.aliyuncs.com/wx/banner.jpg); height: 300px; display: table; } ul.pagination li { display: inline-block; } ul.pagination li:active{color:blue;}#right-sidebar { background: #2b2b2b !important; } mip-sidebar { z-index: 99999 !important; } mip-sidebar { position: fixed !important; top: 0; max-height: 100% !important; height: 100%; max-width: 80% !important; background-color: #efefef; min-width: 45px !important; overflow-x: hidden !important; overflow-y: auto !important; z-index: 9999 !important; -webkit-overflow-scrolling: touch; will-change: transform; display: none; } #right-sidebar ul li { height: 42px; line-height: 42px; padding: 0px 35px; font-size: 16px; border-bottom: 1px solid #111; border-top: 1px solid #444; } #right-sidebar ul li button { width: 30px; font-size: 22px; background: #2b2b2b; color: #fff; border: 1px solid #2b2b2b; } #right-sidebar ul li a { color: #fff; }.search-icon { color: #fff; background: none; border: none; } .search-icon1 { color: #000; background: none; border: none; } .search-index { position: relative; line-height: 85px; transition: all .3s ease-out 0s; } .popup { display: inline-block; position: fixed; z-index: 10002; text-align: center; top: 0; right: 0; left: 0; bottom: 0; height: 100%; width: 100%; background-color: rgba(0,0,0,0.2); } .search.popup .popup_main { width: 630px; } .popup .popup_main { padding: 40px 60px; border: 1px #eee solid; background-color: #fff; } .popup>section { position: absolute; top: 45%; left: 50%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%); } .search_form form { padding: 0 90px 0 0; overflow: hidden; margin: 0 auto; } .mip-layout-container { display: block; position: relative; } mip-form form { position: relative; } .search_form form input { height: 42px; background-color: #fff; float: left; border-radius: 0; } mip-form input[type='text'], mip-form input[type='input'], mip-form input[type='datetime'], mip-form input[type='email'], mip-form input[type='number'], mip-form input[type='tel'], mip-form input[type='url'] { padding-right: 30px; } .search_form form .search_btn { margin-right: -80px; width: 80px; background-color: #2C74E6; color: #fff; border: none; } .search_form form input { height: 42px; background-color: #fff; float: left; border-radius: 0; } mip-form input[type='submit'] { border: 0!important; border-radius: 0!important; } input[type="email"], input[type="email"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="url"], select, textarea { background-color: #fbfbfb; border: 1px #f2f2f2 solid; padding: 10px; width: 100%; min-width: 60px; font-size: 12px; font-family: '微软雅黑'; } span.lightbox-close { position: absolute; top: 12px; right: 12px; font-size: 30px; color: #a0ce4e; cursor: pointer; text-align: right; width: 50px; height: 50px; } </style>
+  <link rel="canonical" href="/view/{[.view.ID]}">
  </head>
  <body class="home blog">
   <header class="header ">
@@ -31,9 +31,9 @@
        <li><button on="tap:right-sidebar.close"> X </button></li>
        <li><a target="_blank" href="/">网站首页</a></li>
 
-       {{range $i, $v := .base.Typeinfo}}
-       <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a></li>
-       {{end}}	 
+       {[range $i, $v := .base.Typeinfo]}
+       <li><a target="_blank" href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}" title="{[$v.Name]}">{[$v.Name]}</a></li>
+       {[end]}	 
        <li><a target="_blank" href="/about" data-type="mip" data-title="关于我"
         title="关于我">关于我</a></li>
       </ul>
@@ -46,9 +46,9 @@
      <nav class="navbar-left primary-menu">
       <ul id="menu-justnews-menu" class="nav navbar-nav">
        <li class="menu-item "><a href="/">首页</a></li>
-       {{range $i, $v := .base.Typeinfo}}
-                        <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a></li>
-                        {{end}}	 
+       {[range $i, $v := .base.Typeinfo]}
+                        <li><a target="_blank" href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}" title="{[$v.Name]}">{[$v.Name]}</a></li>
+                        {[end]}	 
                         <li class="menu-item "><a href="/about">关于我</a></li>
       </ul>
      </nav>
@@ -68,23 +68,23 @@
      <div class="content">
       <ol class="breadcrumb entry-breadcrumb">
        <li class="home"><i class="fa fa-map-marker"></i><a href="">首页</a></li>
-       {{.typeinfo.Name}}
+       {[.typeinfo.Name]}
       </ol>
       <article class="post-855 post type-post status-publish format-standard has-post-thumbnail hentry category-7">
        <div class="entry">
         <div class="entry-head">
-         <h1 class="entry-title">{{.view.Title}}</h1>
+         <h1 class="entry-title">{[.view.Title]}</h1>
          <div class="entry-info">
-          <a class="nickname" href="/list/{{.view.Typeid}}">分类</a>
-          <span class="dot">•</span><span>{{.view.Ctime}}</span>
-          <span class="dot">•</span><span>阅读 {{.view.Click}}</span>
+          <a class="nickname" href="/list/{[.view.Typeid]}">分类</a>
+          <span class="dot">•</span><span>{[.view.Ctime]}</span>
+          <span class="dot">•</span><span>阅读 {[.view.Click]}</span>
          </div>
         </div>
         <div class="entry-content clearfix">
        <!--       <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
 	
 
-       {{.body}}
+       {[.body]}
 
    <!--       <mip-adsense ad-client="ca-pub-8152760122334813" ad-width="300" ad-height="300" ad-slot="3502334652" ad-format="auto"></mip-adsense>-->
          <div class=" bbm">
@@ -99,7 +99,7 @@
          <div class="entry-action">
           <div class="btn-zan" data-id="855">
            <i class="fa fa-thumbs-up"></i> 赞 
-           <span class="entry-action-num">({{.view.Click}})</span>
+           <span class="entry-action-num">({[.view.Click]})</span>
           </div>
           <div class="btn-dashang">
            <i class="fa fa-usd"></i> 关注 
@@ -129,7 +129,7 @@
       <div >
         <mip-form method="post"  url="/addComment" clear>
           <input type="text" name="name"  placeholder="名称">
-          <input type="hidden" name="vid" value="{{.view.ID}}">
+          <input type="hidden" name="vid" value="{[.view.ID]}">
           <textarea class="md-input"  name="body" placeholder="在此输入你想说的话"></textarea>
           <div submit-success>
             <template type="mip-mustache">
@@ -145,9 +145,9 @@
       </mip-form>
     </div>
     <div id="xhz-render-body">
-      {{range $i, $v := .view.Comment}}
-      <p>{{$v.Name}}:{{$v.Body}}</p>
-      {{end}}
+      {[range $i, $v := .view.Comment]}
+      <p>{[$v.Name]}:{[$v.Body]}</p>
+      {[end]}
     </div>
         </div>
        </div>
@@ -160,9 +160,9 @@
         <h3 class="widget-title"><span>推荐</span></h3>
         <ul>
 		
-          {{range $i, $v := .base.Tuijian}}
-         <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark" title="{{$v.Title}}">{{$v.Title}}</a></li>
-         {{end}}
+          {[range $i, $v := .base.Tuijian]}
+         <li><a target="_blank" href="/view/{[$v.ID]}" rel="bookmark" title="{[$v.Title]}">{[$v.Title]}</a></li>
+         {[end]}
         </ul>
        </div>
       </div>
@@ -171,17 +171,17 @@
        <h3 class="widget-title"><span>最新文章</span></h3>
        <ul>
 	   
-        {{range $i, $v := .base.New}}
+        {[range $i, $v := .base.New]}
         <li class="item">
          <div class="item-img">
-          <a href="/view/{{$v.ID}}">
-           <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" src="{{$v.Pic}}"></mip-img></a>
+          <a href="/view/{[$v.ID]}">
+           <mip-img layout="container" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" src="{[$v.Pic]}"></mip-img></a>
          </div>
          <div class="item-content">
-          <p class="item-title"><a href="/view/{{$v.ID}}">{{$v.Title}}</a></p>
-          <p class="item-date">{{$v.Ctime}}</p>
+          <p class="item-title"><a href="/view/{[$v.ID]}">{[$v.Title]}</a></p>
+          <p class="item-date">{[$v.Ctime]}</p>
          </div></li>
-         {{end}}
+         {[end]}
        </ul>
       </div>
      </aside>
@@ -196,19 +196,19 @@
      </div>
      <div class="footer-col footer-col-copy ">
       <ul class="footer-nav hidden-xs ">
-        {{range $i, $v := .base.Typeinfo}}
-        <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
-          {{end}}	 
+        {[range $i, $v := .base.Typeinfo]}
+        <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}" title="{[$v.Name]}">{[$v.Name]}</a>. </li>
+          {[end]}	 
           <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/about" data-type="mip"
             data-title="关于我" title="关于我">关于我</a>. </li>
       </ul>
       <div class="copyright ">
         Copyright &copy; 2020  版权所有 
         <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
-          {{.base.Tdk.Beian}}
+          {[.base.Tdk.Beian]}
       </a> |
-      <a href=" {{.base.Tdk.Goanurl}}" target="_blank " rel="nofollow noopener noreferrer ">
-          {{.base.Tdk.Goan}}
+      <a href=" {[.base.Tdk.Goanurl]}" target="_blank " rel="nofollow noopener noreferrer ">
+          {[.base.Tdk.Goan]}
       </a>
        </div>
      </div>
@@ -239,7 +239,7 @@
   <mip-fixed type="gototop">
    <mip-gototop></mip-gototop>
   </mip-fixed>
-  <mip-stats-baidu token="{{.base.Tdk.Tongjiid}}"></mip-stats-baidu>
+  <mip-stats-baidu token="{[.base.Tdk.Tongjiid]}"></mip-stats-baidu>
   <script src="https://c.mipcdn.com/static/v1/mip.js"></script>
   <script src="https://c.mipcdn.com/static/v1/mip-form/mip-form.js"></script>
 <script src="https://c.mipcdn.com/static/v1/mip-adsense/mip-adsense.js" type="text/javascript" charset="utf-8"></script>

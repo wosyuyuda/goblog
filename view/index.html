@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <title>{{.base.Tdk.Title}}-power by goblog</title>
-    <meta name="Keywords" content="{{.base.Tdk.Keyword}}">
-    <meta name="description" content="{{.base.Tdk.Description}}">
+    <title>{[.base.Tdk.Title]}-power by goblog</title>
+    <meta name="Keywords" content="{[.base.Tdk.Keyword]}">
+    <meta name="description" content="{[.base.Tdk.Description]}">
     <link rel="stylesheet" type="text/css" href="https://c.mipcdn.com/static/v1/mip.css" />
     <link rel="stylesheet" type="text/css" href="/static/just.css?1" />
     <style mip-custom="">
@@ -336,10 +336,10 @@
                     <ul>
                         <li><button on="tap:right-sidebar.close"> X </button></li>
                         <li><a target="_blank" href="/">网站首页</a></li>
-                        {{range $i, $v := .base.Typeinfo}}
-                        <li><a target="_blank" href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
-                                title="{{$v.Name}}">{{$v.Name}}</a></li>
-                        {{end}}
+                        {[range $i, $v := .base.Typeinfo]}
+                        <li><a target="_blank" href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}"
+                                title="{[$v.Name]}">{[$v.Name]}</a></li>
+                        {[end]}
                         <li><a target="_blank" href="/about" data-type="mip" data-title="关于我"
                             title="关于我">关于我</a></li>
                     </ul>
@@ -352,10 +352,10 @@
                 <nav class="navbar-left primary-menu">
                     <ul id="menu-justnews-menu" class="nav navbar-nav">
                         <li class="menu-item dropdown active"><a href="/">首页</a></li>
-                        {{range $i, $v := .base.Typeinfo}}
-                        <li class="menu-item "><a href="/list/{{$v.ID}}" data-type="mip" data-title="{{$v.Name}}"
-                                title="{{$v.Name}}" class="dropdown-toggle">{{$v.Name}}</a></li>
-                        {{end}}
+                        {[range $i, $v := .base.Typeinfo]}
+                        <li class="menu-item "><a href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}"
+                                title="{[$v.Name]}" class="dropdown-toggle">{[$v.Name]}</a></li>
+                        {[end]}
                         <li class="menu-item"><a href="/about">关于我</a></li>
                     </ul>
                 </nav>
@@ -380,26 +380,26 @@
                                     buttoncontroller="">
 
                                     <!-- 下面是推荐列表 -->
-                                    {{range $i, $v := .swiper}}
-                                    <li class="slide-item"><a target="_blank" data-type="mip" data-title="{{.Title}}"
-                                            href="/view/{{$v.ID}}">
-                                            <mip-img src="{{$v.Pic}}" layout="responsive" width="670" height="320">
+                                    {[range $i, $v := .swiper]}
+                                    <li class="slide-item"><a target="_blank" data-type="mip" data-title="{[.Title]}"
+                                            href="/view/{[$v.ID]}">
+                                            <mip-img src="{[$v.Pic]}" layout="responsive" width="670" height="320">
                                             </mip-img>
                                         </a>
                                         <h3 class="slide-title"><a target="_blank" data-type="mip"
-                                                data-title="{{$v.Title}}" href="/view/{{$v.ID}}">{{$v.Title}}</a></h3>
+                                                data-title="{[$v.Title]}" href="/view/{[$v.ID]}">{[$v.Title]}</a></h3>
                                     </li>
-                                    {{end}}
+                                    {[end]}
                                 </mip-carousel>
                             </ul>
                         </div>
                         <ul class="feature-post pull-right">
-                            {{range $i, $v := .base.Tuijian}}
-                            <li><a target="_blank" href="/view/{{$v.ID}}" data-type="mip" data-title="{{$v.Title}}"
-                                    title="{{.Title}}">
-                                    <mip-img layout="container" class="j-lazy" src="{{$v.Pic}}"></mip-img>
-                                </a><span>{{$v.Title}}</span></li>
-                            {{end}}
+                            {[range $i, $v := .base.Tuijian]}
+                            <li><a target="_blank" href="/view/{[$v.ID]}" data-type="mip" data-title="{[$v.Title]}"
+                                    title="{[.Title]}">
+                                    <mip-img layout="container" class="j-lazy" src="{[$v.Pic]}"></mip-img>
+                                </a><span>{[$v.Title]}</span></li>
+                            {[end]}
                         </ul>
                     </div>
 
@@ -426,90 +426,90 @@
                             <ul class="list tabs" id="j-newslist">
                                 <li class="tab">最新</li>
                                 <!--  下面是分类的列表 -->
-                                {{range $i, $v := .tt}} <li class="tab">{{$v.Name}}</li> {{end}}
+                                {[range $i, $v := .tt]} <li class="tab">{[$v.Name]}</li> {[end]}
                             </ul>
 
 
 
 
                             <ul class="article-list tab-list active">
-                                {{range $i, $v := .base.New}}
+                                {[range $i, $v := .base.New]}
                                 <li class="item">
                                     <div class="item-img">
-                                        <a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
-                                            data-title="{{$v.Title}}" title="{{$v.Title}}">
+                                        <a target="_blank" href="/view/{[$v.ID]}" data-type="mip"
+                                            data-title="{[$v.Title]}" title="{[$v.Title]}">
                                             <mip-img layout="container"
                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy "
-                                                src="{{$v.Pic}}" alt="{{$v.Title}}"></mip-img>
+                                                src="{[$v.Pic]}" alt="{[$v.Title]}"></mip-img>
                                         </a>
                                         <!-- 这里放分类的链接 -->
                                         <a target="_blank" class="item-category"
-                                            href="/list/{{$v.Typeid}}">{{$v.Typename}}
+                                            href="/list/{[$v.Typeid]}">{[$v.Typename]}
                                         </a>
                                     </div>
                                     <div class="item-content">
-                                        <h2 class="item-title"><a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
-                                                data-title="{{$v.Title}}" title="{{$v.Title}}">{{$v.Title}}</a></h2>
+                                        <h2 class="item-title"><a target="_blank" href="/view/{[$v.ID]}" data-type="mip"
+                                                data-title="{[$v.Title]}" title="{[$v.Title]}">{[$v.Title]}</a></h2>
                                         <div class="item-excerpt">
-                                            <p>{{$v.Content}}...</p>
+                                            <p>{[$v.Content]}...</p>
                                         </div>
                                         <div class="item-meta">
                                             <div class="item-meta-li author">
-                                                <a class="nickname" href="/list/{{$v.Typeid}}"
-                                                    target="_blank">{{$v.Typename}}</a>
+                                                <a class="nickname" href="/list/{[$v.Typeid]}"
+                                                    target="_blank">{[$v.Typename]}</a>
                                             </div>
-                                            <span class="item-meta-li date">{{$v.Ctime}}</span>
+                                            <span class="item-meta-li date">{[$v.Ctime]}</span>
                                             <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i>
-                                                {{$v.Click}}</span>
+                                                {[$v.Click]}</span>
                                         </div>
                                     </div>
                                 </li>
-                                {{end}}
+                                {[end]}
                                 <li class="load-more-wrap"><a target="_blank" data-type="mip"
                                         class="load-more j-load-more" data-title="" href="#">点击查看更多</a></li>
                             </ul>
 
 
                             <!-- 下面是分类的详细调用 -->
-                            {{range $v1 := .tt}}
+                            {[range $v1 := .tt]}
                             <ul class="article-list tab-list active">
-                                {{range $v := $v1.Views}}
+                                {[range $v := $v1.Views]}
                                 <li class="item">
                                     <div class="item-img">
-                                        <a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
-                                            data-title="{{$v.Title}}" title="{{$v.Title}}">
+                                        <a target="_blank" href="/view/{[$v.ID]}" data-type="mip"
+                                            data-title="{[$v.Title]}" title="{[$v.Title]}">
                                             <mip-img layout="container"
                                                 class="attachment-post-thumbnail size-post-thumbnail wp-post-image j-lazy "
-                                                src="{{$v.Pic}}" alt="{{$v.Title}}"></mip-img>
+                                                src="{[$v.Pic]}" alt="{[$v.Title]}"></mip-img>
                                         </a>
                                         <!-- 这里放分类的链接 -->
-                                        <a target="_blank" class="item-category" href="/list/{{$v1.ID}}">{{$v1.Name}}
+                                        <a target="_blank" class="item-category" href="/list/{[$v1.ID]}">{[$v1.Name]}
                                         </a>
                                     </div>
                                     <div class="item-content">
-                                        <h2 class="item-title"><a target="_blank" href="/view/{{$v.ID}}" data-type="mip"
-                                                data-title="{{$v.Title}}" title="{{$v.Title}}">{{$v.Title}}</a></h2>
+                                        <h2 class="item-title"><a target="_blank" href="/view/{[$v.ID]}" data-type="mip"
+                                                data-title="{[$v.Title]}" title="{[$v.Title]}">{[$v.Title]}</a></h2>
                                         <div class="item-excerpt">
-                                            <p>{{$v.Content}}...</p>
+                                            <p>{[$v.Content]}...</p>
                                         </div>
                                         <div class="item-meta">
                                             <div class="item-meta-li author">
-                                                <a class="nickname" href="/list/{{$v1.ID}}"
-                                                    target="_blank">{{$v1.Name}}</a>
+                                                <a class="nickname" href="/list/{[$v1.ID]}"
+                                                    target="_blank">{[$v1.Name]}</a>
                                             </div>
-                                            <span class="item-meta-li date">{{$v.Ctime}}</span>
+                                            <span class="item-meta-li date">{[$v.Ctime]}</span>
                                             <span class="item-meta-li views " title="访问"><i class="fa fa-eye"></i>
-                                                {{$v.Click}}</span>
+                                                {[$v.Click]}</span>
                                         </div>
                                     </div>
                                 </li>
-                                {{end}}
+                                {[end]}
                                 <li class="load-more-wrap"><a target="_blank" data-type="mip"
-                                        class="load-more j-load-more" data-title="{{$v1.Name}}"
-                                        href="/list/{{$v1.ID}}">点击查看更多</a></li>
+                                        class="load-more j-load-more" data-title="{[$v1.Name]}"
+                                        href="/list/{[$v1.ID]}">点击查看更多</a></li>
                             </ul>
 
-                            {{end}}
+                            {[end]}
 
 
 
@@ -530,10 +530,10 @@
                     <div id="views-2" class="widget widget_views">
                         <h3 class="widget-title">热门阅读</h3>
                         <ul>
-                            {{range $i, $v := .remen}}
-                            <li><a target="_blank" href="/view/{{$v.ID}}" rel="bookmark"
-                                    title="{{$v.Title}}">{{$v.Title}}</a></li>
-                            {{end}}
+                            {[range $i, $v := .remen]}
+                            <li><a target="_blank" href="/view/{[$v.ID]}" rel="bookmark"
+                                    title="{[$v.Title]}">{[$v.Title]}</a></li>
+                            {[end]}
                         </ul>
                     </div>
 
@@ -551,11 +551,11 @@
                         <div class="list list-links">
                             <a href="https://www.iq2.cn" data-type="mip" data-title="龙飞程序博客" title="龙飞程序博客"
                                 target="_blank">龙飞程序博客</a>
-                                {{range $i, $v := .link}}
-                                <a href="{{$v.Url}}" data-type="mip" 
-                                data-title="{{$v.Name}}" title="{{$v.Name}}"
-                                target="_blank">{{$v.Name}}</a>
-                                {{end}}
+                                {[range $i, $v := .link]}
+                                <a href="{[$v.Url]}" data-type="mip" 
+                                data-title="{[$v.Name]}" title="{[$v.Name]}"
+                                target="_blank">{[$v.Name]}</a>
+                                {[end]}
                         </div>
                     </div>
                 </div>
@@ -572,24 +572,24 @@
                 <div class="footer-col footer-col-copy ">
                     <ul class="footer-nav hidden-xs ">
 
-                        {{range $i, $v := .base.Typeinfo}}
-                        <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{{$v.ID}}"
-                                data-type="mip" data-title="{{$v.Name}}" title="{{$v.Name}}">{{$v.Name}}</a>. </li>
-                        {{end}}
+                        {[range $i, $v := .base.Typeinfo]}
+                        <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/list/{[$v.ID]}"
+                                data-type="mip" data-title="{[$v.Name]}" title="{[$v.Name]}">{[$v.Name]}</a>. </li>
+                        {[end]}
                         <li id="menu-item-152 " class="menu-item menu-item-152 "><a href="/about" data-type="mip"
                             data-title="关于我" title="关于我">关于我</a>. </li>
                     </ul>
                     <div class="copyright ">
                         Copyright &copy; 2020 龙飞博客版权所有--power by goblog
                         <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
-                            {{.base.Tdk.Beian}}
+                            {[.base.Tdk.Beian]}
                         </a> |
-                        <a href=" {{.base.Tdk.Goanurl}}" target="_blank " rel="nofollow noopener noreferrer ">
+                        <a href=" {[.base.Tdk.Goanurl]}" target="_blank " rel="nofollow noopener noreferrer ">
                             <mip-img 
                             width="20" 
                             height="20"
                             src="/static/ghs.png" ></mip-img>
-                               {{.base.Tdk.Goan}}
+                               {[.base.Tdk.Goan]}
                         </a>
                        
                     </div>
@@ -621,7 +621,7 @@
     <mip-fixed type="gototop">
         <mip-gototop></mip-gototop>
     </mip-fixed>
-    <mip-stats-baidu token="{{.base.Tdk.Tongjiid}}"></mip-stats-baidu><!-- 百度统计,后面集成ID放进去 -->
+    <mip-stats-baidu token="{[.base.Tdk.Tongjiid]}"></mip-stats-baidu><!-- 百度统计,后面集成ID放进去 -->
     <script src="https://c.mipcdn.com/static/v1/mip.js"></script>
     <script src="https://c.mipcdn.com/static/v1/mip-stats-baidu/mip-stats-baidu.js"></script>
     <script src="https://c.mipcdn.com/static/v1/mip-adsense/mip-adsense.js" type="text/javascript"
