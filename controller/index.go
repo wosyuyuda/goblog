@@ -42,7 +42,7 @@ func GetView(c *gin.Context) {
 		return
 	}
 	//fmt.Printf("wyth%+v", baseinfo)
-	server.F自己写的模板语法(c, "view.html", map[string]interface{}{
+	server.F自己写的模板方法(c, "view.html", map[string]interface{}{
 		"view": vvv,
 		"body": template.HTML(vvv.Body),
 		"base": baseinfo,
@@ -71,7 +71,7 @@ func About(c *gin.Context) {
 		return
 	}
 	//fmt.Printf("wyth%+v", baseinfo)
-	server.F自己写的模板语法(c, "about.html", map[string]interface{}{
+	server.F自己写的模板方法(c, "about.html", map[string]interface{}{
 		"view": vvv,
 		"body": template.HTML(vvv.Body),
 		"base": baseinfo,
@@ -130,7 +130,7 @@ func NewList(c *gin.Context) {
 	}
 	//fmt.Printf("base基础信息的内容是 %+v \n", baseinfo)
 	//server.ResDataError(searchinfo, err, c)
-	server.F自己写的模板语法(c, "newlist.html", map[string]interface{}{
+	server.F自己写的模板方法(c, "newlist.html", map[string]interface{}{
 		"list":     searchinfo, //分类信息,文章列表,当前分类信息
 		"baseinfo": baseinfo,   //最新,推荐,tdk,全部分类信息
 	})
@@ -159,7 +159,7 @@ func Index(c *gin.Context) {
 	var link []d.Link
 	dao.MDB.Find(&link)
 	//fmt.Printf("link%+v", link)
-	server.F自己写的模板语法(c, "index.html", map[string]interface{}{
+	server.F自己写的模板方法(c, "index.html", map[string]interface{}{
 		"base":   baseinfo, //基础信息,可替换上面四条
 		"tt":     tnew,
 		"remen":  util.Imgsrc(remen),

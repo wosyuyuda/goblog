@@ -2,6 +2,7 @@ package server
 
 import (
 	"bytes"
+	"goblog/config"
 	"html/template"
 	"io/ioutil"
 
@@ -11,8 +12,9 @@ import (
 //方便后期整一个模板的配置功能,
 func F自己写的模板方法(c *gin.Context, temp string, db interface{}) {
 	//此处可以加一个获取配置的模板目录方法，这样就能更智能些
-	temp = "temp/xing/" + temp
-	content, err := ioutil.ReadFile(temp)
+	tempdir := config.Configv.GetString("tempdir")
+	/* temp = "temp/xing/" + temp */
+	content, err := ioutil.ReadFile("temp" + tempdir + "/" + temp)
 	if err != nil {
 		RData(err, c)
 		return

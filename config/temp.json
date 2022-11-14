@@ -6,6 +6,7 @@
         "db": "gorm",
         "port": 3306
     },
+    "tempdir":"/xing",
     "tdk": {
         "title": "goblog",
         "keyword": "龙飞",
