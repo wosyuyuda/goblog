@@ -21,8 +21,8 @@ import (
 
 func main() {
 	//先以正常模式运行，下面去掉为调试模式
-	//gin.SetMode(gin.ReleaseMode)
-	gin.SetMode("debug")
+	gin.SetMode(gin.ReleaseMode)
+	//gin.SetMode("debug")
 	r := gin.Default()
 	r.Delims("{[", "]}")
 	r.NoRoute(con.Not404)                                                      //404页面
