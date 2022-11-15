@@ -99,8 +99,8 @@ func GetListV(views *model.ListInfo) (err error) {
 	return
 }
 
-//获取最新,推荐,tdk
-func Getinfo() (baseinfo model.BaseInfo, err error) {
+//获取最新,推荐,tdk,cid为分类id，用于后面判断当前分类是否选中
+func Getinfo(cid ...int) (baseinfo model.BaseInfo, err error) {
 	err = util.GetCache(util.BaseCache, &baseinfo)
 	if err != nil {
 		//fmt.Println("没有缓存")
@@ -108,6 +108,11 @@ func Getinfo() (baseinfo model.BaseInfo, err error) {
 		baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
 		baseinfo.Tdk = config.GetTDK()
 		err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息
+		if len(cid) != 0 {
+			for k := range baseinfo.Typeinfo {
+				baseinfo.Typeinfo[k].IsTrue = baseinfo.Typeinfo[k].ID == cid[0]
+			}
+		}
 		util.SetCache(util.BaseCache, &baseinfo)
 	}
 	return

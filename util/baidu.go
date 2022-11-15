@@ -9,7 +9,7 @@ import (
 )
 
 //百度链接自动提交,传文章ID
-func BaiduLinksubmit(id uint) {
+func BaiduLinksubmit(id int) {
 	config := config.Configv
 	info := config.GetStringMapString("baidu")
 	//如果没有设置域名那么直接返回

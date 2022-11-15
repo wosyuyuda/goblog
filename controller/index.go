@@ -24,46 +24,47 @@ import (
 
 //这里是详情页
 func GetView(c *gin.Context) {
-	vvv := util.GetView(c.Param("id"), 1) //获取文章详情
-	if vvv.ID == 0 {
+	arc := util.GetView(c.Param("id"), 1) //获取文章详情
+	if arc.ID == 0 {
 		Not404(c)
 		c.Abort()
 		return
 	}
-	vvv.Ctime = time.Unix(int64(vvv.CreatedAt), 0).Format("2006-01-02 15:04:05")
-	err := server.ViewComment(&vvv)
+	arc.Ctime = time.Unix(int64(arc.CreatedAt), 0).Format("2006-01-02 15:04:05")
+	err := server.ViewComment(&arc)
 	if err != nil {
 		server.Fail(c)
 		return
 	}
-	baseinfo, err := server.Getinfo()
+	baseinfo, err := server.Getinfo(arc.ID)
 	if err != nil {
 		server.Fail(c)
 		return
 	}
+
 	//fmt.Printf("wyth%+v", baseinfo)
 	server.F自己写的模板方法(c, "view.html", map[string]interface{}{
-		"view": vvv,
-		"body": template.HTML(vvv.Body),
+		"view": arc,
+		"body": template.HTML(arc.Body),
 		"base": baseinfo,
 	})
 	/* c.HTML(http.StatusOK, "view.html", map[string]interface{}{
-		"view": vvv,
-		"body": template.HTML(vvv.Body),
+		"view": arc,
+		"body": template.HTML(arc.Body),
 		"base": baseinfo,
 	}) */
 }
 
 //获取个人简介信息
 func About(c *gin.Context) {
-	vvv := util.GetView("0", 2) //个人简介
-	if vvv.ID == 0 {
+	arc := util.GetView("0", 2) //个人简介
+	if arc.ID == 0 {
 		Not404(c)
 		c.Abort()
 		return
 	}
-	tm := time.Unix(int64(vvv.CreatedAt), 0)
-	vvv.Ctime = tm.Format("2006-01-02 15:04:05")
+	tm := time.Unix(int64(arc.CreatedAt), 0)
+	arc.Ctime = tm.Format("2006-01-02 15:04:05")
 
 	baseinfo, err := server.Getinfo()
 	if err != nil {
@@ -72,8 +73,8 @@ func About(c *gin.Context) {
 	}
 	//fmt.Printf("wyth%+v", baseinfo)
 	server.F自己写的模板方法(c, "about.html", map[string]interface{}{
-		"view": vvv,
-		"body": template.HTML(vvv.Body),
+		"view": arc,
+		"body": template.HTML(arc.Body),
 		"base": baseinfo,
 	})
 }

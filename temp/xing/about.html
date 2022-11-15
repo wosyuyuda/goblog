@@ -29,7 +29,7 @@
      <mip-sidebar id="right-sidebar" layout="nodisplay" side="right" class="mip-layout-nodisplay mip-element" aria-hidden="true">
       <ul>
        <li><button on="tap:right-sidebar.close"> X </button></li>
-       <li><a target="_blank" href="/">网站首页</a></li>
+       <li><a target="_blank" href="/">首页</a></li>
 
        {[range $i, $v := .base.Typeinfo]}
        <li><a target="_blank" href="/list/{[$v.ID]}" data-type="mip" data-title="{[$v.Name]}" title="{[$v.Name]}">{[$v.Name]}</a></li>
