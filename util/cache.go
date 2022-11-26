@@ -1,12 +1,15 @@
 package util
 
 import (
-	"encoding/json"
+	"errors"
 	"fmt"
 	"goblog/model"
 	"io/ioutil"
 	"os"
 	"path"
+	"time"
+
+	"github.com/patrickmn/go-cache"
 )
 
 const (
@@ -16,27 +19,25 @@ const (
 	ViewCacheNum = "viewcache-%d"   //文章详情的缓存
 )
 
+var (
+	MCA *cache.Cache
+)
+
+func init() {
+	MCA = cache.New(180*time.Minute, 360*time.Minute)
+}
+
 //简单的文件缓存,缓存首页与列表信息,先不整过期时间
 func SetCache(key string, data interface{}) {
-	studata, _ := json.Marshal(data)
-	//fmt.Println(string(studata))
-	fileName := "cache/" + key
-	dstFile, err := os.Create(fileName)
-	if err != nil {
-		fmt.Println(err.Error())
-		return
-	}
-	defer dstFile.Close()
-	dstFile.WriteString(string(studata))
+	MCA.Set(key, data, cache.DefaultExpiration)
 }
 
 //获取缓存,stru请转结构体,如果获取不到err!=nil
-func GetCache(key string, stru interface{}) (err error) {
-	f, err := ioutil.ReadFile("cache/" + key)
-	if err != nil {
-		return
+func GetCache(key string) (stru interface{}, err error) {
+	stru, found := MCA.Get(key)
+	if !found {
+		err = errors.New("不存在")
 	}
-	err = json.Unmarshal(f, stru)
 	return
 }
 
@@ -47,16 +48,28 @@ func SetListCache(views *model.ListInfo) {
 }
 
 //获取列表的缓存
-func GetListCache(views *model.ListInfo) (err error) {
+func GetListCache() (views *model.ListInfo, err error) {
 	str := fmt.Sprintf(ListCache, views.Page.ID, views.Page.Page)
-	err = GetCache(str, views)
+	v1, found := MCA.Get(str)
+	if !found {
+		err = errors.New("未找到缓存")
+		return
+	}
+	views = v1.(*model.ListInfo)
+	//err = GetCache(str, views)
 	return
 }
 
 //获取文章的缓存
-func GetViewCache(id string, v *model.View) (err error) {
+func GetViewCache(id string) (v *model.View, err error) {
 	str := fmt.Sprintf(ViewCache, id)
-	err = GetCache(str, v)
+	v1, found := MCA.Get(str)
+	if !found {
+		err = errors.New("未找到缓存")
+		return
+	}
+	v = v1.(*model.View)
+	//err = GetCache(str, v)
 	return
 }
 

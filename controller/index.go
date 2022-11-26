@@ -31,12 +31,12 @@ func GetView(c *gin.Context) {
 		return
 	}
 	arc.Ctime = time.Unix(int64(arc.CreatedAt), 0).Format("2006-01-02 15:04:05")
-	err := server.ViewComment(&arc)
+	err := server.ViewComment(arc)
 	if err != nil {
 		server.Fail(c)
 		return
 	}
-	baseinfo, err := server.Getinfo(arc.ID)
+	baseinfo, err := server.F文档获取基础信息并更新(arc)
 	if err != nil {
 		server.Fail(c)
 		return

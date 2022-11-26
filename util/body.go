@@ -34,8 +34,9 @@ func GetTypeCount(id string) int64 {
 }
 
 //获取当前文章信息，如果up为1那么点击数+1
-func GetView(id string, up int) (dd d.View) {
-	err := GetViewCache(id, &dd)
+func GetView(id string, up int) (dd *d.View) {
+	//dd = new(d.View)
+	dd, err := GetViewCache(id)
 	if err != nil {
 		if id != "0" {
 			dao.MDB.Model(&d.View{}).Where("id = ?", id).Find(&dd)
@@ -44,7 +45,7 @@ func GetView(id string, up int) (dd d.View) {
 		}
 		fmt.Println(dd)
 		if dd.ID != 0 {
-			SetViewCache(&dd)
+			SetViewCache(dd)
 		}
 	}
 	if up == 1 {

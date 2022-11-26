@@ -75,7 +75,7 @@ func GetListV(views *model.ListInfo) (err error) {
 	if pa.Num == 0 {
 		pa.Num = 10
 	}
-	err = util.GetListCache(views)
+	views, err = util.GetListCache()
 	if err == nil {
 		return
 	}
@@ -100,20 +100,31 @@ func GetListV(views *model.ListInfo) (err error) {
 }
 
 //获取最新,推荐,tdk,cid为分类id，用于后面判断当前分类是否选中
-func Getinfo(cid ...int) (baseinfo model.BaseInfo, err error) {
-	err = util.GetCache(util.BaseCache, &baseinfo)
+func Getinfo() (baseinfo *model.BaseInfo, err error) {
+	base, err := util.GetCache(util.BaseCache)
 	if err != nil {
+		baseinfo = new(model.BaseInfo)
 		//fmt.Println("没有缓存")
 		baseinfo.New = util.Imgsrc(GetViewlist("0", 1))      //最新
 		baseinfo.Tuijian = util.Imgsrc(GetViewlist("-4", 1)) //推荐
 		baseinfo.Tdk = config.GetTDK()
 		err = dao.MDB.Where("status = ?", "1").Find(&baseinfo.Typeinfo).Error //获取全部分类信息
-		if len(cid) != 0 {
-			for k := range baseinfo.Typeinfo {
-				baseinfo.Typeinfo[k].IsTrue = baseinfo.Typeinfo[k].ID == cid[0]
-			}
+		util.SetCache(util.BaseCache, baseinfo)
+	} else {
+		baseinfo = base.(*model.BaseInfo)
+	}
+	return
+}
+func F文档获取基础信息并更新(arc *model.View) (baseinfo *model.BaseInfo, err error) {
+	baseinfo, err = Getinfo()
+	if err != nil {
+		return
+	}
+	for k := range baseinfo.Typeinfo {
+		baseinfo.Typeinfo[k].IsTrue = baseinfo.Typeinfo[k].ID == arc.ID
+		if baseinfo.Typeinfo[k].ID == arc.ID {
+			arc.Typename = baseinfo.Typeinfo[k].Name
 		}
-		util.SetCache(util.BaseCache, &baseinfo)
 	}
 	return
 }
