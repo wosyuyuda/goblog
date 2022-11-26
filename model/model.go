@@ -26,6 +26,7 @@ type View struct {
 	Content   string         `gorm:"type:varchar(500);" json:"content" form:"content"` //文章的简介
 	Body      string         `gorm:"type:varchar(5000);" json:"body" form:"body"`      //详细的内容
 	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
+	Tempdir   string         `gorm:"-" json:"tempdir" form:"tempdir"`
 	Typename  string         `gorm:"-" json:"typename" form:"typename"`
 	Comment   []Comment      `gorm:"-" json:"comment" form:"comment"` //评论列表
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
@@ -56,13 +57,15 @@ type ViewJson struct {
 
 //分类表
 type Tp struct {
-	ID     int        `gorm:"primarykey" json:"id" form:"id"`
-	Name   string     `gorm:"size:255;" form:"name" json:"name"`               //名称
-	Level  int        `gorm:"size:10;default:0;" form:"level" json:"level"`    //分类排序
-	Info   string     `gorm:"size:255;" form:"info" json:"info"`               //介绍
-	Status string     `gorm:"size:1;default:'1';" form:"status" json:"status"` //状态,默认1,0表示删除
-	IsTrue bool       `gorm:"-" `                                              //是否选中
-	Views  []ViewJson `gorm:"-"`
+	ID         int        `gorm:"primarykey" json:"id" form:"id"`
+	Name       string     `gorm:"size:255;" form:"name" json:"name"`                       //名称
+	Level      int        `gorm:"size:10;default:0;" form:"level" json:"level"`            //分类排序
+	Info       string     `gorm:"size:255;" form:"info" json:"info"`                       //介绍
+	Status     string     `gorm:"size:1;default:'1';" form:"status" json:"status"`         //状态,默认1,0表示删除
+	Tempdir    string     `gorm:"type:varchar(32);" form:"tempdir" json:"tempdir"`         //分类模板目录
+	ArcTempdir string     `gorm:"type:varchar(32);" form:"arc_tempdir" json:"arc_tempdir"` //内容模板目录
+	IsTrue     bool       `gorm:"-" `                                                      //是否选中
+	Views      []ViewJson `gorm:"-"`
 }
 
 //系统设置

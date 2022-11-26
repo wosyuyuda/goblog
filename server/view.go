@@ -120,10 +120,14 @@ func F文档获取基础信息并更新(arc *model.View) (baseinfo *model.BaseIn
 	if err != nil {
 		return
 	}
+	arc.Tempdir = "view.html"
 	for k := range baseinfo.Typeinfo {
 		baseinfo.Typeinfo[k].IsTrue = baseinfo.Typeinfo[k].ID == arc.ID
 		if baseinfo.Typeinfo[k].ID == arc.ID {
 			arc.Typename = baseinfo.Typeinfo[k].Name
+			if baseinfo.Typeinfo[k].ArcTempdir == "" {
+				arc.Tempdir = baseinfo.Typeinfo[k].ArcTempdir
+			}
 		}
 	}
 	return

@@ -41,9 +41,9 @@ func GetView(c *gin.Context) {
 		server.Fail(c)
 		return
 	}
-
+	//获取一下当前的目录
 	//fmt.Printf("wyth%+v", baseinfo)
-	server.F自己写的模板方法(c, "view.html", map[string]interface{}{
+	server.F自己写的模板方法(c, arc.Tempdir, map[string]interface{}{
 		"view": arc,
 		"body": template.HTML(arc.Body),
 		"base": baseinfo,
@@ -58,13 +58,10 @@ func GetView(c *gin.Context) {
 //获取个人简介信息
 func About(c *gin.Context) {
 	arc := util.GetView("0", 2) //个人简介
-	if arc.ID == 0 {
-		Not404(c)
-		c.Abort()
-		return
+	if arc.ID != 0 {
+		tm := time.Unix(int64(arc.CreatedAt), 0)
+		arc.Ctime = tm.Format("2006-01-02 15:04:05")
 	}
-	tm := time.Unix(int64(arc.CreatedAt), 0)
-	arc.Ctime = tm.Format("2006-01-02 15:04:05")
 
 	baseinfo, err := server.Getinfo()
 	if err != nil {
@@ -130,8 +127,12 @@ func NewList(c *gin.Context) {
 		searchinfo.Listinfo.Info = "搜索:" + searchinfo.Page.Keyword + "的搜索结果"
 	}
 	//fmt.Printf("base基础信息的内容是 %+v \n", baseinfo)
+	temp := "newlist.html" //默认的模板目录
+	if searchinfo.Listinfo.Tempdir != "" {
+		temp = searchinfo.Listinfo.Tempdir
+	}
 	//server.ResDataError(searchinfo, err, c)
-	server.F自己写的模板方法(c, "newlist.html", map[string]interface{}{
+	server.F自己写的模板方法(c, temp, map[string]interface{}{
 		"list":     searchinfo, //分类信息,文章列表,当前分类信息
 		"baseinfo": baseinfo,   //最新,推荐,tdk,全部分类信息
 	})
