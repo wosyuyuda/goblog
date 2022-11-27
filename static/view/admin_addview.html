@@ -44,12 +44,12 @@
                     </div>
                 </div>
 
-                <div class="row cl"  v-if="isuser==0">
+                <div class="row cl" v-if="isuser==0">
                     <label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
                     <div class="formControls col-xs-8 col-sm-9">
                         <button type="button" v-for="(item,index) in types"
                             :class="item.id == arcdata.typeid ?'layui-btn layui-btn-normal':'layui-btn layui-btn-primary'"
-                            @click='sztype(item.id)'>{[ item.name ]}
+                            @click='sztype(item.id)'>{{ item.name }}
                         </button>
                     </div>
                 </div>
@@ -317,17 +317,17 @@
                     if (getQueryVariable('type') == 'edit') {
                         url = "/admin/addView?type=edit";
                     }
-                    
+
                     this.arcdata.tuijian = this.arcdata.tuijian ? 1 : 0;
                     this.arcdata.swiper = this.arcdata.swiper ? 1 : 0;
-                    if(this.isuser==1||this.isuser==2){
-                        url = "/admin/edit/user?type="+that.isuser;  //编辑用户信息
-                        this.arcdata.tuijian=3
+                    if (this.isuser == 1 || this.isuser == 2) {
+                        url = "/admin/edit/user?type=" + that.isuser;  //编辑用户信息
+                        this.arcdata.tuijian = 3
                     }
                     this.arcdata.content = b.replace(/(<([^>]+)>)/ig, "").slice(0, 120)
-                    b = b.replace(/<img ([^>]*)\/>/ig, "<mip-img $1></mip-img>"); //正则替换img的内容到mip图片
-                    this.arcdata.body = b.replace(/<img ([^>]*)><\/img>/ig, "<mip-img $1></mip-img>");
-
+                    /*  b = b.replace(/<img ([^>]*)\/>/ig, "<mip-img $1></mip-img>"); //正则替换img的内容到mip图片
+                     this.arcdata.body = b.replace(/<img ([^>]*)><\/img>/ig, "<mip-img $1></mip-img>"); */
+                    this.arcdata.body = b
                     this.arcdata.typeid = this.arcdata.typeid != 0 ? this.arcdata.typeid : this.types[0].id
                     console.log(this.arcdata);
                     //return;
@@ -335,7 +335,7 @@
                         if (res.code == 200) {
                             layer.msg(res.msg);
                             that.arcdata = [];
-                           // return
+                            // return
                             setTimeout(function () { window.location.reload() }, 500);
                         } else {
                             layer.msg('更新失败')
@@ -349,7 +349,7 @@
                 let tp = getQueryVariable('type')
                 if (tp == 'edit') {//如果是编辑
                     let id = getQueryVariable('id')
-                    if (id > 1) {
+                    if (id > 0) {
                         $.get("/admin/view/" + id, function (res, status) {
                             if (status == 'success' && res.code == 200) {
                                 console.log(res.data);
@@ -357,7 +357,7 @@
                                 ue.ready(function () {
                                     //设置编辑器的内容
                                     let body = res.data.body
-                                    body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>");
+                                    /* body = body.replace(/<mip-img ([^>]*)><\/mip-img>/ig, "<img $1></img>"); */
                                     ue.setContent(body);
                                 });
                                 that.types = res.type
@@ -383,10 +383,10 @@
                             if (status == 'success' && res.code == 200) {
                                 if (res.data.createtime != 0) {
                                     delete res.data.tps
-                                delete res.data.content
-                                delete res.data.CreatedAt
-                                delete res.data.UpdatedAt
-                                delete res.data.DeletedAt
+                                    delete res.data.content
+                                    delete res.data.CreatedAt
+                                    delete res.data.UpdatedAt
+                                    delete res.data.DeletedAt
                                     ue = UE.getEditor('editor');
                                     ue.ready(function () {
                                         //设置编辑器的内容
@@ -395,7 +395,7 @@
                                         ue.setContent(body);
                                     });
                                     that.arcdata = res.data;
-                                }else{
+                                } else {
                                     that.isuser = 2
                                 }
                             } else {
