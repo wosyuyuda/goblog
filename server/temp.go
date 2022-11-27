@@ -16,7 +16,7 @@ func F自己写的模板方法(c *gin.Context, temp string, db interface{}) {
 	tempdir := config.Configv.GetString("tempdir")
 	/* temp = "temp/xing/" + temp */
 	dir := "temp" + tempdir + "/"
-	//判断当前环境是否为手机，判断是否开户了手机端支持
+	//判断当前环境是否为手机，判断是否开户了手机端支持。。
 	if config.IsMobile == 1 && util.F判断是否为手机访问(c.GetHeader("User-Agent")) {
 		dir += "m/"
 	}
