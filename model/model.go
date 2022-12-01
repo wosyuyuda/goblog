@@ -23,7 +23,7 @@ type View struct {
 	Swiper    int8           `gorm:"size:1" json:"swiper" form:"swiper"`               //是否为轮播图
 	Pic       string         `gorm:"type:varchar(255);" json:"pic" form:"pic"`         //文章的缩略图
 	Status    int8           `gorm:"size:1;default:1;" json:"status" form:"status"`    //文章状态，0删除，1正常
-	Content   string         `gorm:"type:varchar(500);" json:"content" form:"content"` //文章的简介
+	Content   string         `gorm:"type:varchar(256);" json:"content" form:"content"` //文章的简介
 	Body      string         `gorm:"type:varchar(5000);" json:"body" form:"body"`      //详细的内容
 	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
 	Tempdir   string         `gorm:"-" json:"tempdir" form:"tempdir"`
@@ -37,7 +37,7 @@ type Comment struct {
 	ID        int    `gorm:"primarykey"  json:"id" form:"id"`
 	CreatedAt int    `gorm:"size:255" json:"createtime" form:"createtime"`
 	Status    int8   `gorm:"size:1;default:1;" json:"status" form:"status"` //状态，0删除，1正常,2审核
-	Body      string `gorm:"type:varchar(5000);" json:"body" form:"body"`   //详细的内容
+	Body      string `gorm:"type:varchar(512);" json:"body" form:"body"`    //详细的内容
 	Vid       int    `gorm:"index"  json:"vid" form:"vid"`                  //发表评论的ID
 	Name      string `gorm:"size:24" json:"name" form:"name"`               //发表评论的id
 }
@@ -64,7 +64,9 @@ type Tp struct {
 	Status     string     `gorm:"size:1;default:'1';" form:"status" json:"status"`         //状态,默认1,0表示删除
 	Tempdir    string     `gorm:"type:varchar(32);" form:"tempdir" json:"tempdir"`         //分类模板目录
 	ArcTempdir string     `gorm:"type:varchar(32);" form:"arc_tempdir" json:"arc_tempdir"` //内容模板目录
+	SkipPath   string     `gorm:"type:varchar(128);" form:"skip_path" json:"skip_path"`    //跳转的路径
 	IsTrue     bool       `gorm:"-" `                                                      //是否选中
+	IsTz       bool       `gorm:"-" `                                                      //是否跳转
 	Views      []ViewJson `gorm:"-"`
 }
 

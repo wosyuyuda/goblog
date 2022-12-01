@@ -129,6 +129,9 @@ func F文档获取基础信息并更新(arc *model.View) (baseinfo *model.BaseIn
 				arc.Tempdir = baseinfo.Typeinfo[k].ArcTempdir
 			}
 		}
+		if baseinfo.Typeinfo[k].SkipPath != "" {
+			baseinfo.Typeinfo[k].IsTz = true
+		}
 	}
 	return
 }

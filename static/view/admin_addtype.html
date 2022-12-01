@@ -5,10 +5,10 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>添加分类</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  
+
     <link rel="stylesheet" href="/static/layui/css/layui.css" media="all">
     <script src="/static/layui/layui.js" charset="utf-8"></script>
-       <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
     <script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
 </head>
 
@@ -54,6 +54,33 @@
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">跳转链接</label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" autocomplete="off" class="layui-input"
+                            placeholder="如果是跳转第三方则填写，否则忽略" v-model="arcdata.skip_path">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类模板路径</label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" autocomplete="off" class="layui-input"
+                            placeholder="如果是非默认的目录，否则忽略" v-model="arcdata.tempdir">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">文章模板路径</label>
+                <div class="layui-input-block">
+                    <div class="layui-input-inline">
+                        <input type="tel" name="phone" autocomplete="off" class="layui-input"
+                            placeholder="如果是非默认的目录，否则忽略" v-model="arcdata.arc_tempdir">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">分类排序</label>
                 <div class="layui-input-block">
                     <div class="layui-input-inline">
@@ -68,8 +95,7 @@
                     <div class="layui-input-inline">
                         <a @click='tj()' href="javascript:void(0);" class='layui-btn'><i
                                 class="layui-icon layui-icon-release"></i> 提交</a>
-                                <button type="button" class="layui-btn layui-btn-danger "
-                                @click='del()'>删除
+                        <button type="button" class="layui-btn layui-btn-danger " @click='del()'>删除
                         </button>
                     </div>
                 </div>
@@ -118,11 +144,11 @@
                     this.arcdata = this.types[index]
                 }
             },
-            del(){
-                let that=this
-                if(that.arcdata.id==0)return;
-                 //console.log(this.arcdata); return;
-                $.get("/admin/del/"+that.arcdata.id, {}, function (res) {
+            del() {
+                let that = this
+                if (that.arcdata.id == 0) return;
+                //console.log(this.arcdata); return;
+                $.get("/admin/del/" + that.arcdata.id, {}, function (res) {
                     if (res.code == 200) {
                         layer.msg(res.msg);
                         that.arcdata = [];
@@ -148,7 +174,7 @@
                     if (res.code == 200) {
                         layer.msg(res.msg);
                         that.arcdata = [];
-                         window.location.reload()
+                        window.location.reload()
                     } else {
                         layer.msg('更新失败')
                     }
