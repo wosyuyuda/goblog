@@ -31,6 +31,7 @@ func GetView(c *gin.Context) {
 		return
 	}
 	arc.Ctime = time.Unix(int64(arc.CreatedAt), 0).Format("2006-01-02 15:04:05")
+	arc.Isapp = arc.Appid != "" //如果appid不为空，那么就是推荐小程序，可以直接生成
 	err := server.ViewComment(arc)
 	if err != nil {
 		server.Fail(c)

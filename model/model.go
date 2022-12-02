@@ -17,17 +17,19 @@ type View struct {
 	UpdatedAt int            `gorm:"size:255" json:"updatetime" form:"updatetime"`
 	DeletedAt gorm.DeletedAt `gorm:"index"`
 	Typeid    int            `gorm:"size:10"  json:"typeid" form:"typeid"`             //分类的ID，关联
-	Title     string         `gorm:"type:varchar(255);" json:"title" form:"title"`     //标题
 	Click     int            `gorm:"size:10" json:"click"`                             //点击量
 	Tuijian   int8           `gorm:"size:1" json:"tuijian" form:"tuijian"`             //是否为推荐
 	Swiper    int8           `gorm:"size:1" json:"swiper" form:"swiper"`               //是否为轮播图
-	Pic       string         `gorm:"type:varchar(255);" json:"pic" form:"pic"`         //文章的缩略图
 	Status    int8           `gorm:"size:1;default:1;" json:"status" form:"status"`    //文章状态，0删除，1正常
+	Title     string         `gorm:"type:varchar(255);" json:"title" form:"title"`     //标题
+	Appid     string         `gorm:"type:char(16);" json:"appid" form:"appid"`         //appid，如果是推荐小程序的文章
+	Pic       string         `gorm:"type:varchar(255);" json:"pic" form:"pic"`         //文章的缩略图
 	Content   string         `gorm:"type:varchar(256);" json:"content" form:"content"` //文章的简介
-	Body      string         `gorm:"type:varchar(5000);" json:"body" form:"body"`      //详细的内容
+	Body      string         `gorm:"type:longtext;" json:"body" form:"body"`           //详细的内容
 	Ctime     string         `gorm:"-" json:"ctime" form:"ctime"`
 	Tempdir   string         `gorm:"-" json:"tempdir" form:"tempdir"`
 	Typename  string         `gorm:"-" json:"typename" form:"typename"`
+	Isapp     bool           `gorm:"-" json:"isapp" form:"isapp"`     //是否为app，如果带了appid，那么就有，就生成二维码
 	Comment   []Comment      `gorm:"-" json:"comment" form:"comment"` //评论列表
 	//Tps      Tp     `json:"tps" gorm:"-"`                           //这里放分类信息types
 }
