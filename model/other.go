@@ -24,9 +24,9 @@ type PageList struct {
 
 //列表信息
 type ListInfo struct {
-	Page     PageList   //分类信息
-	Views    []ViewJson //文章列表
-	Listinfo Tp         //当前分类
+	Page     PageList //分类信息
+	Views    []View   //文章列表
+	Listinfo Tp       //当前分类
 }
 
 //最新,推荐,tdk信息

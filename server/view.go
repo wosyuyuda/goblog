@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"goblog/config"
 	"goblog/dao"
 	"goblog/model"
@@ -78,6 +79,8 @@ func GetListV(views *model.ListInfo) (err error) {
 	views, err = util.GetListCache(&pa)
 	if err == nil {
 		return
+	} else {
+		views = new(model.ListInfo)
 	}
 	//fmt.Printf("info%+v", views)
 	JoinDao := dao.MDB.Table("views").Select("views.id,views.title,views.click,views.created_at,views.pic,views.typeid,views.content, tps.name as Typename").Joins("left join tps on tps.id = views.typeid")
@@ -93,7 +96,8 @@ func GetListV(views *model.ListInfo) (err error) {
 	}
 	db = db.Limit(pa.Num).Offset((pa.Page - 1) * pa.Num).Order("created_at desc")
 	err = db.Find(&views.Views).Count(&pa.Sum).Error
-	views.Page.Sum = pa.Sum
+	views.Page = pa
+	fmt.Println("找到的数据列表是:", views.Views)
 	util.PagesinfoTo(views)  //处理一下页面分类信息
 	util.SetListCache(views) //设置进缓存
 	return
@@ -125,7 +129,7 @@ func F文档获取基础信息并更新(arc *model.View) (baseinfo *model.BaseIn
 		baseinfo.Typeinfo[k].IsTrue = baseinfo.Typeinfo[k].ID == arc.ID
 		if baseinfo.Typeinfo[k].ID == arc.ID {
 			arc.Typename = baseinfo.Typeinfo[k].Name
-			if baseinfo.Typeinfo[k].ArcTempdir == "" {
+			if baseinfo.Typeinfo[k].ArcTempdir != "" {
 				arc.Tempdir = baseinfo.Typeinfo[k].ArcTempdir
 			}
 		}

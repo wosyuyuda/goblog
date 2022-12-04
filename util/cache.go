@@ -24,7 +24,7 @@ var (
 )
 
 func init() {
-	MCA = cache.New(180*time.Minute, 360*time.Minute)
+	MCA = cache.New(30*time.Minute, 60*time.Minute)
 }
 
 //简单的文件缓存,缓存首页与列表信息,先不整过期时间
@@ -44,12 +44,13 @@ func GetCache(key string) (stru interface{}, err error) {
 //设置列表页的缓存
 func SetListCache(views *model.ListInfo) {
 	str := fmt.Sprintf(ListCache, views.Page.ID, views.Page.Page)
+	fmt.Println("缓存文件是:", str)
 	SetCache(str, views)
 }
 
 //获取列表的缓存
 func GetListCache(page *model.PageList) (views *model.ListInfo, err error) {
-	str := fmt.Sprintf(ListCache, views.Page.ID, views.Page.Page)
+	str := fmt.Sprintf(ListCache, page.ID, page.Page)
 	fmt.Println("缓存文件是:", str)
 	v1, found := MCA.Get(str)
 	if !found {
