@@ -37,14 +37,21 @@ func Ini(p *model.PageList) {
 
 //把列表信息处理一下
 func PagesinfoTo(p *model.ListInfo) {
-	v := p.Views
-	for i := 0; i < len(v); i++ {
+
+	for k, v := range p.Views {
+		if v.Pic == "" {
+			p.Views[k].Pic = "/static/no-images.jpg"
+		}
+		tm := time.Unix(int64(v.CreatedAt), 0)
+		p.Views[k].Ctime = tm.Format("2006-01-02 15:04:05")
+	}
+	/* for i := 0; i < len(v); i++ {
 		if len(v[i].Pic) == 0 {
 			v[i].Pic = "/static/no-images.jpg"
 		}
 		tm := time.Unix(int64(v[i].CreatedAt), 0)
 		v[i].Ctime = tm.Format("2006-01-02 15:04:05")
-	}
+	} */
 	//处理一下上一页下一页
 	page := p.Page
 	if page.Page == 0 {

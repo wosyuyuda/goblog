@@ -7,6 +7,7 @@ package controller
  */
 
 import (
+	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -14,6 +15,7 @@ import (
 
 	"goblog/config"
 	"goblog/dao"
+	"goblog/model"
 	d "goblog/model"
 	"goblog/server"
 	"goblog/util"
@@ -63,7 +65,7 @@ func About(c *gin.Context) {
 		arc.Ctime = tm.Format("2006-01-02 15:04:05")
 	}
 
-	baseinfo, err := server.Getinfo()
+	baseinfo, err := server.Getinfo(0)
 	if err != nil {
 		server.Fail(c)
 		return
@@ -87,54 +89,54 @@ func Not404(c *gin.Context) {
 
 //文章搜索服务
 /* func Search(c *gin.Context) {
-	var searchinfo d.ListInfo
-	err := c.ShouldBindQuery(&searchinfo)
+	var Mytype d.ListInfo
+	err := c.ShouldBindQuery(&Mytype)
 	if err != nil {
 		server.Fail(c)
 		return
 	}
-	err = server.SearchView(&searchinfo)
-	server.ResDataError(searchinfo, err, c)
+	err = server.SearchView(&Mytype)
+	server.ResDataError(Mytype, err, c)
 } */
 
 //新的获取列表功能,搜索页也在这
 func NewList(c *gin.Context) {
-	var searchinfo d.ListInfo
-	err := c.ShouldBindQuery(&searchinfo)
-	if err != nil {
-		server.Fail(c)
-		return
-	}
+	Mytype := new(d.ListInfo)
+
 	id1, _ := strconv.Atoi(c.Param("id"))
-	if id1 != 0 {
-		searchinfo.Page.ID = id1
+	if Mytype.Page == nil {
+		Mytype.Page = new(model.PageList)
 	}
-	//fmt.Printf("info%+v %d", searchinfo, id1)
-	err = server.GetListV(&searchinfo)
+	if id1 != 0 {
+		Mytype.Page.ID = id1
+	}
+	//fmt.Printf("info%+v %d", Mytype, id1)
+	Mytype, err := server.GetListV(Mytype.Page)
 	if err != nil {
+
 		server.Fail(c)
 		return
 	}
-	//fmt.Printf("列表信息是%+v\n", searchinfo)
-	baseinfo, err := server.Getinfo()
+	baseinfo, err := server.Getinfo(id1)
+	fmt.Printf("列表信息是%+v\n", Mytype.Views)
 	if err != nil {
 		server.Fail(c)
 		return
 	}
 	//如果没有分类信息,那么是搜索
-	if searchinfo.Page.ID == 0 {
-		searchinfo.Listinfo.Name = searchinfo.Page.Keyword
-		searchinfo.Listinfo.Info = "搜索:" + searchinfo.Page.Keyword + "的搜索结果"
+	if Mytype.Page.ID == 0 {
+		Mytype.Listinfo.Info = "搜索:" + Mytype.Page.Keyword + "的搜索结果"
 	}
 	//fmt.Printf("base基础信息的内容是 %+v \n", baseinfo)
 	temp := "newlist.html" //默认的模板目录
-	if searchinfo.Listinfo.Tempdir != "" {
-		temp = searchinfo.Listinfo.Tempdir
+	if baseinfo.Clicktp.Tempdir != "" {
+		temp = baseinfo.Clicktp.Tempdir
 	}
-	//server.ResDataError(searchinfo, err, c)
+
+	//server.ResDataError(Mytype, err, c)
 	server.F自己写的模板方法(c, temp, map[string]interface{}{
-		"list":     searchinfo, //分类信息,文章列表,当前分类信息
-		"baseinfo": baseinfo,   //最新,推荐,tdk,全部分类信息
+		"list": Mytype,   //分类信息,文章列表,当前分类信息
+		"base": baseinfo, //最新,推荐,tdk,全部分类信息
 	})
 }
 
@@ -143,7 +145,7 @@ func Index(c *gin.Context) {
 	remen := server.GetViewlist("-3", 1)  //热门
 	swiper := server.GetViewlist("-2", 1) //轮播
 
-	baseinfo, err := server.Getinfo()
+	baseinfo, err := server.Getinfo(0)
 	if err != nil {
 		server.Fail(c)
 		return

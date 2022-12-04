@@ -4,9 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"goblog/model"
-	"io/ioutil"
-	"os"
-	"path"
 	"time"
 
 	"github.com/patrickmn/go-cache"
@@ -44,20 +41,20 @@ func GetCache(key string) (stru interface{}, err error) {
 //设置列表页的缓存
 func SetListCache(views *model.ListInfo) {
 	str := fmt.Sprintf(ListCache, views.Page.ID, views.Page.Page)
-	fmt.Println("缓存文件是:", str)
+	//fmt.Println("缓存文件是:", str)
 	SetCache(str, views)
 }
 
 //获取列表的缓存
 func GetListCache(page *model.PageList) (views *model.ListInfo, err error) {
 	str := fmt.Sprintf(ListCache, page.ID, page.Page)
-	fmt.Println("缓存文件是:", str)
 	v1, found := MCA.Get(str)
 	if !found {
 		err = errors.New("未找到缓存")
 		return
 	}
 	views = v1.(*model.ListInfo)
+	fmt.Println("缓存文件是:", str, views)
 	//err = GetCache(str, views)
 	return
 }
@@ -86,8 +83,5 @@ func SetViewCache(v *model.View) {
 
 //删除所有缓存
 func DelAll() {
-	dir, _ := ioutil.ReadDir("cache")
-	for _, d := range dir {
-		os.RemoveAll(path.Join([]string{"cache", d.Name()}...))
-	}
+
 }

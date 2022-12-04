@@ -5,7 +5,6 @@ import (
 	"goblog/dao"
 	d "goblog/model"
 	"goblog/util"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -44,23 +43,19 @@ func Gt(c *gin.Context) {
 func AddTypes(c *gin.Context) {
 	var err error
 	data := new(d.Tp)
-	data.Name = c.PostForm("name")
-	data.Info = c.PostForm("info")
-	leve, _ := strconv.Atoi(c.PostForm("level"))
-	data.Level = leve
-	fmt.Printf("这个保存数据传入的数据类型是%T 数据是%+v", data, data)
-	id := c.PostForm("id")
-	conn := dao.MDB
-	conn.AutoMigrate(&d.Tp{})
-	if id != "0" {
-		err = conn.Model(&d.Tp{}).Where("id = ?", id).Updates(&data).Error
+	err = c.ShouldBind(data)
+	//fmt.Printf("这个保存数据传入的数据类型是%T 数据是%+v", data, data)
+	//id := c.PostForm("id")
+	if data.ID == 0 {
+		err = dao.MDB.Create(data).Error
 	} else {
-		err = conn.Create(data).Error
-	}
 
+		err = dao.MDB.Model(&d.Tp{}).Where("id = ?", data.ID).Updates(&data).Error
+	}
 	if err != nil {
 		fmt.Println("失败")
 		c.JSON(400, gin.H{"msg": "失败", "code": 400})
+		return
 	}
 	util.DelAll()
 	c.JSON(200, gin.H{"msg": "成功", "code": 200})

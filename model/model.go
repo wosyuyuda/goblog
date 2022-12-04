@@ -67,8 +67,8 @@ type Tp struct {
 	Tempdir    string     `gorm:"type:varchar(32);" form:"tempdir" json:"tempdir"`         //分类模板目录
 	ArcTempdir string     `gorm:"type:varchar(32);" form:"arc_tempdir" json:"arc_tempdir"` //内容模板目录
 	SkipPath   string     `gorm:"type:varchar(128);" form:"skip_path" json:"skip_path"`    //跳转的路径
-	IsTrue     bool       `gorm:"-" `                                                      //是否选中
-	IsTz       bool       `gorm:"-" `                                                      //是否跳转
+	IsTrue     bool       `gorm:"-"  json:"is_true"`                                       //是否选中
+	IsTz       bool       `gorm:"-"  json:"is_tz"`                                         //是否跳转
 	Views      []ViewJson `gorm:"-"`
 }
 
