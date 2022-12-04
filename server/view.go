@@ -75,7 +75,7 @@ func GetListV(views *model.ListInfo) (err error) {
 	if pa.Num == 0 {
 		pa.Num = 10
 	}
-	views, err = util.GetListCache()
+	views, err = util.GetListCache(&pa)
 	if err == nil {
 		return
 	}

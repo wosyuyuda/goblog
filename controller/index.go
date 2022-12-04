@@ -7,7 +7,6 @@ package controller
  */
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -110,7 +109,7 @@ func NewList(c *gin.Context) {
 	if id1 != 0 {
 		searchinfo.Page.ID = id1
 	}
-	fmt.Printf("info%+v %d", searchinfo, id1)
+	//fmt.Printf("info%+v %d", searchinfo, id1)
 	err = server.GetListV(&searchinfo)
 	if err != nil {
 		server.Fail(c)

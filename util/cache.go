@@ -48,8 +48,9 @@ func SetListCache(views *model.ListInfo) {
 }
 
 //获取列表的缓存
-func GetListCache() (views *model.ListInfo, err error) {
+func GetListCache(page *model.PageList) (views *model.ListInfo, err error) {
 	str := fmt.Sprintf(ListCache, views.Page.ID, views.Page.Page)
+	fmt.Println("缓存文件是:", str)
 	v1, found := MCA.Get(str)
 	if !found {
 		err = errors.New("未找到缓存")
