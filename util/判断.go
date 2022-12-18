@@ -1,21 +1,26 @@
 package util
 
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 func F判断是否为手机访问(userAgent string) bool {
+	userAgent = strings.ToLower(userAgent)
+	fmt.Println("获取到的useragent", userAgent)
 	if len(userAgent) == 0 {
 		return false
 	}
-	isMobile := false
-	mobileKeywords := []string{"Mobile", "Android", "Silk/", "Kindle",
-		"BlackBerry", "Opera Mini", "Opera Mobi"}
+	mbo := false
+	mobileKeywords := []string{"mobile", "android", "silk/", "kindle",
+		"blackBerry", "opera mini", "opera mobi"}
 
 	for i := 0; i < len(mobileKeywords); i++ {
 		if strings.Contains(userAgent, mobileKeywords[i]) {
-			isMobile = true
+			mbo = true
 			break
 		}
 	}
 
-	return isMobile
+	return mbo
 }

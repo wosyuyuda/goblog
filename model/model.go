@@ -89,6 +89,7 @@ type Tdk struct {
 	Description string ` json:"description" form:"description"`
 	Beian       string ` json:"beian" form:"beian"`
 	Goan        string ` json:"goan" form:"goan"`         //公安的备案号
+	Url         string ` json:"url" form:"url"`           //当前网址,以/结尾
 	Goanurl     string ` json:"goanurl" form:"goanurl"`   //备案的网址
 	Tongjiid    string ` json:"tongjiid" form:"tongjiid"` //百度统计的id
 }

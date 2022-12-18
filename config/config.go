@@ -26,10 +26,11 @@ func init() {
 	if !exit {
 		setpath = tempset
 	}
-	IsMobile = Configv.GetInt("ismobile") //看内置模板是否支持手机
 	Configv.SetConfigFile(setpath)
 	Configv.WatchConfig()
 	err = Configv.ReadInConfig()
+	IsMobile = Configv.GetInt("ismobile") //看内置模板是否支持手机
+	fmt.Println("ismobile,", IsMobile)
 	if err != nil {
 		panic(fmt.Errorf("fatal error config file: %s", err))
 	}
@@ -41,6 +42,7 @@ func GetTDK() (tdk model.Tdk) {
 	tdk.Description = Configv.GetString("tdk.description")
 	tdk.Beian = Configv.GetString("tdk.biean")
 	tdk.Goan = Configv.GetString("tdk.goan")
+	tdk.Url = Configv.GetString("tdk.url")
 	tdk.Goanurl = Configv.GetString("tdk.goanurl")
 	tdk.Tongjiid = Configv.GetString("tdk.tonjiid")
 	return

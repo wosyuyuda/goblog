@@ -15,6 +15,7 @@
         "biean": "3",
         "goan": "1",
         "goanurl": "2",
+        "url": "2",
         "tonjiid": "bf02b970151cd2396c34a286097a2b82"
     },
     "con": {
@@ -22,8 +23,8 @@
         "baidutonjiid": ""
     },
     "baidu": {
-        "url": "http://data.zz.baidu.com/urls?site=www.iq2.cn&token=*********",
-        "domain": "https://www.iq2.cn"
+        "url": "http://data.zz.baidu.com/urls?site=https://www.guigusj.cn&token=vMVIzs7oNHtdCxS1",
+        "domain": "https://www.guigusj.cn/"
     },
     "adminuri": "/login"
 }

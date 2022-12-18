@@ -2,6 +2,7 @@ package server
 
 import (
 	"bytes"
+	"fmt"
 	"goblog/config"
 	"goblog/util"
 	"html/template"
@@ -16,8 +17,10 @@ func F自己写的模板方法(c *gin.Context, temp string, db interface{}) {
 	tempdir := config.Configv.GetString("tempdir")
 	/* temp = "temp/xing/" + temp */
 	dir := "temp" + tempdir + "/"
+	userAgent := c.GetHeader("User-Agent") + c.GetHeader("user-agent")
+	fmt.Println("ismobile", config.IsMobile)
 	//判断当前环境是否为手机，判断是否开户了手机端支持。。
-	if config.IsMobile == 1 && util.F判断是否为手机访问(c.GetHeader("User-Agent")) {
+	if config.IsMobile == 1 && util.F判断是否为手机访问(userAgent) {
 		dir += "m/"
 	}
 	content, err := ioutil.ReadFile(dir + temp)
