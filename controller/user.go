@@ -8,7 +8,6 @@ package controller
  */
 
 import (
-	"fmt"
 	"goblog/dao"
 	d "goblog/model"
 	"goblog/server"
@@ -21,7 +20,7 @@ func EditUser(c *gin.Context) {
 	uid := util.GetSession(c, "uid")
 	var user d.User
 	err := c.ShouldBind(&user)
-	fmt.Printf("接收到的数据是%+v", user)
+	//fmt.Printf("接收到的数据是%+v", user)
 	if err != nil {
 		server.Fail(c)
 		return

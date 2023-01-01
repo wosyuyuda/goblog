@@ -1,7 +1,6 @@
 package util
 
 import (
-	"fmt"
 	"goblog/dao"
 	d "goblog/model"
 	"time"
@@ -43,7 +42,7 @@ func GetView(id string, up int) (dd *d.View) {
 		} else {
 			dao.MDB.Model(&d.View{}).Where("status = ?", 3).Find(&dd)
 		}
-		fmt.Println(dd)
+		//fmt.Println(dd)
 		if dd.ID != 0 {
 			SetViewCache(dd)
 		}

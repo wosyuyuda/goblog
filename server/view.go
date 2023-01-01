@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"goblog/config"
 	"goblog/dao"
 	"goblog/model"
@@ -93,7 +92,7 @@ func GetListV(pa *model.PageList) (views *model.ListInfo, err error) {
 	db = db.Limit(pa.Num).Offset((pa.Page - 1) * pa.Num).Order("id desc")
 	err = db.Find(&views.Views).Count(&pa.Sum).Error
 	views.Page = pa
-	fmt.Println("数据库找到的数据列表是:", views.Views)
+	//fmt.Println("数据库找到的数据列表是:", views.Views)
 	util.PagesinfoTo(views)  //处理一下页面分类信息
 	util.SetListCache(views) //设置进缓存
 	return

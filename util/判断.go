@@ -1,13 +1,12 @@
 package util
 
 import (
-	"fmt"
 	"strings"
 )
 
 func F判断是否为手机访问(userAgent string) bool {
 	userAgent = strings.ToLower(userAgent)
-	fmt.Println("获取到的useragent", userAgent)
+	//fmt.Println("获取到的useragent", userAgent)
 	if len(userAgent) == 0 {
 		return false
 	}

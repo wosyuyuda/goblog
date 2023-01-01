@@ -24,6 +24,6 @@ func BaiduLinksubmit(id int) {
 		return
 	}
 	defer rsp.Body.Close()
-	bt, _ := ioutil.ReadAll(rsp.Body)
-	fmt.Println(string(bt))
+	ioutil.ReadAll(rsp.Body)
+	//fmt.Println(string(bt))
 }

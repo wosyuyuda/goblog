@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"goblog/dao"
 	d "goblog/model"
 
@@ -21,5 +20,5 @@ func GetConfig(c *gin.Context) {
 func SetConfig(c *gin.Context) {
 	var data []d.Config
 	c.ShouldBind(&data)
-	fmt.Printf("传过来的数据是%+v", data) //接收后看数据是否正常,再判断是新增还是保存
+	//fmt.Printf("传过来的数据是%+v", data) //接收后看数据是否正常,再判断是新增还是保存
 }

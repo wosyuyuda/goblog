@@ -54,7 +54,7 @@ func GetListCache(page *model.PageList) (views *model.ListInfo, err error) {
 		return
 	}
 	views = v1.(*model.ListInfo)
-	fmt.Println("缓存文件是:", str, views)
+	//fmt.Println("缓存文件是:", str, views)
 	//err = GetCache(str, views)
 	return
 }

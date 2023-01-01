@@ -30,7 +30,7 @@ func init() {
 	Configv.WatchConfig()
 	err = Configv.ReadInConfig()
 	IsMobile = Configv.GetInt("ismobile") //看内置模板是否支持手机
-	fmt.Println("ismobile,", IsMobile)
+	//fmt.Println("ismobile,", IsMobile)
 	if err != nil {
 		panic(fmt.Errorf("fatal error config file: %s", err))
 	}

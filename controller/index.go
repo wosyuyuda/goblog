@@ -7,7 +7,6 @@ package controller
  */
 
 import (
-	"fmt"
 	"html/template"
 	"net/http"
 	"strconv"
@@ -118,7 +117,7 @@ func NewList(c *gin.Context) {
 		return
 	}
 	baseinfo, err := server.Getinfo(id1)
-	fmt.Printf("列表信息是%+v\n", Mytype.Views)
+	//fmt.Printf("列表信息是%+v\n", Mytype.Views)
 	if err != nil {
 		server.Fail(c)
 		return
