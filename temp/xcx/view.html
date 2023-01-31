@@ -1,0 +1,310 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport"
+    content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <title>{[.view.Title]}-{[.base.Tdk.Title]}</title>
+    <meta name="description" content="{[.view.Content]}">
+  <link href="/default/css/zuixindongtai1.css" rel="stylesheet" type="text/css" />
+  <link href="/default/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="/default/css/common.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="page-index">
+  <div class="top">
+    <div class="container main_minwidth">
+      <div class="top1"> <a href="/"><img class="top_logo" src="/default/1651220038896088.png" width=""
+            height="40" /></a>
+        <div class="top2">
+          <ul class="top_nav">
+            <li class="top_nav1"><a href="/">首页</a></li>
+            <!--  <li class="top_nav1  active"><a href="/?help/">帮助中心</a></li> -->
+            {[range $i, $v := .base.Typeinfo]}
+            <li class="top_nav1 {[if $v.IsTrue ]}active{[end]}">
+              {[if $v.IsTz ]}
+              <a target="_blank" href="{[$v.SkipPath]}">{[$v.Name]}</a>
+              {[else]}
+              <a href="/list/{[$v.ID]}">{[$v.Name]}</a>
+              {[end]}
+            </li>
+            {[end]}
+          </ul>
+          <!--<div class="top_event">
+          <div class="top_event1"><a href="/">管理小程序</a></div>
+        </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--banner-->
+  <div class="priceBanner bannerHeight">
+    <div class="container">
+      <div class="priceBanner1 bannerHeight">
+        <div class="index_banner_box">
+          <div class="index_banner_box_title">{[.view.Typename]}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--banner-->
+  <div class="moveList">
+    <div class="container">
+      <dl>
+        {[if .view.Isapp ]}
+        <dt class="col-sm-2 moveList_dt">
+          <div>支付宝小程序码</div>
+          <div>扫码即可访问</div>
+          <div id="qrcode" style="margin-top:15px;"></div>
+        </dt>
+        {[end]}
+        <style type="text/css">
+          .moveList_dd_title {
+            margin-bottom: 2px;
+          }
+
+          .moveList_dl_dd {
+            padding: 10px 35px;
+            font-size: 16px;
+            line-height: 26px;
+          }
+
+          .moveList_dl_dd p {
+            padding: 10px 0 3px 0;
+          }
+
+          .time11 {
+            color: #999;
+            font-size: 16px;
+            text-align: right;
+            padding: 15px 30px 0 10px;
+          }
+        </style>
+        <dd class="col-sm-10 moveList_dd">
+          <div class="moveList_dd_title" style="text-align:center;">{[.view.Title]}</div>
+          <div class="time11">{[.view.Ctime]}</div>
+          <div class="moveList_dl_dd" id="maximg">
+
+            {[.body]}
+             {[if .view.Isapp ]}
+          <div>-------以上信息来源于小程序，一切内容以小程序为准</div>
+        {[end]}
+          </div>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <!--底部  pc-->
+  <style type="text/css">
+    .online_kf {
+      position: fixed;
+      top: 45%;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .online_kf .tit_img {
+      background: url(/skin/img/online_kf.png) no-repeat;
+      background-size: 35px;
+      display: block;
+      width: 35px;
+      height: 120px;
+      cursor: pointer;
+    }
+
+    .online_kf .contact_code {
+      display: none;
+      width: 256px;
+      position: absolute;
+      bottom: 5px;
+      right: 34px;
+      background: #fff;
+      z-index: 9999;
+      padding: 20px 10px;
+      display: none;
+      border: 1px solid #ddd;
+      box-shadow: 0px 2px 4px 0px rgba(64, 64, 64, 0.1);
+    }
+
+    .online_kf:hover .contact_code {
+      display: block;
+    }
+
+    .online_kf .contact_code li {
+      width: 100%;
+      float: left;
+      line-height: 24px;
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .online_kf .contact_code li span {
+      width: 100%;
+      float: left;
+      color: #000;
+      padding-top: 4px;
+      font-size: 14px;
+    }
+
+    .online_kf .contact_code li.qq a {
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .online_kf .contact_code li a {
+      color: #459AE9;
+      line-height: 20px;
+      margin: 0;
+      padding: 0;
+      text-decoration: underline;
+    }
+
+    .online_kf .contact_code li label {
+      width: 100%;
+      float: left;
+      color: #8c8c8c;
+      margin-bottom: 0px;
+      font-size: 16px;
+      font-weight: normal;
+    }
+
+    .xfr {
+      display: none;
+    }
+  </style>
+  <!--底部  pc-->
+  <!-- 右小角联系图标 -->
+  <link rel="stylesheet" href="/default/css/chat.css">
+  <div class="consult_contact">
+    <div class="contact_group_btn">
+      <div class="group_btn_box"> <img src="/default/wx_icon.png" alt="" class="wx_btn" />
+        <div class="hover_txt_box">
+          <div class="wx_code_box"> <img src="/default/1651219975224399.png" alt="" class="wx_code" /> </div>
+          <i class="arrow wx_arrow"></i>
+        </div>
+      </div>
+      <div id="chatqq" class="group_btn_box"> <img src="/default/qq_icon.png" alt="" class="qq_btn addqq" />
+        <div class="hover_txt_box addqq">
+          <div class="phone_txt">88888888</div>
+          <i class="arrow"></i>
+        </div>
+      </div>
+      <div id="goTop" class="group_btn_box" style="display:none"> <a href="javascript:scroll(0,0)"><img
+            src="/default/backtop_icon.png" alt="" class="backTop_btn" /></a> </div>
+    </div>
+  </div>
+  <footer class="bottom">
+    <div class="container">
+      <ul>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">公司</div>
+          <div class="bottom_2"><a href="/?dongtai/">产品动态</a></div>
+          <div class="bottom_2"><a href="/?aboutus/">关于我们</a></div>
+        </li>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">应用</div>
+          <div class="bottom_2"><a href="/?wxapp/266.html">微页面套餐</a></div>
+          <div class="bottom_2"><a href="/?wxapp/265.html">内容资讯</a></div>
+          <div class="bottom_2"><a href="/?wxapp/264.html">商城</a></div>
+        </li>
+        <li class="col-lg-2 mt20 foot youqing">
+          <div class="bottom_1">合作伙伴</div>
+          <a href="int" title="" target="_blank"></a>
+        </li>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">客服</div>
+          <div class="bottom_2">电话：400-888-8888</div>
+          <div class="bottom_2">邮箱：admin@admin.com</div>
+          <div class="bottom_2">微信：Wx88888</div>
+        </li>
+        <style>
+          .bottom_ewm1 img {
+            width: 100px;
+          }
+        </style>
+        <li class="col-lg-2 bottom_ewm bottom_ewm1 mt20">
+          <div class="bottom_1 bot2">关注我们</div>
+          <div id="qrcode1" class="qrcode"></div>
+          <div class="desc">- 扫码浏览手机版 -</div>
+        </li>
+        <li class="col-lg-2 bottom_ewm mt20">
+          <div class="bottom_1"></div>
+          <img src="/default/upload/image/20220429/1651219975224399.png" width="100px" height="100px" />
+          <div class="desc">- 扫码关注公众号 -</div>
+        </li>
+      </ul>
+    </div>
+    <div class="bottomCopy">Copyright &copy; 2020 版权所有
+      <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
+        {[.base.Tdk.Beian]}
+      </a> |
+      <a href=" {[.base.Tdk.Goanurl]}" target="_blank " rel="nofollow noopener noreferrer ">
+        {[.base.Tdk.Goan]}
+      </a>
+    </div>
+  </footer>
+  <script type="text/javascript" src="/default/css/jquery-2.1.0.js"></script>
+  <script type="text/javascript" src="/default/css/qrcode.min.js"></script>
+  <script>
+    var qrcode = new QRCode(document.getElementById("qrcode1"), {
+        width: 140,
+        height: 140,
+      });
+      qrcode.makeCode(window.location.href);
+    if ("{[.view.Appid]}" != "") {
+      var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width: 140,
+        height: 140,
+      });
+      qrcode.makeCode("alipays://platformapi/startapp?appId={[.view.Appid]}&query=qd%3Dlongfei");
+    }
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        var scrollTop = $(window).scrollTop();
+        scrollTop > 100 ? $("#goTop").show() : $("#goTop").hide();
+      });
+    })
+    $(".addqq").click(function () {
+      console.log("添加qq")
+      /* window.open(
+        "http://wpa.qq.com/msgrd?v=3&site=某某网络科技有限公司&menu=yes&uin=88888888"
+      ); */
+    });
+    // 客服弹框 鼠标放上事件
+    $('.group_btn_box').hover(function () {
+      $(this).find('.hover_txt_box').css("display", "flex");
+      $(this).siblings().find('.hover_txt_box').hide();
+    }, function () {
+      $(this).find('.hover_txt_box').hide();
+    });
+  </script>
+</body>
+
+</html>
+<script type="text/javascript" src="/default/css/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="/default/css/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="/default/css/common_tabs.js"></script>
+<script>
+  $('.swiper-container').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  $('.swiper-slide').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  $('.swiper-wrapper').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  var mySwiper = new Swiper('.swiper-container', {
+    direction: 'horizontal',
+    loop: true,
+    autoplay: 3000,
+    speed: 300,
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  })
+  for (var i = 1; i < 9; i++) {
+    var img = new Image();
+    img.src = "/default/fanganbg" + i + ".png";
+  }
+  Tabs(".fangan_left1", ".active", "", ".fangan_right");
+  $(body).resize(function () {
+    $('.swiper-container').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+    $('.swiper-slide').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+    $('.swiper-wrapper').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  })
+</script>

@@ -1,0 +1,77 @@
+﻿@charset "utf-8";
+
+html.body{ background:#FFF}
+.moveList{
+	padding-top:50px;
+	background:#f8f8f8}
+.moveList_dt ul{
+	background:#FFF}
+.moveList_dt ul li{
+	text-align:center;
+	height:49px;
+	line-height:49px;
+	font-size:16px}
+.moveList_dt ul li.active{ border-left:2px solid #36bb81}
+.moveList_dt ul li.active a{color:#36bb81}
+.moveList_dt ul li a{color:#333333; display:block; margin:0 10px; border-bottom:1px solid #f8f8f8; font-weight:normal}
+.moveList_dt ul li a:hover{ color:#36bb81}
+
+.moveList_dd{ background:#FFF}
+.moveList_dd_title{ height:79px; line-height:79px; color:#333333; font-size:24px; margin:0 35px;border-bottom:1px solid #ccc;}
+.moveList_dd_ul{ margin:0 35px}
+.moveList_dd_ul li{ padding:30px 0; border-top:1px solid #f8f8f8; overflow:hidden}
+.moveList_dd_img{ width:220px; height:120px; float:left}
+.moveList_dd_content{ float:left; margin-left:20px; width:70%}
+.moveList_dd_content .title a{ font-size:18px;}
+.moveList_dd_content .title a:hover{ color:#4758a1}
+.moveList_dd_content .desc{ font-size:14px; color:#666666; padding:16px 0; line-height:22px}
+.moveList_dd_content .time{ font-size:16; color:#999999}
+
+.moveList_dl_dd_page{
+	height:140px;
+	border-top:1px solid #f0f0f0;
+	padding-top:50px;
+	position:relative;
+	padding-bottom:50px;
+	width:100%}
+.moveList_dl_dd_page ul{
+	position:absolute;
+	height:40px;
+	left:50%;
+	transform:translateX(-50%);
+	overflow:hidden;}
+.moveList_dl_dd_page ul a,.moveList_dl_dd_page ul span{
+	float:left;
+	width:38px;
+	height:38px;
+	line-height:38px;
+	border:1px solid #ececec;
+	margin:0 5px;
+	color:#333333;
+	font-size:14px;
+	text-align:center;
+	border-radius:4px}
+.moveList_dl_dd_page ul a.page-num-current{
+	width:40px;
+	height:40px;
+	line-height40px;
+	background:#36bb81;
+	color:#FFF;
+	border:none}
+.moveList_dl_dd_page ul a.border_none{
+	border:none}
+.moveList_dl_dd_page ul a{
+	display:block;}
+.moveList_dl_dd_page ul a:hover{
+	background:#36bb81;
+	color:#FFF;}
+/*电脑端的banner样式*/
+.priceBanner{
+	background:url(../newsdt.png);
+	background-size:cover;
+	background-position:0 center;
+	height:360px}
+.priceBanner1{ position:relative; height:360px}
+.index_banner_box{ position:absolute; top:50%; left:0; transform:translateY(-50%); text-align:center; width:100%}
+.index_banner_box_title{font-size:36px;color:#FFF;font-weight:bold;}
+.index_banner_box_title2{font-size:36px;color:#FFF}

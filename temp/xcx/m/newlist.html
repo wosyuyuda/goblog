@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>{[.base.Clicktp.Name]}</title>
+  <meta name="description" content="{[.base.Clicktp.Name]}">
+  <link href="/default/m/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/default/m/css/swiper-3.4.2.min.css">
+  <link rel="stylesheet" href="/default/m/css/common.css">
+  <script src="/default/m/css/jquery.min.js"></script>
+  <script src="/default/m/css/setfontsize.js"></script>
+  <link rel="stylesheet" href="/default/m/css/affiche.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <!-- header -->
+    <header id="header_box">
+      <div id="header">
+        <div class="header_box"> <a href="/"><img class="logo_img" src="/default/1651220038896088.png"
+              alt="logo_img"></a>
+        </div>
+        <img class="menu_img menu" src="/default/m/img/menu.png" alt="menu_img"> <img class="menu_close_img menu hide"
+          src="/default/m/img/menu_close.png" alt="">
+      </div>
+    </header>
+    <!-- 解决上面浮动问题 -->
+    <div class="emptyBox"></div>
+    <div class="act">
+      <!-- <ul class="act_nav text-center size-28">
+        <li><a href="/?dongtai/">产品动态</a></li>
+        <li><a href="/?xinwen/">行业新闻</a></li>
+      </ul> -->
+      <ul class="act_list">
+        {[range $i, $v := .list.Views]}
+        <li> <a href="/view/{[$v.ID]}">
+            <div class="act_list_img"><img src="{[$v.Pic]}" width="220"></div>
+            <div class="act_list_x">
+              <div class="act_list_x_t size-28 color-333">{[$v.Title]}</div>
+              <div class="act_list_x_d size-22 color-999">{[$v.Content]}...</div>
+              <div class="color-ccc size-20">{[$v.Ctime]}</div>
+            </div>
+          </a> </li>
+          {[end]}
+      </ul>
+      <div class="pagebar">
+        <div class="pagination">
+          
+          {[if ne .list.Page.Up 0]}
+          <a class="page-num" href="?page={[.list.Page.Up]}">{[.list.Page.Up]}</a>
+          {[else]} {[end]}
+          <span class="page-link">{[.list.Page.Page]}</span>
+          {[if ne .list.Page.Nex 0]}
+          <a class="page-num" href="?page={[.list.Page.Nex]}">{[.list.Page.Nex]}</a>
+          {[end]}
+        </div>
+      </div>
+    </div>
+    <!-- footer -->
+    <footer>
+      <div id="footer_box">
+        <div class="footer_item">
+          <h2>公司</h2>
+          <ul>
+            <li><a href="/?dongtai/">产品动态</a></li>
+            <li><a href="/?aboutus/">关于我们</a></li>
+          </ul>
+        </div>
+        <div class="footer_item">
+          <h2>应用</h2>
+          <div class="footer_item_cont">
+           <!--  <ul>
+              <li><a href="/?wxapp/266.html">微页面套餐</a></li>
+              <li><a href="/?wxapp/265.html">内容资讯</a></li>
+              <li><a href="/?wxapp/264.html">商城</a></li>
+              <li><a href="/?wxapp/263.html">活动票务</a></li>
+              <li><a href="/?wxapp/262.html">同城生活</a></li>
+            </ul>
+            <ul>
+              <li><a href="/?wxapp/261.html">点餐外卖</a></li>
+              <li><a href="/?wxapp/260.html">知识付费</a></li>
+              <li><a href="/?wxapp/259.html">语音口令红包</a></li>
+              <li><a href="/?wxapp/258.html">相册</a></li>
+              <li><a href="/?wxapp/257.html">互动社群</a></li>
+            </ul>
+            <ul>
+              <li><a href="/?wxapp/256.html">储值卡</a></li>
+              <li><a href="/?wxapp/255.html">幸运大抽奖</a></li>
+              <li><a href="/?wxapp/18.html">推广员</a></li>
+              <li><a href="/?wxapp/28.html">幸运砸金蛋</a></li>
+            </ul> -->
+          </div>
+        </div>
+        <div class="footer_item contact_box">
+          <h2>客服</h2>
+          <ul>
+            <li>
+              <dl>
+                <dt>座机：</dt>
+                <dd><a href="tel:400-888-8888">400-888-8888</a></dd>
+              </dl>
+            </li>
+            <li>
+              <dl>
+                <dt>微信：</dt>
+                <dd><a href="javascript:;">Wx88888</a></dd>
+              </dl>
+            </li>
+            <li>
+              <dl>
+                <dt>QQ：</dt>
+                <dd><a href="javascript:;">88888888</a></dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <div class="footer_item about_us_box">
+          <h2>关于我们</h2>
+          <ul>
+            <li>
+              <dl>
+                <dt><img src="/static/upload/image/20220429/1651219975224399.png" alt=""></dt>
+                <dd>- 扫码关注公众号 -</dd>
+              </dl>
+            </li>
+          </ul>
+        </div>
+        <p class="company_code">Copyright © 2002-2022 小程序 版权所有 </p>
+      </div>
+    </footer>
+    <!-- 返回顶部按钮 -->
+    <div class="backTop radius-50 hide" onclick="backTop()"> <img src="img/scrolltop.png" alt=""> </div>
+  </div>
+  <!-- 侧边导航 -->
+  <aside id="menu_box" class="hide" style="top: 1.2rem">
+    <ul class="menu_list">
+      <li> <a href="/"> <span class="active">网站首页</span> <img class="more" src="/m/skin/img/more.png" alt=""> </a> </li>
+      {[range $i, $v := .base.Typeinfo]}
+      <li>
+        {[if $v.IsTz ]}
+        <a href="{[$v.SkipPath]}">
+          {[else]}
+          <a href="/list/{[$v.ID]}">
+            {[end]}
+        <span {[if $v.IsTrue ]} class="active" {[end]}>
+            {[$v.Name]}</span> <img class="more" src="/m/skin/img/more.png" alt=""> </a> </li>
+      {[end]}
+    </ul>
+  </aside>
+  <script src="/default/m/css/bootstrap.min.js"></script>
+  <script src="/default/m/css/common.js"></script>
+  <script>
+    // 调用导航相关事件
+    menuFunc();
+    // 点击合作
+    cooperation();
+    // 查看大图
+    var itemObj = $('.index_anli_item');
+    seeBigPic(itemObj);
+    // 关闭查看大图
+    $('.modal_bg').click(function () {
+      closeMadel();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport"
+    content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+  <title>{[.base.Clicktp.Name]}-{[.base.Tdk.Title]}</title>
+  <meta name="description" content="{[.base.Clicktp.Info]}">
+  <link href="/default/css/zuixindongtai1.css" rel="stylesheet" type="text/css" />
+  <link href="/default/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="/default/css/common.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="page-index">
+  <div class="top">
+    <div class="container main_minwidth">
+      <div class="top1"> <a href="/"><img class="top_logo" src="/default/1651220038896088.png" width=""
+            height="40" /></a>
+        <div class="top2">
+          <ul class="top_nav">
+            <li class="top_nav1"><a href="/">首页</a></li>
+            <!--  <li class="top_nav1  active"><a href="/?help/">帮助中心</a></li> -->
+            {[range $i, $v := .base.Typeinfo]}
+            <li class="top_nav1 {[if $v.IsTrue ]}active{[end]}">
+              {[if $v.IsTz ]}
+              <a target="_blank" href="{[$v.SkipPath]}">{[$v.Name]}</a>
+              {[else]}
+              <a href="/list/{[$v.ID]}">{[$v.Name]}</a>
+              {[end]}
+            </li>
+            {[end]}
+
+          </ul>
+          <!--<div class="top_event">
+          <div class="top_event1"><a href="/">管理小程序</a></div>
+        </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="priceBanner bannerHeight">
+    <div class="container">
+      <div class="priceBanner1 bannerHeight">
+        <div class="index_banner_box">
+          <div class="index_banner_box_title">{[.base.Clicktp.Name]}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="moveList">
+    <div class="container">
+      <dl>
+        <!-- <dt class="col-sm-2 moveList_dt">
+          <ul>
+            <li class="temp_dl_dt_ul_li active"><a href="/?news/">全部</a></li>
+            <li class="temp_dl_dt_ul_li "><a href="/?dongtai/">产品动态</a></li>
+            <li class="temp_dl_dt_ul_li "><a href="/?xinwen/">行业新闻</a></li>
+          </ul>
+        </dt> -->
+        <dd class="col-sm-10 moveList_dd">
+          <div class="moveList_dd_title">{[.base.Clicktp.Name]}</div>
+          <ul class="moveList_dd_ul">
+            {[ range $i, $v := .list.Views ]}
+            <li> <a href="/view/{[$v.ID]}"><img class="moveList_dd_img" src="{[$v.Pic]}" width="220"
+                  title="{[$v.Title]}" /></a>
+              <div class="moveList_dd_content">
+                <div class="title"><a href="/view/{[$v.ID]}">{[$v.Title]}</a></div>
+                <div class="desc">{[$v.Content]}···</div>
+                <div class="time">{[$v.Ctime]}</div>
+              </div>
+            </li>
+            {[end]}
+
+          </ul>
+          <div class="pagebar">
+            <div class="pagination">
+              <!--  <a class="page-item page-link hidden-sm" href="?news/" title="首页">首页</a> -->
+              {[if ne .list.Page.Up 0]}
+              <a class="page-num" href="?page={[.list.Page.Up]}">{[.list.Page.Up]}</a>
+              {[else]} {[end]}
+              <span class="page-link">{[.list.Page.Page]}</span>
+              {[if ne .list.Page.Nex 0]}
+              <a class="page-num" href="?page={[.list.Page.Nex]}">{[.list.Page.Nex]}</a>
+              {[end]}
+              <!-- <a class="page-item page-link st" href="javascript:;" title="上一页">
+                <<< /a>
+                  <a href="?news/" class="page-num page-num-current">1</a><a href="?news/&page=2"
+                    class="page-num">2</a><a href="?news/&page=3" class="page-num">3</a><a href="?news/&page=4"
+                    class="page-num">4</a><a href="?news/&page=5" class="page-num">5</a><span
+                    class="page-num">···</span> -->
+              <!-- <a class="page-item page-link" href="javascript:;" title="当前页/总页数">1/8</a>
+                  <a class="page-item page-link st" href="?news/&page=2" title="下一页">>></a>
+                  <a class="page-item page-link hidden-sm" href="?news/&page=8" title="尾页">尾页</a> -->
+            </div>
+          </div>
+        </dd>
+        </dd>
+      </dl>
+    </div>
+  </div>
+  <!--底部  pc-->
+  <!-- 右小角联系图标 -->
+  <link rel="stylesheet" href="/default/css/chat.css">
+  <div class="consult_contact">
+    <div class="contact_group_btn">
+      <div class="group_btn_box"> <img src="/default/wx_icon.png" alt="" class="wx_btn" />
+        <div class="hover_txt_box">
+          <div class="wx_code_box"> <img src="/default/1651219975224399.png" alt="" class="wx_code" /> </div>
+          <i class="arrow wx_arrow"></i>
+        </div>
+      </div>
+      <div id="chatqq" class="group_btn_box"> <img src="/default/qq_icon.png" alt="" class="qq_btn addqq" />
+        <div class="hover_txt_box addqq">
+          <div class="phone_txt">88888888</div>
+          <i class="arrow"></i>
+        </div>
+      </div>
+      <div id="goTop" class="group_btn_box" style="display:none"> <a href="javascript:scroll(0,0)"><img
+            src="/default/backtop_icon.png" alt="" class="backTop_btn" /></a> </div>
+    </div>
+  </div>
+  <footer class="bottom">
+    <div class="container">
+      <ul>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">公司</div>
+          <div class="bottom_2"><a href="/?dongtai/">产品动态</a></div>
+          <div class="bottom_2"><a href="/?aboutus/">关于我们</a></div>
+        </li>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">友情链接</div>
+          {[range $i, $v := .link]}
+          <div class="bottom_2"><a href="{[$v.Url]}">{[$v.Name]}</a></div>
+          {[end]}
+        </li>
+        <li class="col-lg-2 mt20 foot youqing">
+          <div class="bottom_1">合作伙伴</div>
+          <a href="" title="" target="_blank"></a>
+        </li>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">客服</div>
+          <div class="bottom_2">电话：400-888-8888</div>
+          <div class="bottom_2">邮箱：admin@admin.com</div>
+          <div class="bottom_2">微信：Wx88888</div>
+        </li>
+        <style>
+          .bottom_ewm1 img {
+            width: 100px;
+          }
+        </style>
+        <li class="col-lg-2 bottom_ewm bottom_ewm1 mt20">
+          <div class="bottom_1 bot2">关注我们</div>
+          <div id="qrcode1" class="qrcode"></div>
+          <div class="desc">- 扫码浏览手机版 -</div>
+        </li>
+        <li class="col-lg-2 bottom_ewm mt20">
+          <div class="bottom_1"></div>
+          <img src="/default/upload/image/20220429/1651219975224399.png" width="100px" height="100px" />
+          <div class="desc">- 扫码关注公众号 -</div>
+        </li>
+      </ul>
+    </div>
+    <div class="bottomCopy">Copyright © 2002-2022 小程序 版权所有
+      <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
+        {[.base.Tdk.Beian]}
+      </a> <a href=" {[.base.Tdk.Goanurl]}" target="_blank " rel="nofollow noopener noreferrer ">
+        <mip-img width="20" height="20" src="/static/ghs.png"></mip-img>
+        {[.base.Tdk.Goan]}
+      </a>
+    </div>
+  </footer>
+  <script type="text/javascript" src="/default/css/jquery-2.1.0.js"></script>
+  <script>
+    var qrcode = new QRCode(document.getElementById("qrcode1"), {
+        width: 140,
+        height: 140,
+      });
+      qrcode.makeCode(window.location.href);
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        var scrollTop = $(window).scrollTop();
+        scrollTop > 100 ? $("#goTop").show() : $("#goTop").hide();
+      });
+    })
+    $(".addqq").click(function () {
+      window.open(
+        "http://wpa.qq.com/msgrd?v=3&site=某某网络科技有限公司&menu=yes&uin=88888888"
+      );
+    });
+    // 客服弹框 鼠标放上事件
+    $('.group_btn_box').hover(function () {
+      $(this).find('.hover_txt_box').css("display", "flex");
+      $(this).siblings().find('.hover_txt_box').hide();
+    }, function () {
+      $(this).find('.hover_txt_box').hide();
+    });
+  </script>
+</body>
+
+</html>
+<script type="text/javascript" src="/default/css/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="/default/css/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="/default/css/common_tabs.js"></script>
+<script>
+  $('.swiper-container').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  $('.swiper-slide').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  $('.swiper-wrapper').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  var mySwiper = new Swiper('.swiper-container', {
+    direction: 'horizontal',
+    loop: true,
+    autoplay: 3000,
+    speed: 300,
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  })
+  for (var i = 1; i < 9; i++) {
+    var img = new Image();
+    img.src = "/default/fanganbg" + i + ".png";
+  }
+  Tabs(".fangan_left1", ".active", "", ".fangan_right");
+  $(body).resize(function () {
+    $('.swiper-container').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+    $('.swiper-slide').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+    $('.swiper-wrapper').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  })
+</script>

@@ -1,0 +1,758 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport"
+    content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+  <title>{[.base.Tdk.Title]}</title>
+  <meta name="description" content="{[.base.Tdk.Description]}">
+  <meta name="author" content=" " />
+  <link href="/default/css/index20171208.css" rel="stylesheet" type="text/css" />
+  <link href="/default/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="/default/css/common.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body class="page-index">
+  <div class="top">
+    <div class="container main_minwidth">
+      <div class="top1"> <a href="/"><img class="top_logo" src="default/1651220038896088.png" width=""
+            height="40" /></a>
+        <div class="top2">
+          <ul class="top_nav">
+            <li class="top_nav1 active"><a href="/">网站首页</a></li>
+            {[range $i, $v := .base.Typeinfo]}
+            <li class="top_nav1">
+              {[if $v.IsTz ]}
+              <a target="_blank" href="{[$v.SkipPath]}">{[$v.Name]}</a>
+              {[else]}
+              <a href="/list/{[$v.ID]}">{[$v.Name]}</a>
+              {[end]}
+            </li>
+            {[end]}
+          </ul>
+          <!--<div class="top_event">
+          <div class="top_event1"><a href="/">管理小程序</a></div>
+        </div>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- banner 轮播 -->
+  <link rel="stylesheet" href="/default/css/swiper-3.4.2.min.css">
+  <link href="/default/css/banner.css" rel="stylesheet" type="text/css" />
+  <div id="banner" class="swiper-container" style="height:560px;">
+    <div class="swiper-wrapper" style="height:560px;">
+      <div class="swiper-slide"
+        style="height:560px;background:url('default/1-1912112216420-L.png'); background-position:center; background-repeat:no-repeat; background-size:cover">
+        <a class="slide_a" href="#"><img style="opacity:0" src="default/1-1912112216420-L.png"></a>
+      </div>
+      <!-- <div class="swiper-slide"
+        style="height:560px;background:url('default/1-1912112215230-L.jpg'); background-position:center; background-repeat:no-repeat; background-size:cover">
+        <a class="slide_a" href="#"><img style="opacity:0" src="default/1-1912112215230-L.jpg"></a>
+      </div> -->
+    </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination"></div>
+    <!-- 如果需要导航按钮 -->
+    <div class="slidesjs-previous slidesjs-navigation swiper-button-prev"></div>
+    <div class="slidesjs-next slidesjs-navigation swiper-button-next"></div>
+  </div>
+  <div class="xinwen">
+    <div class="container">
+      <div class="xinwen_list">
+        {[range $i, $v := .remen]}
+        {[if lt $i 3]}
+        <a class="xinwen_list1" href="/view/{[$v.ID]}" target="_blank"> <img class="xinwen_list1_icon"
+            src="{[$v.Pic]}" />
+          <div class="xinwen_list1_con">
+            <div class="xw_list1_desc1">
+              <div class="xw_list1_desc10 text-overflow">{[$v.Title]}</div>
+            </div>
+            <div class="xw_list_line"></div>
+            <div class="xw_list1_desc2">{[$v.Content]}...</div>
+          </div>
+        </a>
+        {[end]}
+        {[end]}
+      </div>
+    </div>
+  </div>
+  <div class="xiaochengx">
+    <div class="container">
+      <div class="syhy_t">小程序 · 大市场</div>
+      <i class="title_line"></i>
+      <ul class="xiao">
+        <li class="col-sm-3">
+          <div class="bg"> <img src="default/1-1P22QK3540-L.png" /> </div>
+          <div class="xiao_title">流量红包</div>
+          <div class="xiao_desc">共享9.85亿微信注册用户，7亿微信支付用户，2000万微信公众号，率先上线小程序，抢占流量红利</div>
+        </li>
+        <li class="col-sm-3">
+          <div class="bg"> <img src="default/1-1P22QK3190-L.png" /> </div>
+          <div class="xiao_title">即用即走</div>
+          <div class="xiao_desc">拒绝满屏僵尸App，不要恼人的安装更新推送，即用即走，简单高效，就是潇洒</div>
+        </li>
+        <li class="col-sm-3">
+          <div class="bg"> <img src="default/1-1P22QK2580-L.png" /> </div>
+          <div class="xiao_title">生态汇入</div>
+          <div class="xiao_desc">附近小程序，与订阅号服务号绑定，公众号文章传播，搜索入口，还有更多...</div>
+        </li>
+        <li class="col-sm-3">
+          <div class="bg"> <img src="default/1-1P22QK2320-L.png" /> </div>
+          <div class="xiao_title">品牌展示</div>
+          <div class="xiao_desc">颠覆传统应用模式，微信上*轻、*快、*好的用户体验，实现高效的品牌宣传</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="xcx_h">
+    <div class="container">
+      <dl class="xcx_h_dl">
+        <dt class="xcx_h_dl_dt">
+          <div class="xcx_h_dl_dt_1">应用大厅</div>
+          <i class="title_line"></i>
+          <div class="xcx_h_dl_dd_desc">丰富的小程序应用大厅，持续不断更新，全面满足您的需求<br>
+          </div>
+        </dt>
+        <dd class="xcx_h_dl_dd">
+          <ul class="xcx_h_dl_dd_ul">
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/266.html"><img src="default/1-1P306103R00-L.png"
+                    width="342" height="181" alt="微页面套餐" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/266.html" title="微页面套餐">微页面套餐</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">丰富的模板、组件库，完全可视化拖拽 三分钟打造自己的小程序</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/265.html"><img src="default/1-1P306103J40-L.png"
+                    width="342" height="181" alt="内容资讯" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/265.html" title="内容资讯">内容资讯</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">适用于各类资讯、内容发布，支持分类、评论、点赞等功能</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/264.html"><img src="default/1-1P3061036370-L.png"
+                    width="342" height="181" alt="商城" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/264.html" title="商城">商城</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">商品展示，搜索，下单，功能齐全，支持优惠券等营销推广</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/263.html"><img src="default/1-1P3061035470-L.png"
+                    width="342" height="181" alt="活动票务" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/263.html" title="活动票务">活动票务</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">支持活动发布、在线报名、微信支付、快速核销、客户管理、名单导出等功能</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/262.html"><img src="default/1-1P3061032190-L.png"
+                    width="342" height="181" alt="同城生活" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/262.html" title="同城生活">同城生活</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">同城生活圈，地方自媒体赚钱利器，通过互联网让生活变得更简单！</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/261.html"><img src="default/1-1P3061031380-L.png"
+                    width="342" height="181" alt="点餐外卖" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/261.html" title="点餐外卖">点餐外卖</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">具有买单、点餐、外卖、打印小票等功能，扫码即可点餐，无需服务员参与，下···</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/260.html"><img src="default/1-1P3061030540-L.png"
+                    width="342" height="181" alt="知识付费" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/260.html" title="知识付费">知识付费</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">支持音频、视频、图文等多种付费形式，让知识更立体</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/259.html"><img src="default/1-1P3061030070-L.png"
+                    width="342" height="181" alt="语音口令红包" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/259.html" title="语音口令红包">语音口令红包</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">只要说出发起人设置的口令，程序识别后就可以领取到赏金啦</div>
+                </div>
+              </div>
+            </li>
+            <li class="xcx_h_dl_dd_ul_li col-md-4 col-xs-6">
+              <div class="xcx_h_dl_dd_ul_li1"> <a href="#/?wxapp/258.html"><img src="default/1-1P306102Z50-L.png"
+                    width="342" height="181" alt="相册" /></a>
+                <div class="xcx_s_dl_dd_ul_li_div">
+                  <div class="xcx_s_dl_dd_ul_li_text"><a href="#/?wxapp/258.html" title="相册">相册</a></div>
+                  <div class="xcx_s_dl_dd_ul_li_text1">支持相册分类，相片展示，给用户更好的视觉体验</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </dd>
+      </dl>
+      <a class="xcx_btn" href="#/?wxapp/">查看全部</a>
+    </div>
+  </div>
+  <!-- 接入流程-->
+  <div class="liucheng">
+    <div class="container">
+      <div class="syhy_t">接入流程</div>
+      <i class="title_line"></i> <img class="liucheng_img" src="default/liucheng.png" />
+    </div>
+  </div>
+  <!-- <div class="fanganAll"> <img class="fanganbg fanganbg1 f_active" src="default/fanganbg1.png" /> <img
+      class="fanganbg fanganbg2" src="default/fanganbg2.png" /> <img class="fanganbg fanganbg3"
+      src="default/fanganbg3.png" /> <img class="fanganbg fanganbg4" src="default/fanganbg4.png" /> <img
+      class="fanganbg fanganbg5" src="default/fanganbg5.png" /> <img class="fanganbg fanganbg6"
+      src="default/fanganbg6.png" /> <img class="fanganbg fanganbg7" src="default/fanganbg7.png" /> <img
+      class="fanganbg fanganbg8" src="default/fanganbg8.png" />
+    <div class="fanganCon">
+      <div class="container">
+        <div class="fangan_right1">客户案例</div>
+        <div class="fangan_right2"></div>
+        <div class="fangan_right3">我们已为您定制多套解决方案，助您轻松玩转微信小程序，快人一步，抢占先机</div>
+        <div class="fangan1">
+          <ul class="fangan_left">
+            <li id="#fangan_right1" class="fangan_left1 active" num=1> <img class="fangan_left_img" width="16"
+                height="14" src="default/fangan1.png" />
+              <div class="fangan_left_title">商城</div>
+            </li>
+            <li id="#fangan_right2" class="fangan_left1 " num=2> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan2.png" />
+              <div class="fangan_left_title">美食</div>
+            </li>
+            <li id="#fangan_right3" class="fangan_left1 " num=3> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan3.png" />
+              <div class="fangan_left_title">鲜花</div>
+            </li>
+            <li id="#fangan_right4" class="fangan_left1 " num=4> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan4.png" />
+              <div class="fangan_left_title">家居</div>
+            </li>
+            <li id="#fangan_right5" class="fangan_left1 " num=5> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan5.png" />
+              <div class="fangan_left_title">水果</div>
+            </li>
+            <li id="#fangan_right6" class="fangan_left1 " num=6> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan6.png" />
+              <div class="fangan_left_title">学校</div>
+            </li>
+            <li id="#fangan_right7" class="fangan_left1 " num=7> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan7.png" />
+              <div class="fangan_left_title">汽车</div>
+            </li>
+            <li id="#fangan_right8" class="fangan_left1 " num=8> <img class="fangan_left_img" width="16" height="14"
+                src="default/fangan8.png" />
+              <div class="fangan_left_title">酒业</div>
+            </li>
+          </ul>
+          <div id="fangan_right1" class="fangan_right">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305120431K4.jpg"
+                      alt="绿农园生鲜" /></div>
+                </div>
+                绿农园生鲜
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305120320641.jpg"
+                      alt="玖美商城" /></div>
+                </div>
+                玖美商城
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P3051202422A.jpg"
+                      alt="夏春秋茶生活" /></div>
+                </div>
+                夏春秋茶生活
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305120203620.jpg"
+                      alt="上海白银" /></div>
+                </div>
+                上海白银
+              </li>
+            </ul>
+            <div class="fangan_right6">商城</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/shangcheng/">查看更多</a>
+          </div>
+          <div id="fangan_right2" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P3051051463A.jpg"
+                      alt="好香串" /></div>
+                </div>
+                好香串
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305105120341.jpg"
+                      alt="四川味在小龙坎" /></div>
+                </div>
+                四川味在小龙坎
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305105051121.jpg"
+                      alt="潮汕佬安岳店" /></div>
+                </div>
+                潮汕佬安岳店
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305105006420.jpg"
+                      alt="金伙伴自助火锅" /></div>
+                </div>
+                金伙伴自助火锅
+              </li>
+            </ul>
+            <div class="fangan_right6">美食</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/meishi/">查看更多</a>
+          </div>
+          <div id="fangan_right3" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511110J13.jpg"
+                      alt="金枝玉叶鲜花礼品速递" /></div>
+                </div>
+                金枝玉叶鲜花礼品速递
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P3051110414A.jpg"
+                      alt="成都花礼定制" /></div>
+                </div>
+                成都花礼定制
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511101J14.jpg"
+                      alt="爱花居" /></div>
+                </div>
+                爱花居
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511094SS.png"
+                      alt="VV花艺" /></div>
+                </div>
+                VV花艺
+              </li>
+            </ul>
+            <div class="fangan_right6">鲜花</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/xianhua/">查看更多</a>
+          </div>
+          <div id="fangan_right4" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305115200229.jpg"
+                      alt="乾祥室内环境治理有限公司" /></div>
+                </div>
+                乾祥室内环境治理有限公司
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305114T4H6.jpg"
+                      alt="韩客工贸" /></div>
+                </div>
+                韩客工贸
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305114A70-L.jpg"
+                      alt="名家灯饰" /></div>
+                </div>
+                名家灯饰
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305114622R6.jpg"
+                      alt="安岳恋家家纺" /></div>
+                </div>
+                安岳恋家家纺
+              </li>
+            </ul>
+            <div class="fangan_right6">家居</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/jiaji/">查看更多</a>
+          </div>
+          <div id="fangan_right5" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305103404503.jpg"
+                      alt="川哥土特产" /></div>
+                </div>
+                川哥土特产
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305103334209.jpg"
+                      alt="自贡时时鲜水果商城" /></div>
+                </div>
+                自贡时时鲜水果商城
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30510330R42.jpg"
+                      alt="麦小菓" /></div>
+                </div>
+                麦小菓
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305103243J0.jpg"
+                      alt="安岳电商网" /></div>
+                </div>
+                安岳电商网
+              </li>
+            </ul>
+            <div class="fangan_right6">水果</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/shuiguo/">查看更多</a>
+          </div>
+          <div id="fangan_right6" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305114356355.jpg"
+                      alt="齐雯芭蕾培训学院" /></div>
+                </div>
+                齐雯芭蕾培训学院
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511432C35.jpg"
+                      alt="花娃艺术学校" /></div>
+                </div>
+                花娃艺术学校
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511423G36.jpg"
+                      alt="US体能成都" /></div>
+                </div>
+                US体能成都
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305114211342.jpg"
+                      alt="安岳乐乐幼儿园" /></div>
+                </div>
+                安岳乐乐幼儿园
+              </li>
+            </ul>
+            <div class="fangan_right6">学校</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/xuexiao/">查看更多</a>
+          </div>
+          <div id="fangan_right7" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305113QU51.jpg"
+                      alt="成都二手车超市" /></div>
+                </div>
+                成都二手车超市
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305113IB15.jpg" alt="么世昌" />
+                  </div>
+                </div>
+                么世昌
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305113FV29.jpg"
+                      alt="崇州市新能源汽车" /></div>
+                </div>
+                崇州市新能源汽车
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511363VA.jpg"
+                      alt="豪行轮胎馆之汽车养护" /></div>
+                </div>
+                豪行轮胎馆之汽车养护
+              </li>
+            </ul>
+            <div class="fangan_right6">汽车</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/qiche/">查看更多</a>
+          </div>
+          <div id="fangan_right8" class="fangan_right" style="display:none;">
+            <ul class="fangan_right5">
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P30511325S28.jpg"
+                      alt="资阳同发商贸部" /></div>
+                </div>
+                资阳同发商贸部
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305111H3W8.jpg"
+                      alt="五湖液白酒代理" /></div>
+                </div>
+                五湖液白酒代理
+              </li>
+              <li class="fangan_right5_1">
+                <div class="fangan_right5_1_1">
+                  <div class="fangan_right5_1_1_1"><img class="fangan_ewm" src="default/1-1P305111AAN.jpg"
+                      alt="安岳正宽酒业" /></div>
+                </div>
+                安岳正宽酒业
+              </li>
+            </ul>
+            <div class="fangan_right6">酒业</div>
+            <div class="fangan_right7"></div>
+            <a class="fangan_right8" href="#/?case/jiuye/">查看更多</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ -->
+  <div class="youshi">
+    <div class="container">
+      <div class="syhy_t youshi1">我们的核心优势</div>
+      <i class="title_line"></i>
+      <ul class="youshi2">
+        <li class="youshi2_1">
+          <div class="youshi2_1bg"> <img src="default/1-1P3010923170-L.png" /> </div>
+          <div class="youshi2_1tit">可靠</div>
+          <div class="youshi2_1dec">本土团队亲力打造，专注活动平台开发与研究</div>
+        </li>
+        <li class="youshi2_1">
+          <div class="youshi2_1bg"> <img src="default/1-1P3010923040-L.png" /> </div>
+          <div class="youshi2_1tit">专业</div>
+          <div class="youshi2_1dec">专业的小程序第三方平台服务商，Web App技术领域的先行者</div>
+        </li>
+        <li class="youshi2_1">
+          <div class="youshi2_1bg"> <img src="default/1-1P3010922410-L.png" /> </div>
+          <div class="youshi2_1tit">专注</div>
+          <div class="youshi2_1dec">十年专注HTML5和小程序技术研究，资深的技术团队支持</div>
+        </li>
+        <li class="youshi2_1">
+          <div class="youshi2_1bg"> <img src="default/1-1P3010922280-L.png" /> </div>
+          <div class="youshi2_1tit">强大</div>
+          <div class="youshi2_1dec">产品强大易用，模板+定制开发，*低0元起，学习成本低</div>
+        </li>
+        <li class="youshi2_1">
+          <div class="youshi2_1bg"> <img src="default/1-1P301092206436.png" /> </div>
+          <div class="youshi2_1tit">服务</div>
+          <div class="youshi2_1dec">完善的售后服务，7×24小时人工在线问题解答，保证无忧</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="dongtai">
+    <div class="container">
+      <div class="syhy_t youshi1">小程序动态</div>
+      <i class="title_line"></i>
+      <ul class="dongtai2">
+        {[range $i, $v := .base.New]}
+        <li class="dongtai2_1">
+          <div class="dongtai2_1_1"> <a class="dongtai2_1Img1" href="/view/{[$v.ID]}"><img class="dongtai2_1Img"
+                src="{[$v.Pic]}" /></a> <a class="dongtai2_1tit" href="/view/{[$v.ID]}"
+              title="{[$v.Title]}">{[$v.Title]}</a> <a class="dongtai2_1time">{[$v.Ctime]}</a> </div>
+        </li>
+        {[end]}
+      </ul>
+      <a class="xcx_btn" href="/list/1">查看全部</a>
+    </div>
+  </div>
+  <!--开启小程序时代-->
+  <div class="shidai">
+    <div class="container">
+      <div class="shidai1">开启小程序时代</div>
+      <div class="shidai2">您的梦想与远见，我们帮您达成！</div>
+      <div class="shidai3"></div>
+      <ul class="shidai4">
+        <li class="shidai41">
+          <div class="shidai40">
+            <div class="shidai411">7000</div>
+            <div class="shidai412">个</div>
+            <div class="shidai413">+</div>
+          </div>
+          <div class="shidai_desc">小程序平台已经生成小程序</div>
+        </li>
+        <li class="shidai41">
+          <div class="shidai401">
+            <div class="shidai411">200</div>
+            <div class="shidai412">家</div>
+            <div class="shidai413">+</div>
+          </div>
+          <div class="shidai_desc">全国代理数</div>
+        </li>
+        <li class="shidai41">
+          <div class="shidai402">
+            <div class="shidai411">20</div>
+            <div class="shidai412">款</div>
+            <div class="shidai413">+</div>
+          </div>
+          <div class="shidai_desc">已深度研发行业应用</div>
+        </li>
+        <li class="shidai41">
+          <div class="shidai401">
+            <div class="shidai411">300</div>
+            <div class="shidai412">天</div>
+            <div class="shidai413">+</div>
+          </div>
+          <div class="shidai_desc">工程师小程序平台</div>
+        </li>
+      </ul>
+      <a class="shidai_btn" href="http://wpa.qq.com/msgrd?v=3&site=某某网络科技有限公司&menu=yes&uin=88888888"
+        target="_blank">立即开通</a>
+    </div>
+  </div>
+  <!--底部  pc-->
+  <!-- 右小角联系图标 -->
+  <link rel="stylesheet" href="/default/css/chat.css">
+  <div class="consult_contact">
+    <div class="contact_group_btn">
+      <div class="group_btn_box"> <img src="default/wx_icon.png" alt="" class="wx_btn" />
+        <div class="hover_txt_box">
+          <div class="wx_code_box"> <img src="default/1651219975224399.png" alt="" class="wx_code" /> </div>
+          <i class="arrow wx_arrow"></i>
+        </div>
+      </div>
+      <div id="chatqq" class="group_btn_box"> <img src="default/qq_icon.png" alt="" class="qq_btn addqq" />
+        <div class="hover_txt_box addqq">
+          <div class="phone_txt">88888888</div>
+          <i class="arrow"></i>
+        </div>
+      </div>
+      <div id="goTop" class="group_btn_box" style="display:none"> <a href="javascript:scroll(0,0)"><img
+            src="default/backtop_icon.png" alt="" class="backTop_btn" /></a> </div>
+    </div>
+  </div>
+  <footer class="bottom">
+    <div class="container">
+      <ul>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">公司</div>
+          <div class="bottom_2"><a href="/view/">产品动态</a></div>
+          <div class="bottom_2"><a href="#/?aboutus/">关于我们</a></div>
+        </li>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">友情链接</div>
+          {[range $i, $v := .link]}
+          <div class="bottom_2"><a href="{[$v.Url]}">{[$v.Name]}</a></div>
+          {[end]}
+        </li>
+        <li class="col-lg-2 mt20 foot youqing">
+          <div class="bottom_1">合作伙伴</div>
+          <a href="" title="" target="_blank"></a>
+        </li>
+        <li class="col-lg-2 mt20 foot">
+          <div class="bottom_1">客服</div>
+          <div class="bottom_2">电话：400-888-8888</div>
+          <div class="bottom_2">邮箱：itlun@qq.com</div>
+          <div class="bottom_2">微信：Wx88888</div>
+        </li>
+        <style>
+          .bottom_ewm1 img {
+            width: 100px;
+          }
+        </style>
+        <li class="col-lg-2 bottom_ewm bottom_ewm1 mt20">
+          <div class="bottom_1 bot2">关注我们</div>
+          <div id="qrcode1" class="qrcode"></div>
+          <div class="desc">- 扫码浏览手机版 -</div>
+        </li>
+        <li class="col-lg-2 bottom_ewm mt20">
+          <div class="bottom_1"></div>
+          <img src="default/upload/image/20220429/1651219975224399.png" width="100px" height="100px" />
+          <div class="desc">- 扫码关注公众号 -</div>
+        </li>
+      </ul>
+    </div>
+    <div class="bottomCopy">Copyright © 2002-2022 小程序 版权所有
+      <a href="http://www.miitbeian.gov.cn/" target="_blank " rel="nofollow noopener noreferrer ">
+        {[.base.Tdk.Beian]}
+      </a> <a href=" {[.base.Tdk.Goanurl]}" target="_blank " rel="nofollow noopener noreferrer ">
+        <mip-img width="20" height="20" src="/static/ghs.png"></mip-img>
+        {[.base.Tdk.Goan]}
+      </a>
+    </div>
+  </footer>
+  <script type="text/javascript" src="/default/css/jquery-2.1.0.js"></script>
+  <script type="text/javascript" src="/default/css/qrcode.min.js"></script>
+  <script>
+
+    var qrcode = new QRCode(document.getElementById("qrcode1"), {
+        width: 140,
+        height: 140,
+      });
+      qrcode.makeCode(window.location.href);
+    $(document).ready(function () {
+      $(window).scroll(function () {
+        var scrollTop = $(window).scrollTop();
+        scrollTop > 100 ? $("#goTop").show() : $("#goTop").hide();
+      });
+    })
+    $(".addqq").click(function () {
+      window.open(
+        "http://wpa.qq.com/msgrd?v=3&site=某某网络科技有限公司&menu=yes&uin=88888888"
+      );
+    });
+    // 客服弹框 鼠标放上事件
+    $('.group_btn_box').hover(function () {
+      $(this).find('.hover_txt_box').css("display", "flex");
+      $(this).siblings().find('.hover_txt_box').hide();
+    }, function () {
+      $(this).find('.hover_txt_box').hide();
+    });
+  </script>
+</body>
+
+</html>
+<script type="text/javascript" src="/default/css/jquery-2.1.0.js"></script>
+<script type="text/javascript" src="/default/css/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="/default/css/common_tabs.js"></script>
+<script>
+  $('.swiper-container').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  $('.swiper-slide').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  $('.swiper-wrapper').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  var mySwiper = new Swiper('.swiper-container', {
+    direction: 'horizontal',
+    loop: true,
+    autoplay: 3000,
+    speed: 300,
+    pagination: '.swiper-pagination',
+    nextButton: '.swiper-button-next',
+    prevButton: '.swiper-button-prev',
+  })
+  for (var i = 1; i < 9; i++) {
+    var img = new Image();
+    img.src = "/default/fanganbg" + i + ".png";
+  }
+  Tabs(".fangan_left1", ".active", "", ".fangan_right");
+  $(body).resize(function () {
+    $('.swiper-container').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+    $('.swiper-slide').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+    $('.swiper-wrapper').css({ width: '100%', height: $(window).width() / 1920 * 560 })
+  })
+</script>

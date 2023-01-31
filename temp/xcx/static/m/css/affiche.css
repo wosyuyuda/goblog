@@ -1,0 +1,112 @@
+﻿
+ul,li{ list-style-type:none; margin:0; padding:0}
+p{ margin:0; padding:0}
+a{ text-decoration:none}
+a:hover{ text-decoration:none; cursor:pointer}
+body,html{
+	background:#f8f8f8}
+
+.top_title{
+	padding: 0.2rem 0;
+	border-top:1px solid #e9e9e9;
+	position:relative;
+	overflow:hidden;
+	background:#FFF}
+.top_title_img{
+	width:1.18rem;
+	height:0.4rem;
+	background:url(../img/home.png);
+	background-repeat:no-repeat;
+	background-position:center;
+	background-size:0.38rem;
+	display:block;
+	border-right:1px solid #e9e9e9;
+	float:left;
+	margin-top:0.1rem}
+.top_title_title{
+	line-height:0.6rem;
+	text-indent:0.3rem}
+.top_title_btn{
+	width:1.3rem;
+	height:0.6rem;
+	position:absolute;
+	top:0.2rem;
+	right:0.3rem;
+	text-align:center;
+	line-height:0.6rem;
+	background:#36bb81;
+	color:#FFF;
+	border-radius:5px}
+.top_title_btn:hover{
+	color:#36bb81;
+	color:#FFF}
+.act{
+	background:#f8f8f8}
+.act_nav{
+	height:0.99rem;
+	border-bottom:1px solid #e9e9e9;
+	/*border-top:1px solid #e9e9e9;*/
+	line-height:0.99rem;
+	display: -webkit-box;
+    display: box;
+	background:#FFF}
+.act_nav li{
+	position: relative;
+    -webkit-box:flex;
+	height:0.99rem;
+    box:flex;
+	width:33.33333%;
+	color:#333333;}
+.act_nav li a{
+	color:#333333}
+.act_nav li.active{
+	color:#36bb81}
+.act_nav li.active a{
+	color:#36bb81}
+.act_nav li.active i{
+	background:#36bb81;
+	height:0.04rem;
+	width:0.6rem;
+	border-radius:2px;
+	position:absolute;
+	bottom: 1px;
+	left:50%;
+	margin-left:-0.3rem}
+.act_list{
+	margin-top:0.2rem;
+	background:#FFF;
+	min-height: 5rem;
+	margin-bottom: 1rem;
+}
+.act_list li a {
+	margin:0 0.3rem;
+	padding:0.3rem 0;
+	display: -webkit-box;
+    display: box;
+	border-bottom:1px solid #e9e9e9;
+}
+.act_list li:last-child a {
+	border: none;
+}
+.act_list_img{
+	width:2.2rem;
+	height:1.2rem;
+	position: relative;
+    -webkit-box:flex;
+    box:flex;}
+.act_list_img img{
+	width:2.2rem;
+	height:1.2rem}
+.act_list_x{
+	margin-left:0.3rem;
+	width:4.4rem}
+.act_list_x_t{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;}
+.act_list_x_d{
+	margin-top:0.05rem;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	margin-bottom:0.1rem}
